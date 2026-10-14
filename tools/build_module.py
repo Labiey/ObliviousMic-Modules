@@ -30,7 +30,10 @@ def build(name, output=None):
             info = zipfile.ZipInfo(file.relative_to(folder).as_posix(), (2026, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o100644 << 16
-            archive.writestr(info, file.read_bytes())
+            # Git checkouts may use CRLF on Windows. Publish identical UTF-8/LF
+            # packages on every platform, independent of local checkout settings.
+            content = file.read_text("utf-8-sig").replace("\r\n", "\n")
+            archive.writestr(info, content.encode("utf-8"))
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
     return {
         "module_id": manifest["module_id"],

@@ -1,0 +1,42 @@
+{
+  "catalog_version": 1,
+  "repository": "Labiey/ObliviousMic-Modules",
+  "modules": [
+    {
+      "module_id": "org.obliviousmic.campplus",
+      "name": "campplus",
+      "version": "1.1.0",
+      "api": {
+        "min": "1.0",
+        "max_exclusive": "2.0"
+      },
+      "license": "Apache-2.0",
+      "bytes": 33081,
+      "sha256": "ff2aac22c4c372f9837111b7056208d68ca55525ad0375d12b7d1b23204e426a",
+      "source_path": "modules/campplus",
+      "minimum_framework_version": "0.2.0",
+      "description": "Speaker identity with one-time registration",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.1.0/campplus-1.1.0.obmic.zip",
+      "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/campplus/LICENSE",
+      "weight_status": "Apache-2.0 public CAM++ resource"
+    },
+    {
+      "module_id": "org.obliviousmic.bsrnn",
+      "name": "bsrnn",
+      "version": "1.1.0",
+      "api": {
+        "min": "1.0",
+        "max_exclusive": "2.0"
+      },
+      "license": "Apache-2.0",
+      "bytes": 44306,
+      "sha256": "a9ba48f9ffb1de54f3c3194a324be01b585efbc33df8b79b7e3a1866427dc4f5",
+      "source_path": "modules/bsrnn",
+      "minimum_framework_version": "0.2.0",
+      "description": "Target-speaker extraction; authorized local template required",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/bsrnn-v1.1.0/bsrnn-1.1.0.obmic.zip",
+      "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/bsrnn/LICENSE",
+      "weight_status": "Unresolved upstream checkpoint redistribution; local import only"
+    }
+  ]
+}

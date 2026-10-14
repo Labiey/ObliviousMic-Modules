@@ -8,7 +8,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/features.py",
       "source_sha256": "fdea0aeb4812343b04fedf680d736ddd016b07a56634b999236d9c109a907823",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "campplus",
@@ -16,7 +17,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/identity_seam.py",
       "source_sha256": "150ca118696911e8ba081d62d428855cfc262df4a6b08858bd15d4122764c9a3",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "campplus",
@@ -24,7 +26,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/identity_stream.py",
       "source_sha256": "9fe1afdf249acb2d4a828fcc86460c010c3ef2014a3f0ea72c29a0ee20041c34",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "campplus",
@@ -32,15 +35,17 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/sessions.py",
       "source_sha256": "2b8f95633931f730b1ec8814db6fd96b96257cf454a927a69e0a2790100485bc",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "campplus",
       "file": "modules/campplus/lib/__init__.py",
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/__init__.py",
-      "source_sha256": "da13f2317922a26ed58be2a08b2d8c8526dfc6cdfe46b9489e53bb60857248c2",
+      "source_sha256": "b85b0de2ff953409cea8ee5f331d10677e21808cb8126611b22cee9b6d3be24f",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
@@ -48,7 +53,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/bake.py",
       "source_sha256": "3c3733bbb94705c5c9dcdbf2b60cdd24ea213b072b7969ae9340317d59fb9f09",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
@@ -56,7 +62,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/excerpt.py",
       "source_sha256": "406b2a718705ddc5d44ad01288e308bc258c09c4c858f98d9bb592cf02247303",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
@@ -64,7 +71,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/features.py",
       "source_sha256": "fdea0aeb4812343b04fedf680d736ddd016b07a56634b999236d9c109a907823",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
@@ -72,7 +80,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/frame_glue.py",
       "source_sha256": "3d2c9562f1e59a85e9088879fdfae8a8e8862593e6df8ad34c0dec5f65626f0b",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
@@ -80,7 +89,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/identity_seam.py",
       "source_sha256": "150ca118696911e8ba081d62d428855cfc262df4a6b08858bd15d4122764c9a3",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
@@ -88,7 +98,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/identity_stream.py",
       "source_sha256": "9fe1afdf249acb2d4a828fcc86460c010c3ef2014a3f0ea72c29a0ee20041c34",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
@@ -96,7 +107,8 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/onnx_frame_backend.py",
       "source_sha256": "2831eadd3c305819a5c2d34759466cbd048b941a85ef2592c87b1e7cd3bb13ef",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
@@ -104,15 +116,17 @@
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/sessions.py",
       "source_sha256": "2b8f95633931f730b1ec8814db6fd96b96257cf454a927a69e0a2790100485bc",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     },
     {
       "module": "bsrnn",
       "file": "modules/bsrnn/lib/__init__.py",
       "origin": "ObliviousMic fa4620e / src/obliviousmic/plugins/models/__init__.py",
-      "source_sha256": "da13f2317922a26ed58be2a08b2d8c8526dfc6cdfe46b9489e53bb60857248c2",
+      "source_sha256": "b85b0de2ff953409cea8ee5f331d10677e21808cb8126611b22cee9b6d3be24f",
       "origin_license": "Apache-2.0",
-      "changes": "module-local imports and redistribution/provenance header; algorithm retained"
+      "changes": "module-local imports and redistribution/provenance header; algorithm retained",
+      "hash_encoding": "Git blob bytes from fa4620e"
     }
   ]
 }

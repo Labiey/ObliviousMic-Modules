@@ -1,0 +1,31 @@
+{
+  "type": "object",
+  "required": [
+    "catalog_version",
+    "repository",
+    "modules"
+  ],
+  "properties": {
+    "catalog_version": {
+      "const": 1
+    },
+    "repository": {
+      "const": "Labiey/ObliviousMic-Modules"
+    },
+    "modules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "module_id",
+          "version",
+          "sha256",
+          "bytes",
+          "download_url",
+          "license",
+          "minimum_framework_version"
+        ]
+      }
+    }
+  }
+}
