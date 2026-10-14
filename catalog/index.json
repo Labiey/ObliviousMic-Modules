@@ -11,8 +11,8 @@
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 33081,
-      "sha256": "ff2aac22c4c372f9837111b7056208d68ca55525ad0375d12b7d1b23204e426a",
+      "bytes": 95996,
+      "sha256": "7e389cf22b3db660a59e9ee3cc912857cd083a6ed298e5e444e056dc927eca2b",
       "source_path": "modules/campplus",
       "minimum_framework_version": "0.2.0",
       "description": "Speaker identity with one-time registration",
@@ -29,8 +29,8 @@
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 44306,
-      "sha256": "a9ba48f9ffb1de54f3c3194a324be01b585efbc33df8b79b7e3a1866427dc4f5",
+      "bytes": 126735,
+      "sha256": "bb9fc471a370c299f0a26efe905031c9c8bd14d7f088034b4570e516c20d94c2",
       "source_path": "modules/bsrnn",
       "minimum_framework_version": "0.2.0",
       "description": "Target-speaker extraction; authorized local template required",

@@ -20,7 +20,7 @@ def build(name, output=None):
         for p in folder.rglob("*")
         if p.is_file() and "__pycache__" not in p.parts and "tests" not in p.parts
     )
-    with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_DEFLATED) as archive:
+    with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_STORED) as archive:
         for file in files:
             if file.suffix not in {".py", ".json", ".md", ".txt"} and file.name not in {
                 "LICENSE",
@@ -28,7 +28,7 @@ def build(name, output=None):
             }:
                 raise ValueError("code-only module contains prohibited file")
             info = zipfile.ZipInfo(file.relative_to(folder).as_posix(), (2026, 1, 1, 0, 0, 0))
-            info.compress_type = zipfile.ZIP_DEFLATED
+            info.compress_type = zipfile.ZIP_STORED
             info.external_attr = 0o100644 << 16
             # Git checkouts may use CRLF on Windows. Publish identical UTF-8/LF
             # packages on every platform, independent of local checkout settings.
