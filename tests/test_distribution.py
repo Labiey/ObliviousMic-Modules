@@ -1,10 +1,10 @@
 import zipfile
 
 import pytest
-from tools.build_module import build
-
 from obliviousmic.plugin_manager import PluginManager
 from obliviousmic.sdk import ModuleRegistry
+
+from tools.build_module import build
 
 
 @pytest.mark.parametrize("name", ["campplus", "bsrnn"])

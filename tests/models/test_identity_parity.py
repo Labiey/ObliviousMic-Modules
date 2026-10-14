@@ -5,6 +5,7 @@ import unittest
 from pathlib import Path
 
 import numpy as np
+
 from modules.campplus.lib.identity_seam import IdentityObservation
 from modules.campplus.lib.identity_stream import (
     IdentityStreamError,

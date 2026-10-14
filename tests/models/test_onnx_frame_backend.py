@@ -11,6 +11,7 @@ from __future__ import annotations
 import unittest
 
 import numpy as np
+
 from modules.bsrnn.lib.frame_glue import FrameGlueError, NumpyFrameStream
 from modules.bsrnn.lib.onnx_frame_backend import STATE_LAYERS, OnnxFrameBackend
 

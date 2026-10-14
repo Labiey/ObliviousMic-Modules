@@ -23,18 +23,18 @@ import unittest
 from dataclasses import fields
 
 import numpy as np
+from obliviousmic.plugins.gate.legacy import (
+    PresenceGateConfig,
+    PresenceGateError,
+    StreamingPresenceGate,
+)
+
 from tests.models.frozen_reference.gate import (
     GateFrameFeatures,
     GateSimulationError,
     GateTuningConfig,
     simulate_gate,
     smooth_identity,
-)
-
-from obliviousmic.plugins.gate.legacy import (
-    PresenceGateConfig,
-    PresenceGateError,
-    StreamingPresenceGate,
 )
 
 RANDOM_SEED = 20260907

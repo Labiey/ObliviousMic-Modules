@@ -3,10 +3,6 @@ from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
-from modules.bsrnn.lib.frame_glue import FrameBackend, periodic_hann
-from modules.campplus.lib.identity_stream import SlidingIdentityProvider
-from modules.registration import register_models
-
 from obliviousmic.__main__ import builtin_registry
 from obliviousmic.adapters import PythonAdapter
 from obliviousmic.graph.dag import DAGCompiler
@@ -19,6 +15,10 @@ from obliviousmic.sdk import (
     PrepareContext,
     StreamContext,
 )
+
+from modules.bsrnn.lib.frame_glue import FrameBackend, periodic_hann
+from modules.campplus.lib.identity_stream import SlidingIdentityProvider
+from modules.registration import register_models
 
 
 class Embedder:

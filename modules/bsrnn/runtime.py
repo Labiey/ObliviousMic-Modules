@@ -5,7 +5,6 @@ from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
-
 from obliviousmic.sdk import FlushResult, Latency, PortBundle
 from obliviousmic.sdk.declaration import audio, manifest, parameter, settings
 
@@ -94,4 +93,3 @@ class Module(ModelModule):
 # Package declarations are the source of truth for both bundled and source use.
 Module.MANIFEST = json.loads(Path(__file__).with_name("manifest.json").read_text("utf-8"))
 Module.SCHEMA = json.loads(Path(__file__).with_name("settings.schema.json").read_text("utf-8"))
-

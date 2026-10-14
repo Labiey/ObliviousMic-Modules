@@ -4,11 +4,11 @@ from unittest.mock import patch
 
 import numpy as np
 import soundfile as sf
-from modules.campplus.lib.base import model_path
-from modules.registration import register_models
-
 from obliviousmic.sdk import AudioFormat, PrepareContext
 from obliviousmic.web.service import WebService
+
+from modules.campplus.lib.base import model_path
+from modules.registration import register_models
 
 
 def wait(service, job):
