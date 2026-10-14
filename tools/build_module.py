@@ -29,6 +29,7 @@ def build(name, output=None):
                 raise ValueError("code-only module contains prohibited file")
             info = zipfile.ZipInfo(file.relative_to(folder).as_posix(), (2026, 1, 1, 0, 0, 0))
             info.compress_type = zipfile.ZIP_STORED
+            info.create_system = 3
             info.external_attr = 0o100644 << 16
             # Git checkouts may use CRLF on Windows. Publish identical UTF-8/LF
             # packages on every platform, independent of local checkout settings.

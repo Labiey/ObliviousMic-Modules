@@ -1,7 +1,7 @@
 {
   "manifest_version": 1,
   "module_id": "org.obliviousmic.bsrnn",
-  "module_version": "1.1.0",
+  "module_version": "1.1.1",
   "api": {
     "min": "1.0",
     "max_exclusive": "2.0"

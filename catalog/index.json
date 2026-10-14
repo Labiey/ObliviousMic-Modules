@@ -5,36 +5,36 @@
     {
       "module_id": "org.obliviousmic.campplus",
       "name": "campplus",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
       "bytes": 95996,
-      "sha256": "7e389cf22b3db660a59e9ee3cc912857cd083a6ed298e5e444e056dc927eca2b",
+      "sha256": "0b28d73e045742b06afd05088b1703d46d17c524e1104a44ed983caf9f6825e8",
       "source_path": "modules/campplus",
       "minimum_framework_version": "0.2.0",
       "description": "Speaker identity with one-time registration",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.1.0/campplus-1.1.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.1.1/campplus-1.1.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/campplus/LICENSE",
       "weight_status": "Apache-2.0 public CAM++ resource"
     },
     {
       "module_id": "org.obliviousmic.bsrnn",
       "name": "bsrnn",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
       "bytes": 126735,
-      "sha256": "bb9fc471a370c299f0a26efe905031c9c8bd14d7f088034b4570e516c20d94c2",
+      "sha256": "5223dc9fe67e64330c72e8590698cb801ee4d7d330a5782fbda6b4002e191b3f",
       "source_path": "modules/bsrnn",
       "minimum_framework_version": "0.2.0",
       "description": "Target-speaker extraction; authorized local template required",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/bsrnn-v1.1.0/bsrnn-1.1.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/bsrnn-v1.1.1/bsrnn-1.1.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/bsrnn/LICENSE",
       "weight_status": "Unresolved upstream checkpoint redistribution; local import only"
     }
