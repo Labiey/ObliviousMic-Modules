@@ -14,6 +14,7 @@ def test_independent_bundle_roundtrip_and_licenses(tmp_path, name):
     assert one["sha256"] == two["sha256"]
     with zipfile.ZipFile(one["bundle_path"]) as archive:
         names = archive.namelist()
+        assert names == sorted(names)
         assert {"LICENSE", "NOTICE", "licensing.md", "provenance.json"} <= set(names)
         assert not any(x.endswith((".onnx", ".wav", ".npy")) for x in names)
     manager = PluginManager(tmp_path / "data", ModuleRegistry())

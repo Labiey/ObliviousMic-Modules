@@ -16,9 +16,12 @@ def build(name, output=None):
     output.mkdir(parents=True, exist_ok=True)
     path = output / f"{name}-{manifest['module_version']}.obmic.zip"
     files = sorted(
-        p
-        for p in folder.rglob("*")
-        if p.is_file() and "__pycache__" not in p.parts and "tests" not in p.parts
+        (
+            p
+            for p in folder.rglob("*")
+            if p.is_file() and "__pycache__" not in p.parts and "tests" not in p.parts
+        ),
+        key=lambda p: p.relative_to(folder).as_posix(),
     )
     with zipfile.ZipFile(path, "w", compression=zipfile.ZIP_STORED) as archive:
         for file in files:

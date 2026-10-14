@@ -18,7 +18,10 @@ def validate():
         name = item["name"]
         folder = ROOT / "modules" / name
         package = build(name)
-        assert item["sha256"] == package["sha256"] and item["bytes"] == package["bytes"]
+        assert item["sha256"] == package["sha256"] and item["bytes"] == package["bytes"], (
+            f"{name}: catalog {item['sha256']} / {item['bytes']} bytes; "
+            f"built {package['sha256']} / {package['bytes']} bytes"
+        )
         assert item["module_id"] == package["module_id"] and item["version"] == package["version"]
         assert (folder / "LICENSE").is_file() and (folder / "NOTICE").is_file()
         for path in folder.rglob("*.py"):
