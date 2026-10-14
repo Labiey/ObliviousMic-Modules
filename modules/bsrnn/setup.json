@@ -1,0 +1,31 @@
+{
+  "setup_version": 1,
+  "profile_required": true,
+  "artifacts": [
+    "baked_core"
+  ],
+  "settings_bindings": {
+    "profile_id": {
+      "source": "profile"
+    }
+  },
+  "action_bindings": {
+    "initialize": {
+      "profile_id": {
+        "source": "profile"
+      },
+      "speaker_asset": {
+        "source": "resource",
+        "id": "speaker"
+      },
+      "template_asset": {
+        "source": "resource",
+        "id": "template"
+      }
+    }
+  },
+  "initialize_action": "initialize",
+  "file_required": true,
+  "minimum_audio_seconds": 4,
+  "runtime_resources": []
+}

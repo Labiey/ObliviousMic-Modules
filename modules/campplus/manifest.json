@@ -1,0 +1,66 @@
+{
+  "manifest_version": 1,
+  "module_id": "org.obliviousmic.campplus",
+  "module_version": "1.1.0",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          16000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "decision",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 160,
+    "preferred_block_frames": 160,
+    "maximum_block_frames": 65536,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 4,
+    "latency_mode": "reported_on_prepare",
+    "exact_block_frames": 160,
+    "allow_partial_eos": true,
+    "async_process": true
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [
+    "asset.read",
+    "profile.read",
+    "resource.acquire"
+  ],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "onnx>=1.16,<2",
+    "onnxruntime>=1.20,<2",
+    "numpy>=2,<3"
+  ]
+}

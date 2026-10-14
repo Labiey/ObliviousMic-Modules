@@ -1,0 +1,89 @@
+{
+  "actions": {
+    "initialize": {
+      "label": "Initialize separation",
+      "handler": "initialize_action",
+      "settings_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "format": "profile_id"
+          },
+          "file_id": {
+            "type": "string",
+            "format": "upload_id"
+          },
+          "speaker_asset": {
+            "type": "string",
+            "format": "asset_id"
+          },
+          "engine": {
+            "type": "string",
+            "enum": [
+              "onnxruntime",
+              "openvino"
+            ],
+            "default": "onnxruntime",
+            "advanced": true
+          },
+          "device": {
+            "type": "string",
+            "enum": [
+              "CPU",
+              "GPU",
+              "NPU"
+            ],
+            "default": "CPU",
+            "advanced": true
+          },
+          "threads": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 32,
+            "default": 1,
+            "advanced": true
+          },
+          "template_asset": {
+            "type": "string",
+            "format": "asset_id"
+          }
+        },
+        "required": [
+          "profile_id",
+          "file_id",
+          "speaker_asset",
+          "template_asset"
+        ]
+      },
+      "permissions": [
+        "audio.read",
+        "asset.read",
+        "profile.read",
+        "profile.write",
+        "resource.acquire"
+      ]
+    },
+    "validate_artifact": {
+      "label": "Validate artifacts",
+      "handler": "validate_action",
+      "settings_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "format": "profile_id"
+          }
+        },
+        "required": [
+          "profile_id"
+        ]
+      },
+      "permissions": [
+        "profile.read"
+      ]
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "setup_version": 1,
+  "profile_required": true,
+  "artifacts": [
+    "embedding"
+  ],
+  "settings_bindings": {
+    "profile_id": {
+      "source": "profile"
+    },
+    "model_asset": {
+      "source": "resource",
+      "id": "speaker"
+    }
+  },
+  "action_bindings": {
+    "initialize": {
+      "profile_id": {
+        "source": "profile"
+      },
+      "speaker_asset": {
+        "source": "resource",
+        "id": "speaker"
+      }
+    }
+  },
+  "initialize_action": "initialize",
+  "file_required": true,
+  "minimum_audio_seconds": 3,
+  "runtime_resources": [
+    "speaker"
+  ]
+}

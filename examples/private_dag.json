@@ -1,0 +1,20 @@
+{
+  "graph_schema": 1, "graph_id": "private_mic", "revision": 1, "execution": "dag",
+  "nodes": [
+    {"id": "source", "type": "core.source"},
+    {"id": "identity", "type": "org.obliviousmic.campplus"},
+    {"id": "separation", "type": "org.obliviousmic.bsrnn"},
+    {"id": "gate", "type": "core.gate"},
+    {"id": "loudness", "type": "org.obliviousmic.loudness"},
+    {"id": "sink", "type": "core.sink"}
+  ],
+  "edges": [
+    {"from": "source.audio", "to": "identity.audio"},
+    {"from": "source.audio", "to": "separation.mixture"},
+    {"from": "identity.decision", "to": "gate.decision"},
+    {"from": "separation.separated", "to": "gate.audio"},
+    {"from": "gate.audio", "to": "loudness.audio"},
+    {"from": "loudness.audio", "to": "sink.audio"}
+  ],
+  "failure_policy": "mute_for_private_route"
+}

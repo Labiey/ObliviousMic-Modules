@@ -1,0 +1,75 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "model_path": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "advanced": true
+    },
+    "profile_id": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "format": "profile_id",
+      "advanced": false
+    },
+    "model_asset": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "format": "asset_id",
+      "advanced": true
+    },
+    "engine": {
+      "type": "string",
+      "default": "onnxruntime",
+      "apply_policy": "reprepare",
+      "enum": [
+        "onnxruntime",
+        "openvino"
+      ],
+      "advanced": true
+    },
+    "device": {
+      "type": "string",
+      "default": "CPU",
+      "apply_policy": "reprepare",
+      "enum": [
+        "CPU",
+        "GPU",
+        "NPU"
+      ],
+      "advanced": true
+    },
+    "threads": {
+      "type": "integer",
+      "default": 1,
+      "apply_policy": "reprepare",
+      "minimum": 1,
+      "maximum": 32,
+      "advanced": true
+    },
+    "win": {
+      "type": "integer",
+      "default": 512,
+      "apply_policy": "reprepare",
+      "minimum": 2,
+      "maximum": 2048,
+      "multipleOf": 2,
+      "advanced": true
+    },
+    "hop": {
+      "type": "integer",
+      "default": 128,
+      "apply_policy": "reprepare",
+      "minimum": 1,
+      "maximum": 512,
+      "advanced": true
+    }
+  }
+}

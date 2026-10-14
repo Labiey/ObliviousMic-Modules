@@ -1,0 +1,100 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "model_path": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "advanced": true
+    },
+    "profile_id": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "format": "profile_id",
+      "advanced": false
+    },
+    "model_asset": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "format": "asset_id",
+      "advanced": true
+    },
+    "engine": {
+      "type": "string",
+      "default": "onnxruntime",
+      "apply_policy": "reprepare",
+      "enum": [
+        "onnxruntime",
+        "openvino"
+      ],
+      "advanced": true
+    },
+    "device": {
+      "type": "string",
+      "default": "CPU",
+      "apply_policy": "reprepare",
+      "enum": [
+        "CPU",
+        "GPU",
+        "NPU"
+      ],
+      "advanced": true
+    },
+    "threads": {
+      "type": "integer",
+      "default": 1,
+      "apply_policy": "reprepare",
+      "minimum": 1,
+      "maximum": 32,
+      "advanced": true
+    },
+    "embedding_path": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "advanced": true
+    },
+    "window_ms": {
+      "type": "integer",
+      "default": 600,
+      "apply_policy": "reprepare",
+      "minimum": 200,
+      "maximum": 3000,
+      "multipleOf": 10,
+      "advanced": true
+    },
+    "hop_ms": {
+      "type": "integer",
+      "default": 100,
+      "apply_policy": "reprepare",
+      "minimum": 10,
+      "maximum": 1000,
+      "multipleOf": 10,
+      "advanced": true
+    },
+    "veto_window_ms": {
+      "type": "integer",
+      "default": 600,
+      "apply_policy": "reprepare",
+      "minimum": 200,
+      "maximum": 3000,
+      "multipleOf": 10,
+      "advanced": true
+    },
+    "silence_floor_dbfs": {
+      "type": "number",
+      "default": -55,
+      "apply_policy": "reprepare",
+      "minimum": -100,
+      "maximum": 0,
+      "advanced": true
+    }
+  }
+}
