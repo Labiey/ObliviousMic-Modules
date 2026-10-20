@@ -1,0 +1,6 @@
+ObliviousMic NVIDIA Broadcast adapter
+Copyright 2026 ObliviousMic contributors. Apache-2.0.
+Original integration code only. No NVIDIA software, SDK binaries, models or drivers are redistributed.
+NVIDIA Broadcast and its installed components remain subject to their own terms.
+Interface reference: NVIDIA Broadcast 2.3.0 installed MCP reference documents.
+Official alternative native API documentation: https://docs.nvidia.com/maxine/afx/latest/UseAFXInApps/UseTheAFXSDKInApplications.html
