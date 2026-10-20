@@ -1,0 +1,62 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "enabled": {
+      "type": "boolean",
+      "default": true,
+      "apply_policy": "hot"
+    },
+    "font_size": {
+      "type": "integer",
+      "default": 28,
+      "apply_policy": "hot",
+      "minimum": 12,
+      "maximum": 72
+    },
+    "opacity": {
+      "type": "number",
+      "default": 0.88,
+      "apply_policy": "hot",
+      "minimum": 0.2,
+      "maximum": 1
+    },
+    "display_seconds": {
+      "type": "integer",
+      "default": 8,
+      "apply_policy": "hot",
+      "minimum": 1,
+      "maximum": 60
+    },
+    "width": {
+      "type": "integer",
+      "default": 960,
+      "apply_policy": "reprepare",
+      "minimum": 320,
+      "maximum": 2400,
+      "advanced": true
+    },
+    "position": {
+      "type": "string",
+      "default": "bottom",
+      "apply_policy": "reprepare",
+      "enum": [
+        "bottom",
+        "top"
+      ],
+      "advanced": true
+    },
+    "click_through": {
+      "type": "boolean",
+      "default": false,
+      "apply_policy": "hot",
+      "advanced": true
+    },
+    "show_in_offline": {
+      "type": "boolean",
+      "default": false,
+      "apply_policy": "reprepare",
+      "advanced": true
+    }
+  }
+}

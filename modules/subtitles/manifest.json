@@ -1,0 +1,50 @@
+{
+  "manifest_version": 1,
+  "module_id": "org.obliviousmic.subtitles",
+  "module_version": "1.0.0",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ],
+    "outputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 160,
+    "maximum_block_frames": 65536,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 4,
+    "latency_mode": "reported_on_prepare",
+    "async_process": true
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [],
+  "resources": {
+    "model_assets": []
+  }
+}
