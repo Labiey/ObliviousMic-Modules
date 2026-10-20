@@ -29,9 +29,10 @@ def validate():
         resources = json.loads((folder / "resources.json").read_text("utf-8"))["assets"]
         for resource in resources:
             if resource["auto_download"]:
-                assert (
-                    resource["redistribution"] == "allowed" and resource["license"] == "Apache-2.0"
-                )
+                assert resource["redistribution"] == "allowed" and resource["license"] in {
+                    "Apache-2.0",
+                    "MIT",
+                }
                 assert len(resource["sha256"]) == 64 and resource["bytes"] > 0
             if resource["redistribution"] != "allowed":
                 assert not resource["auto_download"]

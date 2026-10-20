@@ -54,7 +54,9 @@ def build(name, output=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("name", choices=["campplus", "bsrnn"])
+    parser.add_argument(
+        "name", choices=["campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast"]
+    )
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
     print(json.dumps(build(args.name, args.output), indent=2))

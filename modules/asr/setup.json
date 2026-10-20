@@ -1,0 +1,29 @@
+{
+  "setup_version": 1,
+  "profile_required": false,
+  "artifacts": [],
+  "runtime_resources": [
+    "weights",
+    "configuration",
+    "tokenizer",
+    "vocabulary"
+  ],
+  "settings_bindings": {
+    "model_asset": {
+      "source": "resource",
+      "id": "weights"
+    },
+    "config_asset": {
+      "source": "resource",
+      "id": "configuration"
+    },
+    "tokenizer_asset": {
+      "source": "resource",
+      "id": "tokenizer"
+    },
+    "vocabulary_asset": {
+      "source": "resource",
+      "id": "vocabulary"
+    }
+  }
+}

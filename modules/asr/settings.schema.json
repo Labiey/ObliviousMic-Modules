@@ -1,0 +1,121 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "language": {
+      "type": "string",
+      "default": "auto",
+      "apply_policy": "reprepare",
+      "enum": [
+        "auto",
+        "zh",
+        "en",
+        "ja"
+      ]
+    },
+    "max_segment_seconds": {
+      "type": "integer",
+      "default": 6,
+      "apply_policy": "reprepare",
+      "minimum": 2,
+      "maximum": 12,
+      "advanced": true
+    },
+    "silence_ms": {
+      "type": "integer",
+      "default": 500,
+      "apply_policy": "reprepare",
+      "minimum": 200,
+      "maximum": 2000,
+      "advanced": true
+    },
+    "minimum_speech_ms": {
+      "type": "integer",
+      "default": 200,
+      "apply_policy": "reprepare",
+      "minimum": 50,
+      "maximum": 1000,
+      "advanced": true
+    },
+    "silence_dbfs": {
+      "type": "number",
+      "default": -48,
+      "apply_policy": "reprepare",
+      "minimum": -80,
+      "maximum": -15,
+      "advanced": true
+    },
+    "engine": {
+      "type": "string",
+      "default": "faster-whisper",
+      "apply_policy": "reprepare",
+      "enum": [
+        "faster-whisper"
+      ],
+      "advanced": true
+    },
+    "device": {
+      "type": "string",
+      "default": "cpu",
+      "apply_policy": "reprepare",
+      "enum": [
+        "cpu"
+      ],
+      "advanced": true
+    },
+    "compute_type": {
+      "type": "string",
+      "default": "int8",
+      "apply_policy": "reprepare",
+      "enum": [
+        "int8"
+      ],
+      "advanced": true
+    },
+    "threads": {
+      "type": "integer",
+      "default": 4,
+      "apply_policy": "reprepare",
+      "minimum": 1,
+      "maximum": 16,
+      "advanced": true
+    },
+    "memory_multiplier": {
+      "type": "integer",
+      "default": 2,
+      "apply_policy": "reprepare",
+      "enum": [
+        2
+      ],
+      "advanced": true
+    },
+    "model_asset": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "advanced": true
+    },
+    "config_asset": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "advanced": true
+    },
+    "tokenizer_asset": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "advanced": true
+    },
+    "vocabulary_asset": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "private": true,
+      "advanced": true
+    }
+  }
+}

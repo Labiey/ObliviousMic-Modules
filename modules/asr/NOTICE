@@ -1,0 +1,10 @@
+ObliviousMic ASR adapter
+Copyright 2026 ObliviousMic contributors. Adapter code: Apache-2.0.
+
+This package contains adapter code and declarations only, no model or upstream implementation.
+faster-whisper (SYSTRAN): MIT, https://github.com/SYSTRAN/faster-whisper
+CTranslate2 (OpenNMT): MIT, https://github.com/OpenNMT/CTranslate2
+Whisper Small conversion: Systran/faster-whisper-small, model card MIT.
+https://huggingface.co/Systran/faster-whisper-small
+Weights are separately fetched at the pinned revision and verified by SHA-256.
+Upstream terms and model provenance are separate from this adapter's Apache license.

@@ -1,0 +1,64 @@
+{
+  "manifest_version": 1,
+  "module_id": "org.obliviousmic.asr",
+  "module_version": "1.0.0",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          16000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 160,
+    "maximum_block_frames": 160,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 1,
+    "latency_mode": "reported_on_prepare",
+    "allow_partial_eos": true,
+    "async_process": true
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [
+    "asset.read",
+    "resource.acquire"
+  ],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "faster-whisper>=1.2.1,<2",
+    "ctranslate2>=4.8.3,<5",
+    "numpy>=2,<3"
+  ]
+}
