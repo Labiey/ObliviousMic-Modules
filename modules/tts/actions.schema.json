@@ -1,0 +1,45 @@
+{
+  "actions": {
+    "initialize_reference": {
+      "label": "Initialize reference voice",
+      "handler": "initialize_reference",
+      "permissions": [
+        "audio.read",
+        "profile.write"
+      ],
+      "settings_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "profile_id": {
+            "type": "string",
+            "format": "profile_id"
+          },
+          "file_id": {
+            "type": "string",
+            "format": "upload_id"
+          },
+          "prompt_text": {
+            "type": "string",
+            "default": "",
+            "maxLength": 2000,
+            "private": true
+          },
+          "prompt_language": {
+            "type": "string",
+            "enum": [
+              "zh",
+              "en",
+              "ja"
+            ],
+            "default": "zh"
+          }
+        },
+        "required": [
+          "profile_id",
+          "file_id"
+        ]
+      }
+    }
+  }
+}

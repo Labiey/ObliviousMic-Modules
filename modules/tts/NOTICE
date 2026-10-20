@@ -1,0 +1,8 @@
+ObliviousMic TTS adapters
+Copyright 2026 ObliviousMic contributors. Apache-2.0.
+This package contains original adapter code only. It contains no voices, model weights,
+GPT-SoVITS runtime, cloud SDK or NVIDIA software.
+Qwen API: https://www.alibabacloud.com/help/en/model-studio/qwen-tts-api
+Azure API: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/rest-text-to-speech
+GPT-SoVITS API: https://github.com/RVC-Boss/GPT-SoVITS/blob/main/api_v2.py
+Cloud provider terms, service billing and selected local model/voice licenses apply separately.
