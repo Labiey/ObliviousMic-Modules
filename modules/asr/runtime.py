@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Local utterance ASR; inference stays outside audio callbacks."""
 
+import importlib
 import json
 import os
 import shutil
@@ -9,6 +10,7 @@ from collections import deque
 from fractions import Fraction
 from pathlib import Path
 from threading import RLock
+from weakref import WeakSet
 
 import numpy as np
 from obliviousmic.sdk import FlushResult, Latency, PortBundle, TextSegment
@@ -16,10 +18,30 @@ from obliviousmic.sdk import FlushResult, Latency, PortBundle, TextSegment
 ROOT = Path(__file__).parent
 
 
+def configure_progress(progress_module=None):
+    """Give only this backend's progress class a monitor-free implementation.
+
+    Disabled upstream bars still create a global TMonitor. Do not stop an existing
+    monitor or change tqdm's global settings used by downloads or embedding callers.
+    """
+    module = progress_module or importlib.import_module("faster_whisper.transcribe")
+    original = module.tqdm
+    if getattr(original, "_obmic_monitor_free", False):
+        return
+
+    class QuietProgress(original):
+        monitor_interval = 0
+        _instances = WeakSet()
+        _obmic_monitor_free = True
+
+    module.tqdm = QuietProgress
+
+
 class WhisperSession:
     def __init__(self, files, config):
         from faster_whisper import WhisperModel
 
+        configure_progress()
         self.directory = tempfile.TemporaryDirectory(prefix="obmic-whisper-")
         self.lock = RLock()
         try:

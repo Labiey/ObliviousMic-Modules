@@ -85,3 +85,19 @@ def test_long_speech_is_bounded_and_epoch_reset_discards_old_audio():
     send(module, 0.1, 4000)
     assert module.flush().outputs.ports["text"][0].epoch_id == 1
     module.dispose()
+
+
+def test_backend_progress_disables_only_its_own_monitor():
+    from modules.asr.runtime import configure_progress
+
+    class Progress:
+        monitor_interval = 10
+        monitor = object()
+
+    module = SimpleNamespace(tqdm=Progress)
+    configure_progress(module)
+    assert module.tqdm.monitor_interval == 0 and Progress.monitor_interval == 10
+    assert module.tqdm.monitor is Progress.monitor
+    customized = module.tqdm
+    configure_progress(module)
+    assert module.tqdm is customized
