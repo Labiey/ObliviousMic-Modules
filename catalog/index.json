@@ -5,38 +5,161 @@
     {
       "module_id": "org.obliviousmic.campplus",
       "name": "campplus",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 95996,
-      "sha256": "c0316b62a9d925cd3baa9a2253b038e89321ea2a1bced0a1fcd6b06ed4fe8c46",
+      "bytes": 28399306,
+      "sha256": "098f229dfe22cb616f35734f209af03ca9a152551cfc27efe807894c5480b5ac",
       "source_path": "modules/campplus",
-      "minimum_framework_version": "0.2.0",
+      "bundled_resources": [
+        {
+          "id": "speaker",
+          "sha256": "aa3cfc16963a10586a9393f5035d6d6b57e98d358b347f80c2a30bf4f00ceba2",
+          "bytes": 28281164,
+          "license": "Apache-2.0",
+          "source_url": "https://modelscope.cn/models/iic/speech_campplus_sv_zh_en_16k-common_advanced"
+        }
+      ],
+      "minimum_framework_version": "0.3.0rc1",
       "description": "Speaker identity with one-time registration",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.1.2/campplus-1.1.2.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.2.0/campplus-1.2.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/campplus/LICENSE",
-      "weight_status": "Apache-2.0 public CAM++ resource"
+      "weight_status": "Includes the Apache-2.0 public CAM++ model; private enrollment stays local"
     },
     {
       "module_id": "org.obliviousmic.bsrnn",
       "name": "bsrnn",
-      "version": "1.1.2",
+      "version": "1.2.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 126735,
-      "sha256": "aa97d1a6fd869aee721b72e85ef4d3349bc1a80c7ecfa414704a030d80531d2a",
+      "bytes": 28430244,
+      "sha256": "26c0a53d5f947fbabf1bc3235459226a0b06d35e15f69a2064253951a8de68b0",
       "source_path": "modules/bsrnn",
-      "minimum_framework_version": "0.2.0",
+      "bundled_resources": [
+        {
+          "id": "speaker",
+          "sha256": "aa3cfc16963a10586a9393f5035d6d6b57e98d358b347f80c2a30bf4f00ceba2",
+          "bytes": 28281164,
+          "license": "Apache-2.0",
+          "source_url": "https://modelscope.cn/models/iic/speech_campplus_sv_zh_en_16k-common_advanced"
+        }
+      ],
+      "minimum_framework_version": "0.3.0rc1",
       "description": "Target-speaker extraction; authorized local template required",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/bsrnn-v1.1.2/bsrnn-1.1.2.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/bsrnn-v1.2.0/bsrnn-1.2.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/bsrnn/LICENSE",
-      "weight_status": "Unresolved upstream checkpoint redistribution; local import only"
+      "weight_status": "Includes CAM++ speaker weights; separator template rights unresolved, local import only"
+    },
+    {
+      "module_id": "org.obliviousmic.asr",
+      "name": "asr",
+      "version": "1.0.0",
+      "api": {
+        "min": "1.0",
+        "max_exclusive": "2.0"
+      },
+      "license": "Apache-2.0",
+      "bytes": 486245992,
+      "sha256": "6fb561e96203d0ae5cf1eb28b613710bf1b8987c9abbe88639cf8435465c7404",
+      "source_path": "modules/asr",
+      "bundled_resources": [
+        {
+          "id": "weights",
+          "sha256": "3e305921506d8872816023e4c273e75d2419fb89b24da97b4fe7bce14170d671",
+          "bytes": 483546902,
+          "license": "MIT",
+          "source_url": "https://huggingface.co/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120"
+        },
+        {
+          "id": "configuration",
+          "sha256": "b55496ac7940a7ae47d2c01eab40edfd8701feec1229d9cce3b40014383fb828",
+          "bytes": 2370,
+          "license": "MIT",
+          "source_url": "https://huggingface.co/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120"
+        },
+        {
+          "id": "tokenizer",
+          "sha256": "fb7b63191e9bb045082c79fd742a3106a12c99513ab30df4a0d47fa6cb6fd0ab",
+          "bytes": 2203239,
+          "license": "MIT",
+          "source_url": "https://huggingface.co/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120"
+        },
+        {
+          "id": "vocabulary",
+          "sha256": "34ce3fe1c5041027b3f8d42912270993f986dbc4bb34cf27f951e34a1e453913",
+          "bytes": 459861,
+          "license": "MIT",
+          "source_url": "https://huggingface.co/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120"
+        }
+      ],
+      "minimum_framework_version": "0.3.0rc1",
+      "description": "Local speech recognition with timestamped Chinese, English and Japanese text",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr-v1.0.0/asr-1.0.0.obmic.zip",
+      "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/asr/LICENSE",
+      "weight_status": "Includes pinned MIT Whisper Small weights, tokenizer and configuration"
+    },
+    {
+      "module_id": "org.obliviousmic.tts",
+      "name": "tts",
+      "version": "1.0.0",
+      "api": {
+        "min": "1.0",
+        "max_exclusive": "2.0"
+      },
+      "license": "Apache-2.0",
+      "bytes": 51389,
+      "sha256": "c1bc02d59331e80274ae1aa9ed9db72ed222c684f64a33708ba67c09d3c5257a",
+      "source_path": "modules/tts",
+      "bundled_resources": [],
+      "minimum_framework_version": "0.3.0rc1",
+      "description": "Text to speech with Qwen, Azure or local GPT-SoVITS",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.0.0/tts-1.0.0.obmic.zip",
+      "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/tts/LICENSE",
+      "weight_status": "Original adapter only; provider and selected local model terms remain separate"
+    },
+    {
+      "module_id": "org.obliviousmic.subtitles",
+      "name": "subtitles",
+      "version": "1.0.0",
+      "api": {
+        "min": "1.0",
+        "max_exclusive": "2.0"
+      },
+      "license": "Apache-2.0",
+      "bytes": 29326,
+      "sha256": "10dbfe2951bb694b45ed4af6a6ce6beb53bf32079dc59d0e6a43d4367f322bb5",
+      "source_path": "modules/subtitles",
+      "bundled_resources": [],
+      "minimum_framework_version": "0.3.0rc1",
+      "description": "Private timestamped text in a Windows floating subtitle window",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/subtitles-v1.0.0/subtitles-1.0.0.obmic.zip",
+      "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/subtitles/LICENSE",
+      "weight_status": "No model resources; Python/Tk runtime required"
+    },
+    {
+      "module_id": "org.obliviousmic.broadcast",
+      "name": "broadcast",
+      "version": "1.0.0",
+      "api": {
+        "min": "1.0",
+        "max_exclusive": "2.0"
+      },
+      "license": "Apache-2.0",
+      "bytes": 47769,
+      "sha256": "ce49e0b0a154449bcf12ae59bd6a7a9c450ed964a458c1b3f0080198dcb42985",
+      "source_path": "modules/broadcast",
+      "bundled_resources": [],
+      "minimum_framework_version": "0.3.0rc1",
+      "description": "Buffered NVIDIA Broadcast enhancement of the graph's upstream audio",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/broadcast-v1.0.0/broadcast-1.0.0.obmic.zip",
+      "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/broadcast/LICENSE",
+      "weight_status": "No NVIDIA binaries or models; compatible installed Broadcast app required"
     }
   ]
 }

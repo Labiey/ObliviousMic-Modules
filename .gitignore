@@ -20,3 +20,10 @@ build/
 *.partial
 .env
 .env.*
+
+# Model payloads belong in ignored build caches and Release assets.
+*.bin
+*.ckpt
+*.safetensors
+*.h5
+*.tflite
