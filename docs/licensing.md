@@ -66,3 +66,28 @@ versions and resource hashes do not override their license terms. The host's aud
 frontend dependency notices remain in the main project.
 
 No user recording, speaker embedding, personalized ONNX core or dataset is redistributed.
+
+## New module candidates (checked 2026-10-21)
+
+ASR, TTS, subtitles and Broadcast contain original Apache-2.0 adapter code. Each code archive contains
+the complete LICENSE, its own NOTICE, source and resource declarations. The packages contain no
+third-party runtime, model, reference audio, enrollment, cloud key or generated speech.
+
+ASR imports faster-whisper and CTranslate2 as separately installed MIT dependencies. The pinned
+Systran/faster-whisper-small revision 536b0662742c02347bc0e980a01041f333bce120 identifies its model
+as MIT. The model is downloaded from its upstream repository, not embedded or rehosted here.
+The four resources retain upstream URLs, exact sizes, SHA-256 and MIT attribution in resources.json.
+Sources: https://github.com/SYSTRAN/faster-whisper/blob/master/LICENSE and
+https://huggingface.co/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120.
+
+TTS uses original REST adapters for Qwen/Azure and a loopback client for an independently installed
+GPT-SoVITS service. Service terms, selected voices, local runtime and model licenses are separate.
+The adapter does not redistribute cloud SDKs, GPT-SoVITS, its models or the user's voice reference.
+Successful tests with a selected local model or cloud account do not grant redistribution rights.
+
+Subtitles uses the user's Python/Tk runtime and original Windows window-control glue. It does not
+bundle Python, Tcl/Tk or another project's GUI code. Their installed runtime notices remain applicable.
+
+Broadcast uses an already installed application's documented local gateway. No NVIDIA application,
+driver, SDK or model is distributed. The Apache license covers only this adapter, and makes no claim
+about NVIDIA component licensing or endorsement. Consult each module's NOTICE for API references.

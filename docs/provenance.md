@@ -20,3 +20,9 @@ The package build additionally includes provenance and license documentation in 
 Historical performance claims in inherited docstrings describe the frozen project; they are not
 new measurements, endorsement or performance guarantees. Validation uses synthetic correctness
 fixtures and does not rerun hardware performance baselines.
+
+The later asr/tts/subtitles/broadcast directories are original modules, not copied OwnerMic leaves.
+They use the host SDK, separately installed dependencies and documented provider interfaces; their
+per-module NOTICE identifies those sources. No provider implementation, installed vendor program,
+weight or private enrollment is copied into their archives. The candidate catalog builder preserves
+published CAM++/BSRNN entries and records independently rebuilt hashes for the four additions.

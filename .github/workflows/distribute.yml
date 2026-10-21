@@ -2,7 +2,7 @@ name: Validate and distribute modules
 on:
   push:
     branches: [main]
-    tags: ['campplus-v*', 'bsrnn-v*']
+    tags: ['campplus-v*', 'bsrnn-v*', 'asr-v*', 'tts-v*', 'subtitles-v*', 'broadcast-v*']
   pull_request:
   workflow_dispatch:
 permissions:
@@ -19,10 +19,14 @@ jobs:
         with:
           python-version: '3.12'
       - run: python -m tools.validate_catalog
+      - run: python -m tools.prepare_catalog
+      - run: python -m tools.validate_catalog --catalog dist/catalog.next.json
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: official-module-packages-${{ matrix.os }}
-          path: dist/*.obmic.zip
+          path: |
+            dist/*.obmic.zip
+            dist/catalog.next.json
   release:
     if: startsWith(github.ref, 'refs/tags/')
     needs: validate

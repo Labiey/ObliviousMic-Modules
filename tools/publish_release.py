@@ -6,6 +6,7 @@ import urllib.request
 from pathlib import Path
 
 from tools.build_module import build
+from tools.prepare_catalog import prepare
 from tools.validate_catalog import validate
 
 
@@ -22,13 +23,30 @@ def request(url, data, content_type="application/json"):
         return json.loads(response.read())
 
 
-if __name__ == "__main__":
+def audited_package(tag):
+    """Resolve a supported tag before any authenticated publication request."""
     validate()
-    tag = os.environ["GITHUB_REF_NAME"]
     name, version = tag.rsplit("-v", 1)
+    candidate = json.loads(prepare().read_text("utf-8"))
+    expected = next(
+        (
+            item
+            for item in candidate["modules"]
+            if item["name"] == name and item["version"] == version
+        ),
+        None,
+    )
+    if expected is None:
+        raise ValueError("release tag is not in the audited catalog candidate")
     package = build(name)
-    if version != package["version"]:
-        raise ValueError("release tag version differs from manifest")
+    if any(expected[key] != package[key] for key in ("sha256", "bytes", "module_id", "version")):
+        raise ValueError("release package differs from the audited catalog candidate")
+    return name, version, package
+
+
+if __name__ == "__main__":
+    tag = os.environ["GITHUB_REF_NAME"]
+    name, version, package = audited_package(tag)
     release = request(
         "https://api.github.com/repos/Labiey/ObliviousMic-Modules/releases",
         json.dumps(
@@ -37,7 +55,7 @@ if __name__ == "__main__":
                 "name": name + " " + version,
                 "body": (
                     "Official code-only module. "
-                    "Read the packaged LICENSE, NOTICE and licensing.md. "
+                    "Read the packaged LICENSE, NOTICE, README and repository licensing audit. "
                     "No checkpoint weights or private voice assets are distributed. SHA-256: "
                 )
                 + package["sha256"],

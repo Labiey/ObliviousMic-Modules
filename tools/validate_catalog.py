@@ -1,5 +1,6 @@
 """Validate published declarations and deterministic package digests without executing code."""
 
+import argparse
 import ast
 import json
 from pathlib import Path
@@ -9,11 +10,13 @@ from tools.build_module import build
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def validate():
-    catalog = json.loads((ROOT / "catalog/index.json").read_text("utf-8"))
+def validate(path=None):
+    catalog = json.loads(Path(path or ROOT / "catalog/index.json").read_text("utf-8"))
     assert (
         catalog["catalog_version"] == 1 and catalog["repository"] == "Labiey/ObliviousMic-Modules"
     )
+    ids = [item["module_id"] for item in catalog["modules"]]
+    assert len(ids) == len(set(ids)), "duplicate catalog module"
     for item in catalog["modules"]:
         name = item["name"]
         folder = ROOT / "modules" / name
@@ -40,4 +43,6 @@ def validate():
 
 
 if __name__ == "__main__":
-    validate()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--catalog", type=Path)
+    validate(parser.parse_args().catalog)
