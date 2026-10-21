@@ -258,3 +258,147 @@ def test_valid_session_header_is_reused_for_subsequent_calls():
     assert client.version == "2.3.0"
     assert client.call("describe_effects", section="microphone") == {"effects": []}
     assert headers == [None, "owned-session"]
+
+
+def stream_module(**changes):
+    from obliviousmic.sdk import AudioFormat, PrepareContext, StreamContext
+
+    from modules.broadcast.files import FileResult
+    from modules.broadcast.network import Module as NetworkModule
+    from modules.broadcast.runtime import Module
+
+    class GatewayFixture:
+        version = "2.3.0"
+        port = 18100
+
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def call(self, *args, **kwargs):
+            return capabilities()
+
+    class Processor:
+        def __init__(self, gateway, effects, **kwargs):
+            self.delay = 1920 if effects[0]["effectId"] == "studio_voice" else 3360
+            self.calls = []
+
+        def process(self, samples, rate):
+            self.calls.append(samples.copy())
+            data = np.concatenate((np.zeros((self.delay, 1), np.float32), samples * 0.5))[
+                : len(samples) + 960
+            ]
+            return FileResult(data, rate, len(samples), 0)
+
+    config = {key: p["default"] for key, p in Module.SCHEMA["properties"].items()}
+    config.update(changes)
+    module = NetworkModule(GatewayFixture, Processor)
+    module.prepare(
+        PrepareContext(
+            "broadcast",
+            {"audio": AudioFormat(48000)},
+            {"audio": AudioFormat(48000)},
+            mode="realtime",
+        ),
+        config,
+    )
+    module.start(StreamContext("broadcast-test", 2))
+    return module
+
+
+@pytest.mark.parametrize("algorithm", ["noise_removal", "studio_voice"])
+def test_streaming_context_and_delay_compensation_preserve_samples_pts_and_exact_partial_eos(
+    algorithm,
+):
+    from fractions import Fraction
+
+    from obliviousmic.sdk import AudioFormat, AudioPacket, PortBundle
+
+    module = stream_module(algorithm=algorithm)
+    frames = module.window + module.lookahead + 1377
+    source = np.random.default_rng(3).uniform(-0.5, 0.5, (frames, 1)).astype("float32")
+    output = []
+    for offset in range(0, frames, 337):
+        packet = AudioPacket(
+            source[offset : offset + 337].copy(),
+            AudioFormat(48000),
+            Fraction(5) + Fraction(offset, 48000),
+            "broadcast-test",
+            2,
+            offset,
+            frozenset({"private"}),
+        )
+        output.extend(module.process(PortBundle.audio(packet)).ports["audio"])
+    assert output and module.pending < module.window + module.lookahead
+    output.extend(module.flush().outputs.ports["audio"])
+    data = np.concatenate([packet.samples for packet in output])
+    np.testing.assert_array_equal(data, source * 0.5)
+    assert len(data) == frames and output[0].media_start == 5
+    assert output[-1].media_end == Fraction(5) + Fraction(frames, 48000)
+    assert [p.sequence for p in output] == list(range(len(output)))
+    assert all(p.flags == frozenset({"private"}) and p.epoch_id == 2 for p in output)
+    assert module.flush().drained and not module.flush().outputs.ports["audio"]
+    assert (
+        module.report_latency().mode == "variable"
+        and module.report_latency().content_delay_seconds == 0
+    )
+    module.dispose()
+
+
+def test_retained_pcm_detaches_from_ipc_and_epoch_reset_clears_audio():
+    from fractions import Fraction
+
+    from obliviousmic.sdk import AudioFormat, AudioPacket, PortBundle, StreamContext
+
+    module = stream_module()
+    packet = AudioPacket(
+        np.full((960, 1), 0.4, np.float32), AudioFormat(48000), Fraction(0), "broadcast-test", 2
+    )
+    module.process(PortBundle.audio(packet))
+    packet.samples.setflags(write=True)
+    packet.samples[:] = 0
+    outputs = module.flush().outputs.ports["audio"]
+    np.testing.assert_allclose(outputs[0].samples, 0.2)
+    module.reset("new epoch")
+    module.start(StreamContext("broadcast-test", 3))
+    assert not module.flush().outputs.ports["audio"] and module.frames == 0
+    module.dispose()
+
+
+def test_realtime_studio_voice_requires_a_sustainable_window():
+    with pytest.raises(BroadcastError, match="window_too_short"):
+        stream_module(algorithm="studio_voice", window_seconds=2)
+
+
+def test_interrupted_worker_cleanup_checks_private_source_and_cancels_only_owned_job(tmp_path):
+    from modules.broadcast.runtime import cleanup_jobs
+
+    source = tmp_path / "own" / "input.wav"
+    path = tmp_path / "job.json"
+    path.write_text(
+        json.dumps({"id": "owned-job", "port": 18100, "sourcePath": str(source)}), encoding="utf-8"
+    )
+    calls = []
+
+    class Client:
+        def __init__(self, port, **kwargs):
+            assert port == 18100
+
+        def call(self, name, **kwargs):
+            calls.append((name, kwargs))
+            return {
+                "jobs": [{"id": "owned-job", "status": "in_progress", "sourcePath": str(source)}]
+            }
+
+    cleanup_jobs(tmp_path, Client)
+    assert calls[-1][0] == "control_file_processing_jobs" and calls[-1][1]["jobIds"] == [
+        "owned-job"
+    ]
+    calls.clear()
+    path.write_text(
+        json.dumps(
+            {"id": "unrelated", "port": 18100, "sourcePath": str(tmp_path.parent / "unrelated.wav")}
+        ),
+        encoding="utf-8",
+    )
+    cleanup_jobs(tmp_path, Client)
+    assert not calls

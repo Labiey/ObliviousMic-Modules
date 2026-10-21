@@ -1,0 +1,89 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "algorithm": {
+      "type": "string",
+      "default": "noise_removal",
+      "enum": [
+        "noise_removal",
+        "room_echo_removal",
+        "noise_and_echo",
+        "studio_voice"
+      ],
+      "title": "Audio enhancement",
+      "description": "Uses the installed NVIDIA Broadcast app. Buffered processing adds seconds of latency.",
+      "apply_policy": "reprepare"
+    },
+    "strength": {
+      "type": "number",
+      "default": 0.8,
+      "minimum": 0,
+      "maximum": 1,
+      "title": "Effect strength",
+      "visible_when": {
+        "algorithm": [
+          "noise_removal",
+          "room_echo_removal",
+          "noise_and_echo"
+        ]
+      },
+      "apply_policy": "reprepare"
+    },
+    "mic_profile": {
+      "type": "string",
+      "default": "default",
+      "enum": [
+        "default",
+        "bright",
+        "full",
+        "warm"
+      ],
+      "title": "Studio Voice profile",
+      "visible_when": {
+        "algorithm": [
+          "studio_voice"
+        ]
+      },
+      "apply_policy": "reprepare"
+    },
+    "window_seconds": {
+      "type": "number",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 12,
+      "advanced": true,
+      "title": "Buffer window (0 = automatic)",
+      "description": "Automatic: 2 seconds for denoising/echo removal, 8 seconds for Studio Voice. Custom windows must be at least 2 seconds; realtime Studio Voice requires at least 8.",
+      "apply_policy": "reprepare"
+    },
+    "alignment_delay_ms": {
+      "type": "number",
+      "default": -1,
+      "minimum": -1,
+      "maximum": 200,
+      "advanced": true,
+      "title": "Content delay (-1 = automatic)",
+      "description": "Validated Broadcast 2.3 uses 70 ms for denoising/echo removal and 40 ms for Studio Voice. Unknown versions require an explicit override.",
+      "apply_policy": "reprepare"
+    },
+    "request_timeout_seconds": {
+      "type": "number",
+      "default": 45,
+      "minimum": 5,
+      "maximum": 45,
+      "advanced": true,
+      "apply_policy": "reprepare"
+    },
+    "gateway_port": {
+      "type": "integer",
+      "default": 0,
+      "minimum": 0,
+      "maximum": 18109,
+      "advanced": true,
+      "title": "Gateway port (0 = automatic)",
+      "description": "Automatically reads the installed app gateway. Overrides are limited to its loopback ports 18100\u201318109.",
+      "apply_policy": "reprepare"
+    }
+  }
+}

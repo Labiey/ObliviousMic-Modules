@@ -48,6 +48,7 @@ class Gateway:
         if type(port) is not int or not 18100 <= port <= 18109:
             raise BroadcastError("broadcast_gateway_port_invalid")
         self.url = f"http://127.0.0.1:{port}/gateway"
+        self.port = port
         self.open = (
             opener
             or urllib.request.build_opener(NoRedirects(), urllib.request.ProxyHandler({})).open

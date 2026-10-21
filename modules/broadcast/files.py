@@ -9,7 +9,10 @@ from pathlib import Path
 import numpy as np
 import soundfile as sf
 
-from .gateway import BroadcastError
+try:
+    from .gateway import BroadcastError
+except ImportError:
+    from gateway import BroadcastError
 
 
 @dataclass(frozen=True)
@@ -21,12 +24,13 @@ class FileResult:
 
 
 class FileProcessor:
-    def __init__(self, gateway, effects, *, timeout_seconds=45, workdir=None):
+    def __init__(self, gateway, effects, *, timeout_seconds=45, workdir=None, job_state=None):
         if not 2 <= timeout_seconds <= 90 or not effects:
             raise BroadcastError("broadcast_processing_settings_invalid")
         self.gateway, self.effects = gateway, effects
         self.timeout_seconds = timeout_seconds
         self.workdir = workdir
+        self.job_state = job_state or (lambda _: None)
 
     def process(self, samples, sample_rate=48000):
         samples = np.asarray(samples)
@@ -57,6 +61,7 @@ class FileProcessor:
                 )
                 if not isinstance(job.get("id"), str) or not isinstance(job.get("batchId"), str):
                     raise BroadcastError("broadcast_job_response_invalid")
+                self.job_state({"id": job["id"], "sourcePath": str(source.resolve())})
                 if job.get("skippedEffects"):
                     raise BroadcastError("broadcast_requested_effect_skipped")
                 remaining = deadline - time.monotonic()
@@ -140,5 +145,8 @@ class FileProcessor:
                             action="cancel",
                             jobIds=[job["id"]],
                         )
+                        terminal = True
                     except (BroadcastError, OSError):
                         pass
+                if terminal:
+                    self.job_state(None)
