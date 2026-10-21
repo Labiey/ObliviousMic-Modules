@@ -13,11 +13,12 @@ import xml.etree.ElementTree as ET
 import numpy as np
 import soundfile as sf
 import soxr
+from obliviousmic.sdk import PublicModuleError
 
 MAX_AUDIO_BYTES = 16 * 1024 * 1024
 
 
-class TTSError(ValueError):
+class TTSError(PublicModuleError):
     pass
 
 

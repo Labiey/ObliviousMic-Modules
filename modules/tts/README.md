@@ -23,9 +23,13 @@ Audio is decoded and checked for finite normalized PCM, converted to mono and re
 
 ## Validation and distribution
 
-Contract tests cover all three providers, SSML escaping, audio validation, private error handling, deduplication, clock continuity and warmup deadlines. A real local GPT-SoVITS run synthesized Chinese, English and Japanese through the installed ZIP and framework DAG, verified text passthrough, process cleanup and unchanged original installation files. Qwen/Azure authenticated calls still require user credentials and have not been verified against live accounts.
+Contract tests cover all three providers, SSML escaping, audio validation, private error handling, deduplication, clock continuity and warmup deadlines. A real local GPT-SoVITS run synthesized Chinese, English and Japanese through the installed ZIP and framework DAG, verified text passthrough, process cleanup and unchanged original installation files.
 
-This module is currently a local development package; it is not yet in the published official catalog. WebUI initialization and full multi-endpoint device workflows are being integrated. See the framework development decision record for current acceptance status.
+User-authorized live Qwen (Beijing) and Azure Speech (eastasia) checks also passed for Chinese, English and Japanese through the installed ZIP, isolated worker and named offline Web API. Defaults were used for the model and voices, without a reference profile. Local Whisper independently read back each language and checked known phrase content. Job metrics, exported reports and generated QA configuration files were checked for credential leakage. These short calls verify the tested accounts and paths, not provider availability or latency guarantees. Earlier intermittent Japanese Qwen failures could not be diagnosed from the old generic worker error; later explicit checks passed. Requests are not retried automatically.
+
+Provider failures use SDK PublicModuleError identifiers, preserving a controlled error_code across IPC and task records without exposing provider response bodies, keys, prompts or signed audio URLs. A matching current framework build is required for this SDK addition.
+
+This module is currently a local development package; it is not yet in the published official catalog. Local GPT-SoVITS has also passed a real ASR → TTS → device playback/subtitle route with independent physical microphone capture. Cloud playback, broader device combinations and remote distribution have separate acceptance requirements. See the framework development decision record for current status.
 
 ## Licensing
 
