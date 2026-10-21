@@ -52,7 +52,8 @@
     "latency_mode": "reported_on_prepare",
     "async_process": true,
     "maximum_batch_packets": 1,
-    "deadline_seconds": 35
+    "deadline_seconds": 35,
+    "maximum_output_frames": 960000
   },
   "settings_schema": "settings.schema.json",
   "actions_schema": "actions.schema.json",
