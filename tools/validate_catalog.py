@@ -3,6 +3,7 @@
 import argparse
 import ast
 import json
+import tempfile
 from pathlib import Path
 
 from tools.build_module import build
@@ -10,7 +11,7 @@ from tools.build_module import build
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def validate(path=None):
+def validate(path=None, *, metadata_only=False):
     catalog = json.loads(Path(path or ROOT / "catalog/index.json").read_text("utf-8"))
     assert (
         catalog["catalog_version"] == 1 and catalog["repository"] == "Labiey/ObliviousMic-Modules"
@@ -20,12 +21,18 @@ def validate(path=None):
     for item in catalog["modules"]:
         name = item["name"]
         folder = ROOT / "modules" / name
-        package = build(name)
-        assert item["sha256"] == package["sha256"] and item["bytes"] == package["bytes"], (
-            f"{name}: catalog {item['sha256']} / {item['bytes']} bytes; "
-            f"built {package['sha256']} / {package['bytes']} bytes"
-        )
-        assert item["module_id"] == package["module_id"] and item["version"] == package["version"]
+        assert name in {"campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast"}
+        assert len(item["sha256"]) == 64 and 0 < item["bytes"] <= 1024 * 1024 * 1024
+        if not metadata_only:
+            with tempfile.TemporaryDirectory(prefix="obmic-catalog-") as stage:
+                package = build(name, stage, include_models=bool(item.get("bundled_resources")))
+            assert item["sha256"] == package["sha256"] and item["bytes"] == package["bytes"], (
+                f"{name}: catalog {item['sha256']} / {item['bytes']} bytes; "
+                f"built {package['sha256']} / {package['bytes']} bytes"
+            )
+            assert (
+                item["module_id"] == package["module_id"] and item["version"] == package["version"]
+            )
         assert (folder / "LICENSE").is_file() and (folder / "NOTICE").is_file()
         for path in folder.rglob("*.py"):
             ast.parse(path.read_text("utf-8-sig"))
@@ -39,10 +46,12 @@ def validate(path=None):
                 assert len(resource["sha256"]) == 64 and resource["bytes"] > 0
             if resource["redistribution"] != "allowed":
                 assert not resource["auto_download"]
-    print("PASS: catalog digests, declarations, code-only packages and licensing metadata")
+    print("PASS: catalog declarations, package digests and licensing metadata")
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--catalog", type=Path)
-    validate(parser.parse_args().catalog)
+    parser.add_argument("--metadata-only", action="store_true")
+    args = parser.parse_args()
+    validate(args.catalog, metadata_only=args.metadata_only)

@@ -8,3 +8,7 @@ Original source headers/docstrings are retained. Historical performance statemen
 copied docstrings refer to OwnerMic and are not measurements or guarantees for this release.
 Model weights and third-party runtime dependencies have separate terms; see resources.json
 and docs/licensing.md. No user voice, embedding or personalized model is distributed.
+
+Release 1.2.0 includes the unchanged public CAM++ ONNX from k2-fsa/sherpa-onnx,
+original model by 3D-Speaker/ModelScope iic, model card Apache-2.0.
+See licenses/campplus/LICENSE and licenses/campplus/MODEL_CARD.md.

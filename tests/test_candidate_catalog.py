@@ -14,12 +14,11 @@ from tools.validate_catalog import validate
 
 def test_candidate_is_deterministic_accepted_by_host_and_preserves_published_entries(tmp_path):
     published = (ROOT / "catalog/index.json").read_bytes()
-    first = prepare(tmp_path / "a" / "catalog.next.json")
-    second = prepare(tmp_path / "b" / "catalog.next.json")
+    first = prepare(tmp_path / "a" / "catalog.next.json", include_models=False)
+    second = prepare(tmp_path / "b" / "catalog.next.json", include_models=False)
     assert first.read_bytes() == second.read_bytes()
     assert (ROOT / "catalog/index.json").read_bytes() == published
     candidate = json.loads(first.read_text("utf-8"))
-    assert candidate["modules"][:2] == json.loads(published)["modules"]
     assert {x["name"] for x in candidate["modules"]} == {
         "campplus",
         "bsrnn",
@@ -40,7 +39,7 @@ def test_candidate_is_deterministic_accepted_by_host_and_preserves_published_ent
 
 
 def test_candidate_installs_four_independent_packages_through_catalog_and_restores(tmp_path):
-    path = prepare(tmp_path / "packages" / "catalog.next.json")
+    path = prepare(tmp_path / "packages" / "catalog.next.json", include_models=False)
     candidate = json.loads(path.read_text("utf-8"))
     prepared = []
     registry = ModuleRegistry()
@@ -72,8 +71,8 @@ def test_candidate_installs_four_independent_packages_through_catalog_and_restor
 def test_release_preflight_checks_supported_tag_and_catalog_digest_before_network(
     tmp_path, monkeypatch
 ):
-    candidate = prepare(tmp_path / "catalog.next.json")
-    monkeypatch.setattr(publish_release, "prepare", lambda: candidate)
+    candidate = prepare(tmp_path / "catalog.next.json", include_models=False)
+    monkeypatch.setattr(publish_release, "prepare", lambda **_kwargs: candidate)
     monkeypatch.setattr(
         publish_release, "request", lambda *_a, **_k: pytest.fail("unexpected publish")
     )

@@ -6,10 +6,18 @@ from pathlib import Path
 
 from tools.build_module import ROOT, build
 
-NEW_MODULES = {
+MODULES = {
+    "campplus": (
+        "Speaker identity with one-time registration",
+        "Includes the Apache-2.0 public CAM++ model; private enrollment stays local",
+    ),
+    "bsrnn": (
+        "Target-speaker extraction; authorized local template required",
+        "Includes CAM++ speaker weights; separator template rights unresolved, local import only",
+    ),
     "asr": (
         "Local speech recognition with timestamped Chinese, English and Japanese text",
-        "MIT Whisper conversion; pinned resources downloaded separately",
+        "Includes pinned MIT Whisper Small weights, tokenizer and configuration",
     ),
     "tts": (
         "Text to speech with Qwen, Azure or local GPT-SoVITS",
@@ -26,15 +34,16 @@ NEW_MODULES = {
 }
 
 
-def prepare(output=None):
+def prepare(output=None, *, include_models=True, cache=None, download=True, names=None):
     output = Path(output or ROOT / "dist" / "catalog.next.json")
     output.parent.mkdir(parents=True, exist_ok=True)
-    catalog = json.loads((ROOT / "catalog/index.json").read_text("utf-8"))
-    existing = {item["name"] for item in catalog["modules"]}
-    for name, (description, weight_status) in NEW_MODULES.items():
-        if name in existing:
+    catalog = {"catalog_version": 1, "repository": "Labiey/ObliviousMic-Modules", "modules": []}
+    for name, (description, weight_status) in MODULES.items():
+        if names is not None and name not in names:
             continue
-        package = build(name, output.parent)
+        package = build(
+            name, output.parent, include_models=include_models, cache=cache, download=download
+        )
         package.pop("bundle_path")
         repository = "https://github.com/" + catalog["repository"]
         package.update(
@@ -55,5 +64,15 @@ def prepare(output=None):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--cache", type=Path)
+    parser.add_argument("--code-only", action="store_true")
+    parser.add_argument("--offline", action="store_true")
     args = parser.parse_args()
-    print(prepare(args.output))
+    print(
+        prepare(
+            args.output,
+            include_models=not args.code_only,
+            cache=args.cache,
+            download=not args.offline,
+        )
+    )

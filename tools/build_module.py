@@ -1,4 +1,4 @@
-"""Build deterministic code-only packages; assets always use the resource registry."""
+"""Build deterministic code packages or licensed, model-inclusive release packages."""
 
 import argparse
 import hashlib
@@ -9,7 +9,11 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def build(name, output=None):
+def build(name, output=None, *, include_models=False, cache=None, download=True):
+    if include_models:
+        from tools.model_payloads import build_release
+
+        return build_release(name, output, cache=cache, download=download)
     folder = ROOT / "modules" / name
     manifest = json.loads((folder / "manifest.json").read_text("utf-8"))
     output = Path(output or ROOT / "dist")
@@ -49,6 +53,7 @@ def build(name, output=None):
         "sha256": digest,
         "source_path": "modules/" + name,
         "bundle_path": str(path),
+        "bundled_resources": [],
     }
 
 
@@ -58,5 +63,19 @@ if __name__ == "__main__":
         "name", choices=["campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast"]
     )
     parser.add_argument("--output", type=Path)
+    parser.add_argument("--cache", type=Path)
+    parser.add_argument("--code-only", action="store_true")
+    parser.add_argument("--offline", action="store_true")
     args = parser.parse_args()
-    print(json.dumps(build(args.name, args.output), indent=2))
+    print(
+        json.dumps(
+            build(
+                args.name,
+                args.output,
+                include_models=not args.code_only,
+                cache=args.cache,
+                download=not args.offline,
+            ),
+            indent=2,
+        )
+    )
