@@ -140,7 +140,7 @@ def test_private_parallel_graph_has_no_unverified_raw_fallback_and_keeps_eos_len
             )
         output.extend(runtime.flush())
     samples = np.concatenate([p.samples for p in output])
-    assert len(samples) == len(x)
+    assert len(samples) == len(x) + 3200  # Gate's default 200ms raw onset buffer
     np.testing.assert_array_equal(samples[: 160 * 59], 0)
     assert np.any(samples[160 * 60 :] != 0)
 
@@ -177,7 +177,7 @@ def test_onset_delay_before_boolean_gate_retains_the_initial_speech(delay_ms, re
                 "settings": {"open_hold_ms": 0, "min_close_ms": 0},
             },
             {"id": "delay", "type": "core.delay", "settings": {"delay_ms": delay_ms}},
-            {"id": "gate", "type": "core.gate"},
+            {"id": "gate", "type": "core.gate", "settings": {"onset_protection_ms": 0}},
             {"id": "sink", "type": "core.sink"},
         ],
         "edges": [
