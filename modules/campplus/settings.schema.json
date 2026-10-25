@@ -2,6 +2,116 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
+    "open_threshold": {
+      "type": "number",
+      "default": 0.55,
+      "apply_policy": "hot",
+      "minimum": 0.001,
+      "maximum": 0.999
+    },
+    "close_threshold": {
+      "type": "number",
+      "default": 0.35,
+      "apply_policy": "hot",
+      "minimum": 0.001,
+      "maximum": 0.999
+    },
+    "open_hold_ms": {
+      "type": "integer",
+      "default": 10,
+      "apply_policy": "hot",
+      "minimum": 0,
+      "maximum": 10000,
+      "multipleOf": 10,
+      "unit": "ms"
+    },
+    "close_hold_ms": {
+      "type": "integer",
+      "default": 200,
+      "apply_policy": "hot",
+      "minimum": 0,
+      "maximum": 10000,
+      "multipleOf": 10,
+      "unit": "ms"
+    },
+    "min_open_ms": {
+      "type": "integer",
+      "default": 300,
+      "apply_policy": "hot",
+      "minimum": 0,
+      "maximum": 10000,
+      "multipleOf": 10,
+      "unit": "ms"
+    },
+    "min_close_ms": {
+      "type": "integer",
+      "default": 200,
+      "apply_policy": "hot",
+      "minimum": 0,
+      "maximum": 10000,
+      "multipleOf": 10,
+      "unit": "ms"
+    },
+    "ema_open_alpha": {
+      "type": "number",
+      "default": 0.5,
+      "apply_policy": "hot",
+      "minimum": 0.001,
+      "maximum": 1,
+      "advanced": true
+    },
+    "ema_close_alpha": {
+      "type": "number",
+      "default": 0.08,
+      "apply_policy": "hot",
+      "minimum": 0.001,
+      "maximum": 1,
+      "advanced": true
+    },
+    "fast_open_score": {
+      "type": "number",
+      "default": 0.45,
+      "apply_policy": "hot",
+      "minimum": 0,
+      "maximum": 0.999,
+      "advanced": true
+    },
+    "fast_open_energy_db": {
+      "type": "number",
+      "default": -12,
+      "apply_policy": "hot",
+      "minimum": -100,
+      "maximum": 0,
+      "unit": "dBFS",
+      "advanced": true
+    },
+    "veto_score": {
+      "type": "number",
+      "default": 0.15,
+      "apply_policy": "hot",
+      "minimum": 0,
+      "maximum": 0.999,
+      "advanced": true
+    },
+    "silence_close_energy_db": {
+      "type": "number",
+      "default": -48,
+      "apply_policy": "hot",
+      "minimum": -100,
+      "maximum": 0,
+      "unit": "dBFS",
+      "advanced": true
+    },
+    "silence_close_ms": {
+      "type": "integer",
+      "default": 500,
+      "apply_policy": "hot",
+      "minimum": 0,
+      "maximum": 10000,
+      "multipleOf": 10,
+      "unit": "ms",
+      "advanced": true
+    },
     "model_path": {
       "type": "string",
       "default": "",

@@ -12,3 +12,7 @@ and docs/licensing.md. No user voice, embedding or personalized model is distrib
 Release 1.2.0 includes the unchanged public CAM++ ONNX from k2-fsa/sherpa-onnx,
 original model by 3D-Speaker/ModelScope iic, model card Apache-2.0.
 See licenses/campplus/LICENSE and licenses/campplus/MODEL_CARD.md.
+
+Release 1.3.0 moves the unchanged Apache-2.0 identity EMA/hysteresis leaf from
+ObliviousMic core Gate into this module. Adds module-owned thresholds, timing,
+boolean control output and scalar-only monitoring. Public weights are unchanged.

@@ -24,6 +24,15 @@ def test_independent_bundle_roundtrip_and_licenses(tmp_path, name):
         manager.install(one["bundle_path"], trusted=True)
     manager.install(one["bundle_path"], trusted=True, official=True)
     registration = manager.registry.get("org.obliviousmic." + name)
+    if name == "campplus":
+        assert registration.manifest.document["ports"]["outputs"][0]["kind"] == "control"
+        with pytest.raises(ValueError, match="close_threshold"):
+            registration.settings({"open_threshold": 0.2})
+        from obliviousmic.presets import PresetStore
+
+        presets = PresetStore(manager.root, manager.registry)
+        with pytest.raises(ValueError, match="preset_settings_incompatible"):
+            presets.create(registration.manifest.module_id, "invalid", {"open_threshold": 0.2})
     if name in {"campplus", "bsrnn"}:
         assert registration.setup["initialize_action"] == "initialize"
     elif name == "tts":

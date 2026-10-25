@@ -29,6 +29,7 @@ def register_models(registry, *, identity_factory=None, separation_factory=None)
                 Manifest(module.Module.MANIFEST),
                 module.Module.SCHEMA,
                 lambda cls=module.Module, make=factory: cls(make),
+                settings_validator=getattr(module.Module, "validate_settings", None),
                 actions=declarations,
                 setup=json.loads((folder / "setup.json").read_text("utf-8")),
                 resources=json.loads((folder / "resources.json").read_text("utf-8"))["assets"],

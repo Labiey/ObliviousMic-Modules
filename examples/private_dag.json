@@ -11,7 +11,7 @@
   "edges": [
     {"from": "source.audio", "to": "identity.audio"},
     {"from": "source.audio", "to": "separation.mixture"},
-    {"from": "identity.decision", "to": "gate.decision"},
+    {"from": "identity.decision", "to": "gate.control"},
     {"from": "separation.separated", "to": "gate.audio"},
     {"from": "gate.audio", "to": "loudness.audio"},
     {"from": "loudness.audio", "to": "sink.audio"}

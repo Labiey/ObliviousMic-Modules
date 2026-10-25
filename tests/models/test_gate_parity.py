@@ -23,12 +23,12 @@ import unittest
 from dataclasses import fields
 
 import numpy as np
-from obliviousmic.plugins.gate.legacy import (
+
+from modules.campplus.lib.presence import (
     PresenceGateConfig,
     PresenceGateError,
     StreamingPresenceGate,
 )
-
 from tests.models.frozen_reference.gate import (
     GateFrameFeatures,
     GateSimulationError,

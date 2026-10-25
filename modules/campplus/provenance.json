@@ -127,6 +127,15 @@
       "origin_license": "Apache-2.0",
       "changes": "module-local imports and redistribution/provenance header; algorithm retained",
       "hash_encoding": "Git blob bytes from fa4620e"
+    },
+    {
+      "module": "campplus",
+      "file": "modules/campplus/lib/presence.py",
+      "origin": "ObliviousMic 8aa927c / src/obliviousmic/plugins/gate/legacy.py",
+      "source_sha256": "c8e076e67694ed203d87d6ccfe69bed4c017ba0a4f7787f868bf0945f56ec655",
+      "origin_license": "Apache-2.0",
+      "changes": "Moved unchanged identity EMA/hysteresis leaf into CAM++; Gate now consumes boolean controls.",
+      "hash_encoding": "Git blob bytes from 8aa927c"
     }
   ]
 }

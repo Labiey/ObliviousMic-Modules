@@ -5,7 +5,8 @@ user-supplied Apache-2.0 OwnerMic snapshot identified in licensing.md. Exact cop
 are in provenance.json. This is adapter/DSP source redistribution, not checkpoint redistribution.
 
 Campplus: features.py (NumPy fbank), identity_stream.py (sliding observations and embeddings),
-identity_seam.py (observation contracts), sessions.py (explicit runtime selection).
+identity_seam.py (observation contracts), sessions.py (explicit runtime selection),
+and presence.py (unchanged identity EMA/hysteresis, moved from core Gate in 1.3.0).
 BSRNN: the same identity helpers for one-step setup, plus frame_glue.py (NumPy STFT/OLA),
 onnx_frame_backend.py (explicit recurrent state), excerpt.py (qualified voice excerpt), bake.py
 (binding an enrollment tensor into a user-authorized template).
