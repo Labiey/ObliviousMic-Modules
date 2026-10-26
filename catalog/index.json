@@ -107,19 +107,19 @@
     {
       "module_id": "org.obliviousmic.tts",
       "name": "tts",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
       "bytes": 53669,
-      "sha256": "04207d79fa661587323165a0461e0338353248baa05162ebb8f5fbc038959f33",
+      "sha256": "256ffb0bb109270ce251008d5aa198b6664938390376e39f8b8bd8074bf37bff",
       "source_path": "modules/tts",
       "bundled_resources": [],
       "minimum_framework_version": "0.3.0rc1",
       "description": "Text to speech with Qwen, Azure or local GPT-SoVITS",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.1.0/tts-1.1.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.1.1/tts-1.1.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/tts/LICENSE",
       "weight_status": "Original adapter only; provider and selected local model terms remain separate"
     },

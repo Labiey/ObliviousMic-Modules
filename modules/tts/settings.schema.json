@@ -120,18 +120,24 @@
       "maximum": 2.0,
       "ui_step": 0.01,
       "apply_policy": "reprepare",
-      "ui_control": "slider",
-      "visible_when": {"provider": ["azure"]}
+      "visible_when": {
+        "provider": [
+          "azure"
+        ]
+      }
     },
     "azure_pitch": {
       "type": "number",
       "default": 1.0,
       "minimum": 0.5,
-      "maximum": 1.5,
+      "maximum": 2.0,
       "ui_step": 0.01,
       "apply_policy": "reprepare",
-      "ui_control": "slider",
-      "visible_when": {"provider": ["azure"]}
+      "visible_when": {
+        "provider": [
+          "azure"
+        ]
+      }
     },
     "azure_endpoint": {
       "type": "string",

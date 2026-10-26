@@ -89,7 +89,8 @@ def test_gpt_sovits_contract_contains_explicit_local_reference_and_decodes_audio
 
 
 @pytest.mark.parametrize(
-    "rate,pitch,expected", [(0.5, 0.5, "-50%"), (1.15, 1.2, "+20%"), (2, 1.5, "+50%")]
+    "rate,pitch,expected",
+    [(0.5, 0.5, "-50%"), (1.15, 1.2, "+20%"), (2, 1.5, "+50%"), (1, 1.55, "+55%"), (1, 2, "+100%")],
 )
 def test_azure_prosody_preserves_literal_text_and_maps_multipliers(rate, pitch, expected):
     calls = []
@@ -115,7 +116,7 @@ def test_azure_prosody_preserves_literal_text_and_maps_multipliers(rate, pitch, 
     [
         ("azure_rate", 0.49),
         ("azure_rate", 2.01),
-        ("azure_pitch", 1.55),
+        ("azure_pitch", 2.01),
         ("azure_pitch", float("nan")),
         ("azure_rate", True),
     ],
@@ -123,6 +124,24 @@ def test_azure_prosody_preserves_literal_text_and_maps_multipliers(rate, pitch, 
 def test_azure_rejects_invalid_prosody_before_network(field, value):
     with pytest.raises(TTSError, match="tts_azure_prosody_invalid"):
         Client(config(provider="azure", azure_api_key="fixture", **{field: value}))
+
+
+def test_pitch_table_can_save_155_and_two_without_changing_defaults(tmp_path):
+    from obliviousmic.presets import PresetStore
+    from obliviousmic.sdk import Manifest, ModuleRegistration, ModuleRegistry
+
+    registry = ModuleRegistry()
+    registry.register(ModuleRegistration(Manifest(Module.MANIFEST), Module.SCHEMA, Module))
+    store = PresetStore(tmp_path, registry)
+    for pitch in (1.55, 2.0):
+        saved = store.create(
+            "org.obliviousmic.tts", str(pitch), {"provider": "azure", "azure_pitch": pitch}
+        )
+        assert (
+            store.get("org.obliviousmic.tts", saved["preset_id"])["settings"]["azure_pitch"]
+            == pitch
+        )
+    assert config()["azure_pitch"] == 1.0
 
 
 @pytest.mark.parametrize(
