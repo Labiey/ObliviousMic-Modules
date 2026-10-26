@@ -89,6 +89,43 @@ def test_gpt_sovits_contract_contains_explicit_local_reference_and_decodes_audio
 
 
 @pytest.mark.parametrize(
+    "rate,pitch,expected", [(0.5, 0.5, "-50%"), (1.15, 1.2, "+20%"), (2, 1.5, "+50%")]
+)
+def test_azure_prosody_preserves_literal_text_and_maps_multipliers(rate, pitch, expected):
+    calls = []
+
+    def open(request, **kwargs):
+        calls.append(request)
+        return io.BytesIO(wav())
+
+    Client(
+        config(provider="azure", azure_api_key="fixture", azure_rate=rate, azure_pitch=pitch), open
+    ).synthesize("Hello <world> & test", "en")
+    root = ET.fromstring(calls[0].data)
+    prosody = root.find(
+        "{http://www.w3.org/2001/10/synthesis}voice/{http://www.w3.org/2001/10/synthesis}prosody"
+    )
+    assert prosody.attrib == {"rate": format(rate, ".6g"), "pitch": expected}
+    assert prosody.text == "Hello <world> & test"
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("azure_rate", 0.49),
+        ("azure_rate", 2.01),
+        ("azure_pitch", 1.55),
+        ("azure_pitch", float("nan")),
+        ("azure_rate", True),
+    ],
+)
+def test_azure_rejects_invalid_prosody_before_network(field, value):
+    with pytest.raises(TTSError, match="tts_azure_prosody_invalid"):
+        Client(config(provider="azure", azure_api_key="fixture", **{field: value}))
+
+
+@pytest.mark.parametrize(
     "change,code",
     [
         ({"provider": "qwen"}, "key_required"),

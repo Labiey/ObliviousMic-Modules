@@ -3,6 +3,7 @@
 
 import io
 import json
+import math
 import re
 import time
 import urllib.error
@@ -65,6 +66,14 @@ def validate_config(config):
             raise TTSError("tts_azure_api_key_required")
         if not re.fullmatch(r"[a-z][a-z0-9-]{1,40}", config["azure_region"]):
             raise TTSError("tts_azure_region_invalid")
+        for field, maximum in (("azure_rate", 2.0), ("azure_pitch", 1.5)):
+            value = config.get(field, 1.0)
+            if (
+                type(value) not in (int, float)
+                or not math.isfinite(value)
+                or not 0.5 <= value <= maximum
+            ):
+                raise TTSError("tts_azure_prosody_invalid")
     if provider == "gpt_sovits":
         local_url(config["local_endpoint"])
     if provider not in {"qwen", "azure", "gpt_sovits"}:
@@ -201,7 +210,20 @@ class Client:
                 },
             )
             voice = ET.SubElement(speak, "voice", {"name": config["azure_voice"] or default_voice})
-            voice.text = text
+            rate, pitch = config.get("azure_rate", 1.0), config.get("azure_pitch", 1.0)
+            if rate == 1 and pitch == 1:
+                voice.text = text
+            else:
+                # Azure pitch uses a relative percentage; rate accepts a multiplier.
+                prosody = ET.SubElement(
+                    voice,
+                    "prosody",
+                    {
+                        "rate": format(rate, ".6g"),
+                        "pitch": format((pitch - 1) * 100, "+.6g") + "%",
+                    },
+                )
+                prosody.text = text
             data = self._request(
                 url,
                 deadline,

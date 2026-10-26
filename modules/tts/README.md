@@ -13,6 +13,10 @@ A device host must schedule generated audio independently; connecting it to a ca
 
 Cloud providers require no reference profile. Secret inputs are marked as password fields. The adapter never logs keys, prompts, reference paths or provider error bodies, never retries billable synthesis automatically, and never forwards credentials to Qwen audio storage.
 
+Azure supports `azure_rate` (0.5–2.0) and `azure_pitch` (0.5–1.5), both defaulting to 1.0 for the original voice. Values are multipliers: rate 1.2 means faster speech; pitch 1.2 requests +20% pitch. The WebUI offers sliders and numeric inputs only when Azure is selected. Save the parameter table, then validate and apply the graph. Default settings retain the original SSML without a prosody tag. Support can vary by voice; these controls do not add styles or role selection. Slower speech still obeys `maximum_audio_seconds`; use shorter input if the generated response exceeds it.
+
+Azure SSML specification: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody
+
 Local API calls are restricted to loopback. Existing compatible API services are reused and left running. When auto-starting, the adapter copies the installation YAML to a temporary directory and owns only the process it starts. Shared framework service leases keep it alive across graph replacement; the last owner releases it. The local runtime and model licenses remain separate from this adapter.
 
 ## Bounded preparation and processing
