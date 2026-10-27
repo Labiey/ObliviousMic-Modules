@@ -27,3 +27,9 @@ They use the host SDK, separately installed dependencies and documented provider
 per-module NOTICE identifies those sources. No provider implementation, installed vendor program,
 weight or private enrollment is copied into their archives. The candidate catalog builder preserves
 published CAM++/BSRNN entries and records independently rebuilt hashes for the four additions.
+
+The translate module is original Apache-2.0 code implementing Azure Translator v3 and
+OpenAI-compatible chat completions from the linked official protocol documentation.
+LunaTranslator revision 856ec4d4f270b59dab489120a702ed93ee254148 (GPL-3.0) was read as a
+conceptual reference for engine separation. No GPL source, assets, provider SDK or model
+is copied into translate. See modules/translate/NOTICE for exact reference URLs.

@@ -31,6 +31,10 @@ MODULES = {
         "Buffered NVIDIA Broadcast enhancement of the graph's upstream audio",
         "No NVIDIA binaries or models; compatible installed Broadcast app required",
     ),
+    "translate": (
+        "Timestamped text translation with Qwen, OpenAI-compatible services or Azure Translator",
+        "Original Apache-2.0 adapter; no weights, provider code or private text bundled",
+    ),
 }
 
 

@@ -26,6 +26,7 @@ def test_candidate_is_deterministic_accepted_by_host_and_preserves_published_ent
         "tts",
         "subtitles",
         "broadcast",
+        "translate",
     }
     validate(first)
     catalog = OfficialCatalog(
@@ -61,7 +62,7 @@ def test_candidate_installs_four_independent_packages_through_catalog_and_restor
         record = catalog.install(item["module_id"], job, item["sha256"])
         assert record["bundle_sha256"] == item["sha256"]
     assert set(prepared) == {
-        "org.obliviousmic." + name for name in ("asr", "tts", "subtitles", "broadcast")
+        "org.obliviousmic." + name for name in ("asr", "tts", "subtitles", "broadcast", "translate")
     }
     restored = PluginManager(tmp_path / "data", ModuleRegistry())
     assert restored.restore() == []
@@ -76,8 +77,9 @@ def test_release_preflight_checks_supported_tag_and_catalog_digest_before_networ
     monkeypatch.setattr(
         publish_release, "request", lambda *_a, **_k: pytest.fail("unexpected publish")
     )
-    name, version, package = publish_release.audited_package("tts-v1.0.0")
-    assert (name, version, package["module_id"]) == ("tts", "1.0.0", "org.obliviousmic.tts")
+    current = json.loads((ROOT / "modules/tts/manifest.json").read_text("utf-8"))["module_version"]
+    name, version, package = publish_release.audited_package("tts-v" + current)
+    assert (name, version, package["module_id"]) == ("tts", current, "org.obliviousmic.tts")
     for tag in ("tts-v99.0.0", "unlisted-v1.0.0", "../tts-v1.0.0"):
         with pytest.raises(ValueError, match="not in"):
             publish_release.audited_package(tag)
@@ -85,4 +87,4 @@ def test_release_preflight_checks_supported_tag_and_catalog_digest_before_networ
     next(x for x in data["modules"] if x["name"] == "tts")["sha256"] = "0" * 64
     candidate.write_text(json.dumps(data), encoding="utf-8")
     with pytest.raises(ValueError, match="differs"):
-        publish_release.audited_package("tts-v1.0.0")
+        publish_release.audited_package("tts-v" + current)

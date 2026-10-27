@@ -16,6 +16,7 @@ include = ["modules*"]
 [tool.setuptools.package-data]
 "modules.campplus" = ["*.json", "LICENSE", "NOTICE", "README.md"]
 "modules.bsrnn" = ["*.json", "LICENSE", "NOTICE", "README.md"]
+"modules.translate" = ["*.json", "LICENSE", "NOTICE", "README.md"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

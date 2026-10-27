@@ -1,0 +1,154 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "provider": {
+      "type": "string",
+      "default": "qwen",
+      "apply_policy": "reprepare",
+      "enum": [
+        "qwen",
+        "openai_compatible",
+        "azure"
+      ]
+    },
+    "source_language": {
+      "type": "string",
+      "default": "auto",
+      "apply_policy": "reprepare",
+      "enum": [
+        "auto",
+        "zh",
+        "zh-Hant",
+        "en",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "es",
+        "ru",
+        "pt",
+        "it"
+      ]
+    },
+    "target_language": {
+      "type": "string",
+      "default": "en",
+      "apply_policy": "reprepare",
+      "enum": [
+        "zh",
+        "zh-Hant",
+        "en",
+        "ja",
+        "ko",
+        "fr",
+        "de",
+        "es",
+        "ru",
+        "pt",
+        "it"
+      ]
+    },
+    "qwen_api_key": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "secret": true,
+      "visible_when": {
+        "provider": [
+          "qwen"
+        ]
+      }
+    },
+    "api_key": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "secret": true,
+      "visible_when": {
+        "provider": [
+          "openai_compatible"
+        ]
+      }
+    },
+    "base_url": {
+      "type": "string",
+      "default": "http://127.0.0.1:11434/v1",
+      "apply_policy": "reprepare",
+      "visible_when": {
+        "provider": [
+          "openai_compatible"
+        ]
+      }
+    },
+    "model": {
+      "type": "string",
+      "default": "qwen-plus",
+      "apply_policy": "reprepare",
+      "visible_when": {
+        "provider": [
+          "qwen",
+          "openai_compatible"
+        ]
+      }
+    },
+    "qwen_region": {
+      "type": "string",
+      "default": "beijing",
+      "apply_policy": "reprepare",
+      "enum": [
+        "beijing",
+        "singapore"
+      ],
+      "visible_when": {
+        "provider": [
+          "qwen"
+        ]
+      },
+      "advanced": true
+    },
+    "azure_api_key": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "secret": true,
+      "visible_when": {
+        "provider": [
+          "azure"
+        ]
+      }
+    },
+    "azure_region": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "visible_when": {
+        "provider": [
+          "azure"
+        ]
+      }
+    },
+    "final_only": {
+      "type": "boolean",
+      "default": true,
+      "apply_policy": "reprepare",
+      "advanced": true
+    },
+    "request_timeout_seconds": {
+      "type": "number",
+      "default": 25,
+      "apply_policy": "reprepare",
+      "minimum": 1,
+      "maximum": 30,
+      "advanced": true
+    },
+    "maximum_text_characters": {
+      "type": "integer",
+      "default": 2000,
+      "apply_policy": "reprepare",
+      "minimum": 1,
+      "maximum": 8000,
+      "advanced": true
+    }
+  }
+}

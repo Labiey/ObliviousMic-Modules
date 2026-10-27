@@ -1,0 +1,27 @@
+{
+  "setup_version": 1,
+  "profile_required": false,
+  "artifacts": [],
+  "requirements": [
+    {
+      "when": {
+        "provider": [
+          "qwen"
+        ]
+      },
+      "settings_required": [
+        "qwen_api_key"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "azure"
+        ]
+      },
+      "settings_required": [
+        "azure_api_key"
+      ]
+    }
+  ]
+}

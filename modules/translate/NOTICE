@@ -1,0 +1,16 @@
+ObliviousMic Text Translation Module
+Copyright 2026 ObliviousMic contributors. Apache-2.0.
+
+Original implementation of documented Azure Translator v3 and OpenAI-compatible
+chat completion protocols. Uses the Python standard library and ObliviousMic SDK.
+No translation models, provider SDKs, keys or user text are redistributed.
+
+LunaTranslator (HIllya51/LunaTranslator), GPL-3.0, was consulted as a conceptual
+reference for separating translator backends. Reference revision:
+856ec4d4f270b59dab489120a702ed93ee254148.
+No LunaTranslator source, dependencies or assets are incorporated in this package.
+
+Protocol documentation:
+https://learn.microsoft.com/en-us/azure/ai-services/translator/text-translation/reference/v3/translate
+https://help.aliyun.com/zh/model-studio/compatibility-of-openai-with-dashscope
+Service access, billing and model licenses remain subject to the chosen provider.

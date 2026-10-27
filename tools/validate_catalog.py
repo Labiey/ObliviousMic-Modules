@@ -21,7 +21,7 @@ def validate(path=None, *, metadata_only=False):
     for item in catalog["modules"]:
         name = item["name"]
         folder = ROOT / "modules" / name
-        assert name in {"campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast"}
+        assert name in {"campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast", "translate"}
         assert len(item["sha256"]) == 64 and 0 < item["bytes"] <= 1024 * 1024 * 1024
         if not metadata_only:
             with tempfile.TemporaryDirectory(prefix="obmic-catalog-") as stage:

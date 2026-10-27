@@ -7,7 +7,9 @@ from obliviousmic.sdk import ModuleRegistry
 from tools.build_module import build
 
 
-@pytest.mark.parametrize("name", ["campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast"])
+@pytest.mark.parametrize(
+    "name", ["campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast", "translate"]
+)
 def test_independent_bundle_roundtrip_and_licenses(tmp_path, name):
     one = build(name, tmp_path / "a")
     two = build(name, tmp_path / "b")

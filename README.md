@@ -12,6 +12,7 @@ optional adapters, module-local reusable algorithms, initialization and package 
 | TTS | Release installer | Qwen/Azure key and region, or one local GPT-SoVITS reference initialization | Adapter Apache-2.0; cloud, model and voice terms remain separate |
 | Subtitles | Release installer | Windows floating window, no voice profile or model | Original Apache-2.0 code; Python/Tk runtime supplied separately |
 | Broadcast | Release installer | Compatible local NVIDIA Broadcast app; default buffered noise removal | Original Apache-2.0 adapter; no NVIDIA software or models redistributed |
+| [Text Translation](modules/translate/README.md) | Release installer | Qwen key, OpenAI-compatible service/model, or Azure Translator key; select target language | Original Apache-2.0 adapter; no weights or LunaTranslator code bundled |
 
 Git contains no weight binaries. Release installers include only audited public CAM++/Whisper resources.
 Recordings, user embeddings, personalized models and unresolved BSRNN templates are excluded.
@@ -30,7 +31,7 @@ Packages are published as GitHub Actions artifacts and per-module GitHub Release
 Catalog entries pin package SHA-256 and size. `resources.json` identifies bundled model payloads, pinned fallback sources and separate weight licenses;
 `setup.json` declares automatic bindings and first-use actions. [Package format](docs/module-format.md).
 
-Prepare all six modules in an ignored staging directory before publishing:
+Prepare all seven modules in an ignored staging directory before publishing:
 
 ```powershell
 python -m tools.prepare_catalog
