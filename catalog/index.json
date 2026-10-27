@@ -164,21 +164,21 @@
     {
       "module_id": "org.obliviousmic.translate",
       "name": "translate",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
-      "license": "Apache-2.0",
-      "bytes": 34935,
-      "sha256": "a46a4e7b8cd26488375bf2d93fc66439c09df0901d9a9e71a750e927d271c201",
+      "license": "GPL-3.0-only",
+      "bytes": 182257,
+      "sha256": "b609c84a53b3e52d8880179ec53769a04efcf0c2da99668137fb104ac508b442",
       "source_path": "modules/translate",
       "bundled_resources": [],
       "minimum_framework_version": "0.3.0rc1",
-      "description": "Timestamped text translation with Qwen, OpenAI-compatible services or Azure Translator",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.0.0/translate-1.0.0.obmic.zip",
+      "description": "Text translation with LunaTranslator web/API engines and OpenAI-compatible services",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.1.0/translate-1.1.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/translate/LICENSE",
-      "weight_status": "Original Apache-2.0 adapter; no weights, provider code or private text bundled"
+      "weight_status": "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights"
     }
   ]
 }
