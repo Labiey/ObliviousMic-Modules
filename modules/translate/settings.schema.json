@@ -4,13 +4,164 @@
   "properties": {
     "provider": {
       "type": "string",
-      "default": "qwen",
+      "default": "microsoft",
       "apply_policy": "reprepare",
       "enum": [
-        "qwen",
         "openai_compatible",
+        "microsoft",
+        "bing",
+        "google",
+        "modernmt",
+        "qqtransmart",
+        "ali",
+        "youdao",
+        "caiyun",
+        "translatecom",
+        "yandex",
+        "qqimt",
+        "huoshan",
+        "papago",
+        "baidu_api",
+        "caiyun_api",
+        "google_api",
+        "deepl_api",
+        "tencent_api",
+        "youdao_api",
+        "yandex_api",
+        "aliyun_api",
+        "huoshan_api",
+        "huawei_api",
+        "niutrans_api",
         "azure"
-      ]
+      ],
+      "enum_labels": {
+        "microsoft": {
+          "zh-CN": "Microsoft（免密钥）",
+          "en": "Microsoft (web)",
+          "ja": "Microsoft（キー不要）"
+        },
+        "bing": {
+          "zh-CN": "必应 Bing（免密钥）",
+          "en": "Bing (web)",
+          "ja": "Bing（キー不要）"
+        },
+        "google": {
+          "zh-CN": "谷歌 Google（免密钥）",
+          "en": "Google (web)",
+          "ja": "Google（キー不要）"
+        },
+        "modernmt": {
+          "zh-CN": "ModernMT（免密钥）",
+          "en": "ModernMT (web)",
+          "ja": "ModernMT（キー不要）"
+        },
+        "qqtransmart": {
+          "zh-CN": "腾讯 TranSmart（免密钥）",
+          "en": "QQ TranSmart (web)",
+          "ja": "QQ TranSmart（キー不要）"
+        },
+        "ali": {
+          "zh-CN": "阿里（免密钥）",
+          "en": "Alibaba (web)",
+          "ja": "Alibaba（キー不要）"
+        },
+        "youdao": {
+          "zh-CN": "有道（免密钥）",
+          "en": "Youdao (web)",
+          "ja": "Youdao（キー不要）"
+        },
+        "caiyun": {
+          "zh-CN": "彩云（免密钥）",
+          "en": "Caiyun (web)",
+          "ja": "Caiyun（キー不要）"
+        },
+        "translatecom": {
+          "zh-CN": "Translate.com（免密钥）",
+          "en": "Translate.com (web)",
+          "ja": "Translate.com（キー不要）"
+        },
+        "yandex": {
+          "zh-CN": "Yandex（免密钥）",
+          "en": "Yandex (web)",
+          "ja": "Yandex（キー不要）"
+        },
+        "qqimt": {
+          "zh-CN": "腾讯 QQ IMT（免密钥）",
+          "en": "QQ IMT (web)",
+          "ja": "QQ IMT（キー不要）"
+        },
+        "huoshan": {
+          "zh-CN": "火山（免密钥）",
+          "en": "Volcengine (web)",
+          "ja": "Volcengine（キー不要）"
+        },
+        "papago": {
+          "zh-CN": "Papago（免密钥）",
+          "en": "Papago (web)",
+          "ja": "Papago（キー不要）"
+        },
+        "baidu_api": {
+          "zh-CN": "百度 API",
+          "en": "Baidu API",
+          "ja": "Baidu API"
+        },
+        "caiyun_api": {
+          "zh-CN": "彩云 API",
+          "en": "Caiyun API",
+          "ja": "Caiyun API"
+        },
+        "google_api": {
+          "zh-CN": "Google Cloud API",
+          "en": "Google Cloud API",
+          "ja": "Google Cloud API"
+        },
+        "deepl_api": {
+          "zh-CN": "DeepL API",
+          "en": "DeepL API",
+          "ja": "DeepL API"
+        },
+        "tencent_api": {
+          "zh-CN": "腾讯云 API",
+          "en": "Tencent Cloud API",
+          "ja": "Tencent Cloud API"
+        },
+        "youdao_api": {
+          "zh-CN": "有道 API",
+          "en": "Youdao API",
+          "ja": "Youdao API"
+        },
+        "yandex_api": {
+          "zh-CN": "Yandex Cloud API",
+          "en": "Yandex Cloud API",
+          "ja": "Yandex Cloud API"
+        },
+        "aliyun_api": {
+          "zh-CN": "阿里云机器翻译 API",
+          "en": "Alibaba Cloud MT API",
+          "ja": "Alibaba Cloud MT API"
+        },
+        "huoshan_api": {
+          "zh-CN": "火山 API",
+          "en": "Volcengine API",
+          "ja": "Volcengine API"
+        },
+        "huawei_api": {
+          "zh-CN": "华为云 API",
+          "en": "Huawei Cloud API",
+          "ja": "Huawei Cloud API"
+        },
+        "niutrans_api": {
+          "zh-CN": "小牛 API",
+          "en": "NiuTrans API",
+          "ja": "NiuTrans API"
+        },
+        "openai_compatible": {
+          "zh-CN": "大模型 · OpenAI 兼容接口",
+          "en": "LLM · OpenAI-compatible",
+          "ja": "大規模言語モデル · OpenAI 互換"
+        },
+        "azure": "Microsoft Azure Translator API"
+      }
     },
     "source_language": {
       "type": "string",
@@ -49,17 +200,6 @@
         "it"
       ]
     },
-    "qwen_api_key": {
-      "type": "string",
-      "default": "",
-      "apply_policy": "reprepare",
-      "secret": true,
-      "visible_when": {
-        "provider": [
-          "qwen"
-        ]
-      }
-    },
     "api_key": {
       "type": "string",
       "default": "",
@@ -73,7 +213,7 @@
     },
     "base_url": {
       "type": "string",
-      "default": "http://127.0.0.1:11434/v1",
+      "default": "",
       "apply_policy": "reprepare",
       "visible_when": {
         "provider": [
@@ -83,29 +223,13 @@
     },
     "model": {
       "type": "string",
-      "default": "qwen-plus",
+      "default": "",
       "apply_policy": "reprepare",
       "visible_when": {
         "provider": [
-          "qwen",
           "openai_compatible"
         ]
       }
-    },
-    "qwen_region": {
-      "type": "string",
-      "default": "beijing",
-      "apply_policy": "reprepare",
-      "enum": [
-        "beijing",
-        "singapore"
-      ],
-      "visible_when": {
-        "provider": [
-          "qwen"
-        ]
-      },
-      "advanced": true
     },
     "azure_api_key": {
       "type": "string",
@@ -149,6 +273,162 @@
       "minimum": 1,
       "maximum": 8000,
       "advanced": true
+    },
+    "engine_key": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "secret": true,
+      "visible_when": {
+        "provider": [
+          "caiyun_api",
+          "google_api",
+          "deepl_api",
+          "tencent_api",
+          "youdao_api",
+          "yandex_api",
+          "aliyun_api",
+          "huoshan_api",
+          "huawei_api",
+          "niutrans_api"
+        ]
+      }
+    },
+    "engine_secret": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "secret": true,
+      "visible_when": {
+        "provider": [
+          "baidu_api",
+          "tencent_api",
+          "youdao_api",
+          "aliyun_api",
+          "huoshan_api",
+          "huawei_api"
+        ]
+      }
+    },
+    "engine_app_id": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "secret": true,
+      "visible_when": {
+        "provider": [
+          "baidu_api"
+        ],
+        "baidu_interface": [
+          "standard",
+          "llm"
+        ]
+      }
+    },
+    "baidu_interface": {
+      "type": "string",
+      "default": "standard",
+      "apply_policy": "reprepare",
+      "enum": [
+        "standard",
+        "bce",
+        "llm"
+      ],
+      "visible_when": {
+        "provider": [
+          "baidu_api"
+        ]
+      },
+      "enum_labels": {
+        "standard": {
+          "zh-CN": "通用翻译（APP ID＋密钥）",
+          "en": "Standard (App ID + secret)",
+          "ja": "汎用翻訳（APP ID＋シークレット）"
+        },
+        "bce": "BCE API Key + Secret Key",
+        "llm": {
+          "zh-CN": "大模型翻译（APP ID＋Bearer 密钥）",
+          "en": "LLM translation (App ID + bearer key)",
+          "ja": "大規模モデル翻訳（APP ID＋Bearer キー）"
+        }
+      }
+    },
+    "deepl_plan": {
+      "type": "string",
+      "default": "free",
+      "apply_policy": "reprepare",
+      "enum": [
+        "free",
+        "pro"
+      ],
+      "visible_when": {
+        "provider": [
+          "deepl_api"
+        ]
+      }
+    },
+    "tencent_region": {
+      "type": "string",
+      "default": "0",
+      "apply_policy": "reprepare",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16"
+      ],
+      "visible_when": {
+        "provider": [
+          "tencent_api"
+        ]
+      },
+      "enum_labels": {
+        "0": "ap-beijing",
+        "1": "ap-shanghai",
+        "2": "ap-chengdu",
+        "3": "ap-chongqing",
+        "4": "ap-guangzhou",
+        "5": "ap-hongkong",
+        "6": "ap-mumbai",
+        "7": "ap-seoul",
+        "8": "ap-shanghai-fsi",
+        "9": "ap-shenzhen-fsi",
+        "10": "ap-singapore",
+        "11": "ap-tokyo",
+        "12": "ap-bangkok",
+        "13": "eu-frankfurt",
+        "14": "na-ashburn",
+        "15": "na-siliconvalley",
+        "16": "na-toronto"
+      }
+    },
+    "baidu_api_key": {
+      "type": "string",
+      "default": "",
+      "secret": true,
+      "apply_policy": "reprepare",
+      "title": "Baidu API Key",
+      "visible_when": {
+        "provider": [
+          "baidu_api"
+        ],
+        "baidu_interface": [
+          "bce"
+        ]
+      }
     }
   }
 }

@@ -48,7 +48,7 @@ def build(name, output=None, *, include_models=False, cache=None, download=True)
         "name": name,
         "version": manifest["module_version"],
         "api": manifest["api"],
-        "license": "Apache-2.0",
+        "license": "GPL-3.0-only" if name == "translate" else "Apache-2.0",
         "bytes": path.stat().st_size,
         "sha256": digest,
         "source_path": "modules/" + name,

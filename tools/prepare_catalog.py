@@ -32,8 +32,8 @@ MODULES = {
         "No NVIDIA binaries or models; compatible installed Broadcast app required",
     ),
     "translate": (
-        "Timestamped text translation with Qwen, OpenAI-compatible services or Azure Translator",
-        "Original Apache-2.0 adapter; no weights, provider code or private text bundled",
+        "Text translation with LunaTranslator web/API engines and OpenAI-compatible services",
+        "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights",
     ),
 }
 

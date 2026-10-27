@@ -12,11 +12,12 @@ optional adapters, module-local reusable algorithms, initialization and package 
 | TTS | Release installer | Qwen/Azure key and region, or one local GPT-SoVITS reference initialization | Adapter Apache-2.0; cloud, model and voice terms remain separate |
 | Subtitles | Release installer | Windows floating window, no voice profile or model | Original Apache-2.0 code; Python/Tk runtime supplied separately |
 | Broadcast | Release installer | Compatible local NVIDIA Broadcast app; default buffered noise removal | Original Apache-2.0 adapter; no NVIDIA software or models redistributed |
-| [Text Translation](modules/translate/README.md) | Release installer | Qwen key, OpenAI-compatible service/model, or Azure Translator key; select target language | Original Apache-2.0 adapter; no weights or LunaTranslator code bundled |
+| [Text Translation](modules/translate/README.md) | Release installer | Microsoft by default without a key; 13 web engines, 12 traditional API engines, one OpenAI-compatible interface | Combined module GPL-3.0; pinned LunaTranslator engine sources, no model weights |
 
 Git contains no weight binaries. Release installers include only audited public CAM++/Whisper resources.
 Recordings, user embeddings, personalized models and unresolved BSRNN templates are excluded.
-`LICENSE` applies to project code and Apache-licensed adapted OwnerMic leaves, not to all third-party
+`LICENSE` applies to project code and Apache-licensed adapted OwnerMic leaves, except the GPL-3.0
+translation module (see its own LICENSE/NOTICE), and not to all third-party
 weights or dependencies. Read [licensing](docs/licensing.md) and [provenance](docs/provenance.md).
 
 The local first-use and distribution tests require the same framework version; code packages are intended for installation through the framework catalog, not an implicit dependency on the main source tree.

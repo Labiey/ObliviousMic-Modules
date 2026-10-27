@@ -28,8 +28,11 @@ per-module NOTICE identifies those sources. No provider implementation, installe
 weight or private enrollment is copied into their archives. The candidate catalog builder preserves
 published CAM++/BSRNN entries and records independently rebuilt hashes for the four additions.
 
-The translate module is original Apache-2.0 code implementing Azure Translator v3 and
-OpenAI-compatible chat completions from the linked official protocol documentation.
-LunaTranslator revision 856ec4d4f270b59dab489120a702ed93ee254148 (GPL-3.0) was read as a
-conceptual reference for engine separation. No GPL source, assets, provider SDK or model
-is copied into translate. See modules/translate/NOTICE for exact reference URLs.
+Translate 1.0.0 originally implemented only Azure/OpenAI-compatible protocols under Apache-2.0.
+Translate 1.1.0 additionally reuses 24 LunaTranslator engine leaves from revision
+856ec4d4f270b59dab489120a702ed93ee254148. The combined module is distributed under
+GPL-3.0-only, with the upstream full license, original source attribution, exact source
+and adapted LF-normalized SHA-256 hashes and per-file modification records in
+modules/translate/LUNA_PROVENANCE.json. The pre-existing Apache adapter headers and full
+Apache license are preserved. No Qt GUI, browser automation, model weights, user recordings
+or credentials are bundled. This per-module exception does not replace other modules' licenses.

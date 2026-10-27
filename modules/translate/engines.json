@@ -1,0 +1,254 @@
+{
+  "microsoft": {
+    "file": "microsoft",
+    "label": "Microsoft",
+    "hosts": [
+      "api.cognitive.microsofttranslator.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "bing": {
+    "file": "bing",
+    "label": "Bing",
+    "hosts": [
+      "www.bing.com",
+      "cn.bing.com",
+      "bing.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "google": {
+    "file": "google",
+    "label": "Google",
+    "hosts": [
+      "translate-pa.googleapis.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "modernmt": {
+    "file": "ModernMt",
+    "label": "ModernMT",
+    "hosts": [
+      "www.modernmt.com",
+      "webapi.modernmt.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "qqtransmart": {
+    "file": "qqTranSmart",
+    "label": "QQ TranSmart",
+    "hosts": [
+      "transmart.qq.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "ali": {
+    "file": "ali",
+    "label": "Alibaba",
+    "hosts": [
+      "translate.alibaba.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "youdao": {
+    "file": "youdaodict",
+    "label": "Youdao",
+    "hosts": [
+      "dict.youdao.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "caiyun": {
+    "file": "caiyun",
+    "label": "Caiyun",
+    "hosts": [
+      "api.interpreter.caiyunai.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "translatecom": {
+    "file": "TranslateCom",
+    "label": "Translate.com",
+    "hosts": [
+      "www.translate.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "yandex": {
+    "file": "yandex",
+    "label": "Yandex",
+    "hosts": [
+      "translate.yandex.net",
+      "browser.translate.yandex.net"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "qqimt": {
+    "file": "qqimt",
+    "label": "QQ IMT",
+    "hosts": [
+      "transmart.qq.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "huoshan": {
+    "file": "huoshan",
+    "label": "Volcengine",
+    "hosts": [
+      "translate.volcengine.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "papago": {
+    "file": "papago",
+    "label": "Papago",
+    "hosts": [
+      "papago.naver.com"
+    ],
+    "credentials": [],
+    "kind": "web"
+  },
+  "baidu_api": {
+    "file": "baiduapi",
+    "label": "Baidu API",
+    "hosts": [
+      "api.fanyi.baidu.com",
+      "fanyi-api.baidu.com",
+      "aip.baidubce.com"
+    ],
+    "credentials": [
+      "engine_app_id",
+      "engine_secret"
+    ],
+    "kind": "api"
+  },
+  "caiyun_api": {
+    "file": "caiyunapi",
+    "label": "Caiyun API",
+    "hosts": [
+      "api.interpreter.caiyunai.com"
+    ],
+    "credentials": [
+      "engine_key"
+    ],
+    "kind": "api"
+  },
+  "google_api": {
+    "file": "googleapi",
+    "label": "Google Cloud API",
+    "hosts": [
+      "translation.googleapis.com"
+    ],
+    "credentials": [
+      "engine_key"
+    ],
+    "kind": "api"
+  },
+  "deepl_api": {
+    "file": "deeplapi_free",
+    "label": "DeepL API",
+    "hosts": [
+      "api-free.deepl.com",
+      "api.deepl.com"
+    ],
+    "credentials": [
+      "engine_key"
+    ],
+    "kind": "api"
+  },
+  "tencent_api": {
+    "file": "tencentapi",
+    "label": "Tencent Cloud API",
+    "hosts": [
+      "tmt.tencentcloudapi.com"
+    ],
+    "credentials": [
+      "engine_key",
+      "engine_secret"
+    ],
+    "kind": "api"
+  },
+  "youdao_api": {
+    "file": "youdaoapi",
+    "label": "Youdao API",
+    "hosts": [
+      "openapi.youdao.com"
+    ],
+    "credentials": [
+      "engine_key",
+      "engine_secret"
+    ],
+    "kind": "api"
+  },
+  "yandex_api": {
+    "file": "yandexapi",
+    "label": "Yandex Cloud API",
+    "hosts": [
+      "translate.api.cloud.yandex.net"
+    ],
+    "credentials": [
+      "engine_key"
+    ],
+    "kind": "api"
+  },
+  "aliyun_api": {
+    "file": "aliyunapi",
+    "label": "Alibaba Cloud MT API",
+    "hosts": [
+      "mt.cn-hangzhou.aliyuncs.com"
+    ],
+    "credentials": [
+      "engine_key",
+      "engine_secret"
+    ],
+    "kind": "api"
+  },
+  "huoshan_api": {
+    "file": "huoshanapi",
+    "label": "Volcengine API",
+    "hosts": [
+      "open.volcengineapi.com"
+    ],
+    "credentials": [
+      "engine_key",
+      "engine_secret"
+    ],
+    "kind": "api"
+  },
+  "huawei_api": {
+    "file": "hwcloud",
+    "label": "Huawei Cloud API",
+    "hosts": [
+      "iam.myhuaweicloud.com",
+      "nlp-ext.cn-north-4.myhuaweicloud.com"
+    ],
+    "credentials": [
+      "engine_key",
+      "engine_secret"
+    ],
+    "kind": "api"
+  },
+  "niutrans_api": {
+    "file": "xiaoniu",
+    "label": "NiuTrans API",
+    "hosts": [
+      "api.niutrans.com"
+    ],
+    "credentials": [
+      "engine_key"
+    ],
+    "kind": "api"
+  }
+}

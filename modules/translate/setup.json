@@ -6,21 +6,145 @@
     {
       "when": {
         "provider": [
-          "qwen"
-        ]
-      },
-      "settings_required": [
-        "qwen_api_key"
-      ]
-    },
-    {
-      "when": {
-        "provider": [
           "azure"
         ]
       },
       "settings_required": [
         "azure_api_key"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "baidu_api"
+        ],
+        "baidu_interface": [
+          "standard",
+          "llm"
+        ]
+      },
+      "settings_required": [
+        "engine_app_id",
+        "engine_secret"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "caiyun_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "google_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "deepl_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "tencent_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key",
+        "engine_secret"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "youdao_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key",
+        "engine_secret"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "yandex_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "aliyun_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key",
+        "engine_secret"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "huoshan_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key",
+        "engine_secret"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "huawei_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key",
+        "engine_secret"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "niutrans_api"
+        ]
+      },
+      "settings_required": [
+        "engine_key"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "baidu_api"
+        ],
+        "baidu_interface": [
+          "bce"
+        ]
+      },
+      "settings_required": [
+        "baidu_api_key",
+        "engine_secret"
       ]
     }
   ]

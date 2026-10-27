@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: Apache-2.0
-"""Documented translation protocols; no borrowed provider implementations."""
+"""OpenAI-compatible/Azure protocols and pinned GPL Luna engine integration."""
 
 import json
 import re
@@ -9,6 +9,11 @@ import urllib.parse
 import urllib.request
 
 from obliviousmic.sdk import PublicModuleError
+
+try:
+    from .luna_bridge import ENGINES, Engine, validate_engine_config
+except ImportError:
+    from luna_bridge import ENGINES, Engine, validate_engine_config
 
 MAX_RESPONSE_BYTES = 256 * 1024
 LANGUAGES = {
@@ -58,19 +63,26 @@ def endpoint(value):
 
 def validate_config(config):
     provider = config["provider"]
-    if provider not in {"qwen", "openai_compatible", "azure"}:
+    if provider not in {"openai_compatible", "azure", *ENGINES}:
         raise TranslationError("translate_provider_unknown")
     if (
         config["source_language"] not in {"auto", *LANGUAGES}
         or config["target_language"] not in LANGUAGES
     ):
         raise TranslationError("translate_language_invalid")
-    for key in ("qwen_api_key", "api_key", "azure_api_key"):
+    for key in (
+        "api_key",
+        "azure_api_key",
+        "engine_key",
+        "engine_secret",
+        "engine_app_id",
+        "baidu_api_key",
+    ):
         value = config[key]
         if not isinstance(value, str) or any(ord(c) < 33 or ord(c) > 126 for c in value):
             raise TranslationError("translate_api_key_invalid")
-    if provider == "qwen" and not config["qwen_api_key"]:
-        raise TranslationError("translate_api_key_required")
+    if provider in ENGINES:
+        validate_engine_config(config)
     if provider == "azure":
         if not config["azure_api_key"]:
             raise TranslationError("translate_api_key_required")
@@ -82,7 +94,7 @@ def validate_config(config):
         _, local = endpoint(config["base_url"])
         if not local and not config["api_key"]:
             raise TranslationError("translate_api_key_required")
-    if provider != "azure" and not config["model"].strip():
+    if provider == "openai_compatible" and not config["model"].strip():
         raise TranslationError("translate_model_required")
 
 
@@ -104,6 +116,7 @@ class Client:
         if config["provider"] == "openai_compatible" and endpoint(config["base_url"])[1]:
             handlers.append(urllib.request.ProxyHandler({}))
         self.open = opener or urllib.request.build_opener(*handlers).open
+        self.engine = Engine(config, opener=opener) if config["provider"] in ENGINES else None
 
     def _request(self, url, payload, headers):
         deadline = time.monotonic() + self.config["request_timeout_seconds"]
@@ -145,7 +158,9 @@ class Client:
         target = config["target_language"]
         if source == target:
             return text
-        if config["provider"] == "azure":
+        if self.engine is not None:
+            output = self.engine.translate(text, source, target)
+        elif config["provider"] == "azure":
             query = {"api-version": "3.0", "to": "zh-Hans" if target == "zh" else target}
             if source != "auto":
                 query["from"] = "zh-Hans" if source == "zh" else source
@@ -163,17 +178,8 @@ class Client:
             except (KeyError, IndexError, TypeError):
                 raise TranslationError("translate_response_invalid") from None
         else:
-            if config["provider"] == "qwen":
-                host = (
-                    "dashscope.aliyuncs.com"
-                    if config["qwen_region"] == "beijing"
-                    else "dashscope-intl.aliyuncs.com"
-                )
-                url = "https://" + host + "/compatible-mode/v1/chat/completions"
-                key = config["qwen_api_key"]
-            else:
-                url, _ = endpoint(config["base_url"])
-                key = config["api_key"]
+            url, _ = endpoint(config["base_url"])
+            key = config["api_key"]
             source_name = LANGUAGES.get(source, "the automatically detected source language")
             prompt = (
                 f"Translate the user's text from {source_name} to {LANGUAGES[target]}. "

@@ -1,16 +1,31 @@
-ObliviousMic Text Translation Module
-Copyright 2026 ObliviousMic contributors. Apache-2.0.
+ObliviousMic Text Translation Module 1.1.0
+Copyright 2026 ObliviousMic contributors.
 
-Original implementation of documented Azure Translator v3 and OpenAI-compatible
-chat completion protocols. Uses the Python standard library and ObliviousMic SDK.
-No translation models, provider SDKs, keys or user text are redistributed.
+This combined module is distributed under GPL-3.0-only. The full GPL text is in
+LICENSE. The original Apache-2.0 adapter files retain their SPDX notices; the full
+Apache text is preserved in licenses/Apache-2.0.txt.
 
-LunaTranslator (HIllya51/LunaTranslator), GPL-3.0, was consulted as a conceptual
-reference for separating translator backends. Reference revision:
-856ec4d4f270b59dab489120a702ed93ee254148.
-No LunaTranslator source, dependencies or assets are incorporated in this package.
+24 translation engine leaves in luna/ are adapted from:
+https://github.com/HIllya51/LunaTranslator
+Revision: 856ec4d4f270b59dab489120a702ed93ee254148
+License: GNU General Public License version 3 (upstream LICENSE).
+Original authors: HIllya51 and LunaTranslator contributors. Original attribution,
+including Google's Ebook-Translator-Calibre-Plugin reference, remains in the source.
 
-Protocol documentation:
-https://learn.microsoft.com/en-us/azure/ai-services/translator/text-translation/reference/v3/translate
+LUNA_PROVENANCE.json records original paths, upstream source SHA-256, adapted
+LF-normalized SHA-256 and modifications. Changes replace GUI-coupled imports,
+remove Google's unused browser/CDP path, correct Bing IG/IID assignment and replace
+annotation-only requests / UTC-only pytz use with standard-library shims.
+The compatibility interface, bounded HTTP session and isolated worker integration
+are original ObliviousMic additions. No Qt GUI, browser driver or model is bundled.
+
+Some web engines contain upstream-published web-client constants/signatures. These
+are retained with their source attribution; they are not user credentials, and
+are not a guarantee of unlimited access or future service availability.
+API providers require the user's own credentials. No private credentials, text,
+recordings or personalized models are included.
+
+OpenAI-compatible and Azure protocol references:
 https://help.aliyun.com/zh/model-studio/compatibility-of-openai-with-dashscope
-Service access, billing and model licenses remain subject to the chosen provider.
+https://learn.microsoft.com/en-us/azure/ai-services/translator/text-translation/reference/v3/translate
+Service access, billing and terms remain those of the selected provider.

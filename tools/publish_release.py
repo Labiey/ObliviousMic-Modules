@@ -79,7 +79,7 @@ def publish(tag):
                     "target_commitish": os.environ.get("GITHUB_SHA", "main"),
                     "name": name + " " + version,
                     "body": (
-                        "Official module package. "
+                        "Official module package. Code license: " + package["license"] + ". "
                         "Licensed public weights are included where declared. "
                         "Read the packaged LICENSE, NOTICE, README and repository licensing audit. "
                         "Unresolved BSRNN templates and private voice assets are excluded. "

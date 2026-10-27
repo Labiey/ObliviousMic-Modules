@@ -16,7 +16,7 @@ include = ["modules*"]
 [tool.setuptools.package-data]
 "modules.campplus" = ["*.json", "LICENSE", "NOTICE", "README.md"]
 "modules.bsrnn" = ["*.json", "LICENSE", "NOTICE", "README.md"]
-"modules.translate" = ["*.json", "LICENSE", "NOTICE", "README.md"]
+"modules.translate" = ["*.json", "LICENSE", "NOTICE", "README.md", "licenses/*.txt"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -24,6 +24,7 @@ testpaths = ["tests"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+extend-exclude = ["modules/translate/luna"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]

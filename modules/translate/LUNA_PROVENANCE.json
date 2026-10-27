@@ -1,0 +1,250 @@
+{
+  "repository": "https://github.com/HIllya51/LunaTranslator",
+  "revision": "856ec4d4f270b59dab489120a702ed93ee254148",
+  "license": "GPL-3.0-only",
+  "files": [
+    {
+      "provider": "microsoft",
+      "file": "luna/microsoft.py",
+      "upstream_path": "src/LunaTranslator/translator/microsoft.py",
+      "upstream_sha256": "bdf627f9e29d3c0007883224e2dcf2890938cd0a783bc9094d3badd775f276bd",
+      "adapted_sha256": "8357c746ffcf3c14127f2e261e1506732798674157d130af1139eb3876ca8c89",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "bing",
+      "file": "luna/bing.py",
+      "upstream_path": "src/LunaTranslator/translator/bing.py",
+      "upstream_sha256": "60e00a31527c44d731c4ef5f7ebcdec422f98269737bed58b9be83ec0f028fa9",
+      "adapted_sha256": "bb3002b76cdf4234157b52428f0779661e2b9ac7131348e19f55ce4cfa21ae39",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface.",
+        "Correct the swapped IG and IID request fields."
+      ]
+    },
+    {
+      "provider": "google",
+      "file": "luna/google.py",
+      "upstream_path": "src/LunaTranslator/translator/google.py",
+      "upstream_sha256": "6f7bcc1278e14d042d7b6297d26ec0ff7929c958457c8a3581c72e4eb00a2428",
+      "adapted_sha256": "7aee841985d5e44f02caaa7ce46d8489c8b6eab7fab46d0e01fe5e21c5a266c9",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface.",
+        "Remove the optional browser/CDP implementation; retain the HTTP engine and upstream attribution."
+      ]
+    },
+    {
+      "provider": "modernmt",
+      "file": "luna/ModernMt.py",
+      "upstream_path": "src/LunaTranslator/translator/ModernMt.py",
+      "upstream_sha256": "5f5de15506854451444e8cc68217f3caccd546b77b2e8787f315fd4ddc956ee2",
+      "adapted_sha256": "d5eff49ad64e4f35ff7d0cd7694caf89269236829846d78e12d1450902c763b4",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "qqtransmart",
+      "file": "luna/qqTranSmart.py",
+      "upstream_path": "src/LunaTranslator/translator/qqTranSmart.py",
+      "upstream_sha256": "94b808c1b54b12d56d0ebb4bb8d9f54fa44470ad4b9cb034a93db3f89bc2d650",
+      "adapted_sha256": "73c0f8e703ae007be283bba644beb72a39aa199148ce45db3c37439d633d427f",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "ali",
+      "file": "luna/ali.py",
+      "upstream_path": "src/LunaTranslator/translator/ali.py",
+      "upstream_sha256": "7b7c2b1d0375c2f1f3f0eb6f018beeb60dddaad9885ecd99a09d1c50e4ad25e8",
+      "adapted_sha256": "efbfaa1bf8af359591849bc2f989a6a1310a56fc14b6b1008586adc042d9a87e",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "youdao",
+      "file": "luna/youdaodict.py",
+      "upstream_path": "src/LunaTranslator/translator/youdaodict.py",
+      "upstream_sha256": "71077e28a1c3c38e48331ac3de7a27e1c21416e67c931ccffd0948995172579a",
+      "adapted_sha256": "d83bcaf8d2572607cd2f79b0cb066eefff9bea475f08a72315349d947afa0e0c",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "caiyun",
+      "file": "luna/caiyun.py",
+      "upstream_path": "src/LunaTranslator/translator/caiyun.py",
+      "upstream_sha256": "11fee3def6cc91f7412c8df92a8b29f52c2bc9c5d341bfb4fcb8b36c5c2d60c5",
+      "adapted_sha256": "a17d509bce1e9515d5a326ae1862c9da76a278eba294c737a75a1a168e167418",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "translatecom",
+      "file": "luna/TranslateCom.py",
+      "upstream_path": "src/LunaTranslator/translator/TranslateCom.py",
+      "upstream_sha256": "f37ddd3b0c3cb321d6abfc00dbd583763549a45f6b19781157f9a94f7788e23d",
+      "adapted_sha256": "4fe8561eefcbcb3e8d5ab0a3e90f0c381fec5011917adc966a4a959a7613ed88",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "yandex",
+      "file": "luna/yandex.py",
+      "upstream_path": "src/LunaTranslator/translator/yandex.py",
+      "upstream_sha256": "ec3e93606d160554477a94ae251a76a84481b6cda1e9638348dc068749e49d9b",
+      "adapted_sha256": "af006421e1657fdb6d1f9ec78511c09082f7f151f2a70469b9b23fd25b69ce94",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "qqimt",
+      "file": "luna/qqimt.py",
+      "upstream_path": "src/LunaTranslator/translator/qqimt.py",
+      "upstream_sha256": "37a5dae820294e34b42f0f82a18f8e0b0c698ca1ab2ad314f9e45d5ce3949fde",
+      "adapted_sha256": "1d7b6be4da62f005803965db9a2f4e8b77a03c48d7d5bbab948dd89f2db14f34",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "huoshan",
+      "file": "luna/huoshan.py",
+      "upstream_path": "src/LunaTranslator/translator/huoshan.py",
+      "upstream_sha256": "fcd3777fa00188bc5cf271769695ef3e216bd25467452e2fed1d37ecf2e47e8f",
+      "adapted_sha256": "819563bd206420789666d056ae72ec1ce73ce8a970d5f131552de584aaea1e48",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "papago",
+      "file": "luna/papago.py",
+      "upstream_path": "src/LunaTranslator/translator/papago.py",
+      "upstream_sha256": "436f890686c15447c3b66498a73cd2917b7bf96b93b795988177319c8e95e1e4",
+      "adapted_sha256": "5afce1100c8ac76f509b92a97751111014edb4685a28fe2d2cfae443d5114754",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "baidu_api",
+      "file": "luna/baiduapi.py",
+      "upstream_path": "src/LunaTranslator/translator/baiduapi.py",
+      "upstream_sha256": "43325e8b59d6b3fbedd9e15f9e40c0a07e468242ed17283ee14d066f06a887ed",
+      "adapted_sha256": "f4ffd7861ef87d2fa11d49333b728bd0db9a7dfff5352d608eb7b188a4c2926b",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "caiyun_api",
+      "file": "luna/caiyunapi.py",
+      "upstream_path": "src/LunaTranslator/translator/caiyunapi.py",
+      "upstream_sha256": "a37d58bbba0ff4aff21a076e719559233aa08b48979e5a1068db8cf36230e230",
+      "adapted_sha256": "96da504c0fd8ac8e6cca6c68d1c07722dfdb932a70eccd9cefd2a00ec0aa9d28",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "google_api",
+      "file": "luna/googleapi.py",
+      "upstream_path": "src/LunaTranslator/translator/googleapi.py",
+      "upstream_sha256": "ad77d8b5cc667c7c7658587e826e1af092ee74c8873d1e5272f350f1c86b885e",
+      "adapted_sha256": "9f473b33e304337f21c9bb772bcab02b795ae7522de634bf72d9ada9ff91488a",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "deepl_api",
+      "file": "luna/deeplapi_free.py",
+      "upstream_path": "src/LunaTranslator/translator/deeplapi-free.py",
+      "upstream_sha256": "74aaafcb0f21c688a9ada9cbbd49138b61e8dd4fcc6a394391658c1fd552fdd9",
+      "adapted_sha256": "b352916b1867e1a4f9d163d5be85ffe91984ed54c2f6198131fa8ba4ba3a4445",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "tencent_api",
+      "file": "luna/tencentapi.py",
+      "upstream_path": "src/LunaTranslator/translator/tencentapi.py",
+      "upstream_sha256": "510dbf5ed20838c55f8330b15d67f40c1aefb85728a22f1a57e3d5119375a490",
+      "adapted_sha256": "4ba1b8bda2f64654b328b5d0123f7a92ca105c8f16d6d8ba05c65daf755672d2",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "youdao_api",
+      "file": "luna/youdaoapi.py",
+      "upstream_path": "src/LunaTranslator/translator/youdaoapi.py",
+      "upstream_sha256": "cf90cecb73d15beba475c1b40cc98192d91439c9b589cca5cc4494475203d63b",
+      "adapted_sha256": "c99ee04c2659f1023e0fdb46bbf346ce11b2732750ae61b7d0f3a153f325a159",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "yandex_api",
+      "file": "luna/yandexapi.py",
+      "upstream_path": "src/LunaTranslator/translator/yandexapi.py",
+      "upstream_sha256": "b56016dea2254e51639c2b0d950ec2d4e5d1b3842a04c68429d98cba815feb6d",
+      "adapted_sha256": "7c903990330f67763bf66b9410b66a053658fc19874b90d2ce88bd78e10c33a3",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "aliyun_api",
+      "file": "luna/aliyunapi.py",
+      "upstream_path": "src/LunaTranslator/translator/aliyunapi.py",
+      "upstream_sha256": "3cf8cfa5869de7b8748e4910563d96624f40926ba5fecd267200a1667dbb840b",
+      "adapted_sha256": "fe29804f05d470bd68b6703c9984b46b17f8717ebd83c7bf918adcc680ed17db",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "huoshan_api",
+      "file": "luna/huoshanapi.py",
+      "upstream_path": "src/LunaTranslator/translator/huoshanapi.py",
+      "upstream_sha256": "a2bacf9c829328fc0114f9495e97c1fd07f109330c39f04e348cfa947a05dd18",
+      "adapted_sha256": "3f0a0e97b2b8c102e5caea318170ffb494625221c586e150ea8d00e7bb443a7c",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface.",
+        "Replace annotation-only requests and UTC-only pytz usage with standard-library shims."
+      ]
+    },
+    {
+      "provider": "huawei_api",
+      "file": "luna/hwcloud.py",
+      "upstream_path": "src/LunaTranslator/translator/hwcloud.py",
+      "upstream_sha256": "66e8952e7fe7fa1048c8808daf42cebb072fb3a05cb3ef30a5a3c162d58af155",
+      "adapted_sha256": "f755e0e1978d6253f74e0c95b373c58fce069a8ac7f9e96bb4b8c6b31129379b",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    },
+    {
+      "provider": "niutrans_api",
+      "file": "luna/xiaoniu.py",
+      "upstream_path": "src/LunaTranslator/translator/xiaoniu.py",
+      "upstream_sha256": "45fb84cab9ea2838eb7a2dd11a745cdacd1396d220bdaa4c76b68cf9fb4cea90",
+      "adapted_sha256": "ec405fe0d846e79dadd86c6a9d63732df31db289d73b96117a8008327122a850",
+      "modifications": [
+        "Replace GUI-coupled imports with the isolated host compatibility interface."
+      ]
+    }
+  ]
+}

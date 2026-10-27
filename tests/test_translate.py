@@ -16,7 +16,12 @@ from modules.translate.runtime import Module
 
 def config(**changes):
     result = {key: p["default"] for key, p in Module.SCHEMA["properties"].items()}
-    result.update(qwen_api_key="synthetic-key")
+    result.update(
+        provider="openai_compatible",
+        api_key="synthetic-key",
+        base_url="https://api.example/v1",
+        model="fixture",
+    )
     result.update(changes)
     return result
 
@@ -31,9 +36,7 @@ def response(text="Hello.", reason="stop"):
     "region,host",
     [("beijing", "dashscope.aliyuncs.com"), ("singapore", "dashscope-intl.aliyuncs.com")],
 )
-def test_qwen_protocol_separates_instructions_and_private_text_and_preparation_is_free(
-    region, host
-):
+def test_qwen_uses_the_same_compatible_protocol_without_a_separate_provider(region, host):
     calls = []
 
     def open(request, **kwargs):
@@ -41,7 +44,7 @@ def test_qwen_protocol_separates_instructions_and_private_text_and_preparation_i
         assert kwargs["timeout"] == 25
         return response()
 
-    client = Client(config(qwen_region=region), open)
+    client = Client(config(base_url=f"https://{host}/compatible-mode/v1"), open)
     assert not calls
     assert client.translate("你好。", "zh") == "Hello."
     assert calls[0].full_url == f"https://{host}/compatible-mode/v1/chat/completions"
@@ -96,7 +99,7 @@ def test_endpoints_reject_insecure_cloud_urls_and_embedded_credentials(url):
 
 
 def test_local_key_optional_cloud_key_required_and_same_language_bypasses_network():
-    Client(config(provider="openai_compatible", api_key=""))
+    Client(config(provider="openai_compatible", api_key="", base_url="http://127.0.0.1:11434/v1"))
     with pytest.raises(TranslationError, match="api_key_required"):
         Client(config(provider="openai_compatible", base_url="https://example.com/v1", api_key=""))
     client = Client(config(), lambda *_a, **_k: pytest.fail("unexpected network request"))
@@ -214,6 +217,7 @@ def test_real_ipc_worker_and_loopback_transport_ignore_proxy_and_clean_up(monkey
                 PrepareContext("tr", {}, {}, "realtime"),
                 config(
                     provider="openai_compatible",
+                    api_key="",
                     base_url=f"http://127.0.0.1:{server.server_port}/v1",
                     model="local-fixture",
                     target_language="ja",

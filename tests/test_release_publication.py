@@ -1,4 +1,5 @@
 import hashlib
+import json
 import urllib.error
 from pathlib import Path
 
@@ -17,6 +18,7 @@ def test_publish_checks_uploaded_digest_before_publication_and_never_replaces_as
         "bundle_path": str(path),
         "bytes": 7,
         "sha256": hashlib.sha256(path.read_bytes()).hexdigest(),
+        "license": "GPL-3.0-only",
     }
     asset = {"name": path.name, "size": 7, "digest": "sha256:" + package["sha256"]}
     release = {
@@ -38,6 +40,8 @@ def test_publish_checks_uploaded_digest_before_publication_and_never_replaces_as
         if url.startswith("https://uploads."):
             assert isinstance(data, Path)  # Large uploads stream, never read into one byte string.
             return {**asset, "digest": "sha256:wrong"} if corrupt else asset
+        if data is not None and isinstance(data, bytes) and kwargs.get("method") != "PATCH":
+            assert "GPL-3.0-only" in json.loads(data)["body"]
         return release
 
     monkeypatch.setattr(publish_release, "request", request)
