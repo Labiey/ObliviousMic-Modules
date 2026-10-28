@@ -179,6 +179,40 @@
       "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.1.0/translate-1.1.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/translate/LICENSE",
       "weight_status": "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights"
+    },
+    {
+      "module_id": "org.obliviousmic.denoise",
+      "name": "denoise",
+      "version": "1.0.0",
+      "api": {
+        "min": "1.0",
+        "max_exclusive": "2.0"
+      },
+      "license": "Apache-2.0",
+      "bytes": 25397633,
+      "sha256": "bd5d988c502649984c75cab5b90a565ba1f5732d6d6515f4e5dbdb521ccb3235",
+      "source_path": "modules/denoise",
+      "bundled_resources": [
+        {
+          "id": "light_weights",
+          "sha256": "7f0575a5cec0ba4ffd8f8bd657e06d007e4ccdd955d76faab922b9d3291dc14b",
+          "bytes": 10493337,
+          "license": "Apache-2.0",
+          "source_url": "https://huggingface.co/Ceva-IP/DPDFNet/blob/dd6818d00f50c836fed43a6243ebe49116de5964/README.md"
+        },
+        {
+          "id": "enhanced_weights",
+          "sha256": "7b3afbb260a08fe9af3d16e3bda992971be1e7e951d1dee7c2d235f5c43f5631",
+          "bytes": 14857107,
+          "license": "Apache-2.0",
+          "source_url": "https://huggingface.co/Ceva-IP/DPDFNet/blob/dd6818d00f50c836fed43a6243ebe49116de5964/README.md"
+        }
+      ],
+      "minimum_framework_version": "0.3.0rc1",
+      "description": "Local DPDFNet speech denoising with Light and Enhanced 48 kHz modes",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/denoise-v1.0.0/denoise-1.0.0.obmic.zip",
+      "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/denoise/LICENSE",
+      "weight_status": "Includes both pinned Apache-2.0 DPDFNet ONNX models; no voice registration required"
     }
   ]
 }
