@@ -1,3 +1,4 @@
+import base64
 import io
 import json
 import urllib.error
@@ -104,6 +105,123 @@ def test_azure_speech_protocol_and_empty_speech_results(status):
     assert request.get_header("Authorization") is None
     with wave.open(io.BytesIO(request.data), "rb") as audio:
         assert audio.getnframes() == 4000
+
+
+@pytest.mark.parametrize(
+    "region,host",
+    [("beijing", "dashscope.aliyuncs.com"), ("singapore", "dashscope-intl.aliyuncs.com")],
+)
+@pytest.mark.parametrize("language", ["auto", "zh", "en", "ja"])
+def test_bailian_audio_message_contract_and_language_options(region, host, language):
+    calls = []
+
+    def open(request, **kwargs):
+        calls.append(request)
+        return io.BytesIO(
+            json.dumps({"choices": [{"message": {"content": "  你好 hello 日本語  "}}]}).encode()
+        )
+
+    result = Client(
+        config(
+            provider="bailian",
+            bailian_api_key="bailian-fixture",
+            bailian_region=region,
+            language=language,
+            bailian_enable_itn=True,
+        ),
+        opener=open,
+    ).transcribe(np.full(1601, 0.1, np.float32))
+    assert result == ("你好 hello 日本語", language)
+    assert len(calls) == 1
+    request = calls[0]
+    assert request.full_url == f"https://{host}/compatible-mode/v1/chat/completions"
+    assert request.get_header("Authorization") == "Bearer bailian-fixture"
+    body = json.loads(request.data)
+    assert body["model"] == "qwen3-asr-flash" and body["stream"] is False
+    assert body["asr_options"] == {
+        "enable_itn": True,
+        **({"language": language} if language != "auto" else {}),
+    }
+    message = body["messages"][0]
+    assert len(body["messages"]) == 1 and message["role"] == "user"
+    content = message["content"][0]
+    assert content["type"] == "input_audio"
+    prefix, encoded = content["input_audio"]["data"].split(",", 1)
+    assert prefix == "data:audio/wav;base64"
+    with wave.open(io.BytesIO(base64.b64decode(encoded, validate=True)), "rb") as audio:
+        assert (
+            audio.getframerate(),
+            audio.getnchannels(),
+            audio.getsampwidth(),
+            audio.getnframes(),
+        ) == (16000, 1, 2, 1601)
+
+
+@pytest.mark.parametrize("suffix", ["", "/chat/completions"])
+def test_bailian_workspace_endpoint(suffix):
+    calls = []
+
+    def open(request, **kwargs):
+        calls.append(request)
+        return io.BytesIO(b'{"choices":[{"message":{"content":""}}]}')
+
+    base = "https://workspace-example.cn-beijing.maas.aliyuncs.com/compatible-mode/v1"
+    result = Client(
+        config(provider="bailian", bailian_api_key="fixture", bailian_base_url=base + suffix),
+        opener=open,
+    ).transcribe(np.zeros(1600, np.float32))
+    assert result == ("", "auto")
+    assert calls[0].full_url == base + "/chat/completions"
+
+
+@pytest.mark.parametrize(
+    "change,code",
+    [
+        ({"bailian_api_key": ""}, "key_required"),
+        ({"bailian_api_key": "fixture\nsecret"}, "key_invalid"),
+        ({"bailian_model": ""}, "model_required"),
+        ({"bailian_region": "invalid"}, "bailian_region_invalid"),
+        ({"bailian_base_url": "http://127.0.0.1/compatible-mode/v1"}, "bailian_endpoint_invalid"),
+        (
+            {"bailian_base_url": "https://dashscope.aliyuncs.com.evil.invalid/compatible-mode/v1"},
+            "bailian_endpoint_invalid",
+        ),
+        (
+            {"bailian_base_url": "https://dashscope.aliyuncs.com:8443/compatible-mode/v1"},
+            "bailian_endpoint_invalid",
+        ),
+        (
+            {
+                "bailian_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1/audio/transcriptions"
+            },
+            "bailian_endpoint_invalid",
+        ),
+    ],
+)
+def test_bailian_invalid_config_never_sends_audio(change, code):
+    with pytest.raises(ASRError, match="asr_api_" + code):
+        Client(
+            config(provider="bailian", **{"bailian_api_key": "fixture", **change}),
+            opener=lambda *_a, **_k: pytest.fail("unexpected network"),
+        )
+
+
+@pytest.mark.parametrize(
+    "result",
+    [
+        {"code": "InvalidApiKey", "message": "PRIVATE-KEY"},
+        {"choices": []},
+        {"choices": [{"message": {"content": None}}]},
+        {"choices": [{"message": {"content": [{"text": "wrong-protocol"}]}}]},
+    ],
+)
+def test_bailian_rejects_malformed_or_error_responses(result):
+    with pytest.raises(ASRError) as exc:
+        Client(
+            config(provider="bailian", bailian_api_key="fixture"),
+            opener=lambda *_a, **_k: io.BytesIO(json.dumps(result).encode()),
+        ).transcribe(np.zeros(1600, np.float32))
+    assert str(exc.value) == "asr_api_response_invalid"
 
 
 @pytest.mark.parametrize(

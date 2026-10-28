@@ -17,3 +17,6 @@ The REST adapters are independently implemented against the documented protocols
 The selected cloud or self-hosted service owns inference, model availability,
 voice-data handling and service terms. No model license is granted by this client.
 NumPy is an external BSD-licensed runtime dependency, not bundled in the ZIP.
+
+Alibaba Cloud Qwen ASR protocol (independent HTTP implementation; no SDK copied):
+https://help.aliyun.com/zh/model-studio/qwen-asr-api-reference

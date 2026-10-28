@@ -10,7 +10,8 @@
   },
   "protocol_sources": [
     "https://developers.openai.com/api/reference/resources/audio/subresources/transcriptions/methods/create",
-    "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/rest-speech-to-text-short"
+    "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/rest-speech-to-text-short",
+    "https://help.aliyun.com/zh/model-studio/qwen-asr-api-reference"
   ],
   "open_source_references": [
     {
@@ -25,5 +26,6 @@
       "usage": "Reviewed WAV upload, language selection and Azure request/response protocol; no source copied."
     }
   ],
-  "models_bundled": false
+  "models_bundled": false,
+  "protocol_reviewed_at": "2026-10-29"
 }

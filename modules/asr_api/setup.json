@@ -39,6 +39,18 @@
         "azure_region",
         "azure_language"
       ]
+    },
+    {
+      "when": {
+        "provider": [
+          "bailian"
+        ]
+      },
+      "settings_required": [
+        "bailian_api_key",
+        "bailian_region",
+        "bailian_model"
+      ]
     }
   ]
 }

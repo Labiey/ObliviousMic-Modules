@@ -40,7 +40,7 @@ MODULES = {
         "Includes both pinned Apache-2.0 DPDFNet ONNX models; no voice registration required",
     ),
     "asr_api": (
-        "Remote ASR via OpenAI-compatible transcription or Azure Speech APIs",
+        "Remote ASR via OpenAI-compatible transcription, Azure Speech or Alibaba Cloud Bailian",
         "Original Apache-2.0 client; no model weights; chosen service receives speech segments",
     ),
 }

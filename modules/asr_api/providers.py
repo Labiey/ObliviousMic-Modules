@@ -1,6 +1,7 @@
 # SPDX-License-Identifier: Apache-2.0
 """Short audio transcription protocols; bounded requests, no retries or redirects."""
 
+import base64
 import io
 import json
 import re
@@ -19,6 +20,10 @@ MAX_RESPONSE_BYTES = 256 * 1024
 MAX_TEXT = 8192
 LANGUAGES = {"auto", "zh", "en", "ja"}
 AZURE_LANGUAGES = {"zh-CN": "zh", "en-US": "en", "ja-JP": "ja"}
+BAILIAN_BASES = {
+    "beijing": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "singapore": "https://dashscope-intl.aliyuncs.com/compatible-mode/v1",
+}
 
 
 class ASRError(PublicModuleError):
@@ -52,7 +57,7 @@ def endpoint(value):
 
 
 def validate_config(config):
-    if config["provider"] not in {"openai_compatible", "azure"}:
+    if config["provider"] not in {"openai_compatible", "azure", "bailian"}:
         raise ASRError("asr_api_provider_unknown")
     if config["provider"] == "openai_compatible":
         _, local = endpoint(config["base_url"])
@@ -63,6 +68,15 @@ def validate_config(config):
         if config["language"] not in LANGUAGES:
             raise ASRError("asr_api_language_invalid")
         keys = ["api_key"]
+    elif config["provider"] == "bailian":
+        if not config["bailian_api_key"].strip():
+            raise ASRError("asr_api_key_required")
+        bailian_endpoint(config)
+        if not config["bailian_model"].strip():
+            raise ASRError("asr_api_model_required")
+        if config["language"] not in LANGUAGES:
+            raise ASRError("asr_api_language_invalid")
+        keys = ["bailian_api_key"]
     else:
         if not config["azure_api_key"].strip():
             raise ASRError("asr_api_key_required")
@@ -75,6 +89,27 @@ def validate_config(config):
         keys = ["azure_api_key"]
     if any(any(ord(c) < 33 or ord(c) > 126 for c in config[key]) for key in keys):
         raise ASRError("asr_api_key_invalid")
+
+
+def bailian_endpoint(config):
+    if config["bailian_region"] not in BAILIAN_BASES:
+        raise ASRError("asr_api_bailian_region_invalid")
+    value, _ = endpoint(config["bailian_base_url"] or BAILIAN_BASES[config["bailian_region"]])
+    parsed = urllib.parse.urlsplit(value)
+    if (
+        parsed.scheme != "https"
+        or parsed.port not in {None, 443}
+        or not (
+            parsed.hostname in {"dashscope.aliyuncs.com", "dashscope-intl.aliyuncs.com"}
+            or re.fullmatch(
+                r"[a-z0-9_-]+\.(?:cn-beijing|ap-southeast-1)\.maas\.aliyuncs\.com",
+                parsed.hostname,
+            )
+        )
+        or parsed.path not in {"/compatible-mode/v1", "/compatible-mode/v1/chat/completions"}
+    ):
+        raise ASRError("asr_api_bailian_endpoint_invalid")
+    return value if value.endswith("/chat/completions") else value + "/chat/completions"
 
 
 def wav_bytes(samples):
@@ -124,7 +159,9 @@ class Client:
         validate_config(config)
         self.config = dict(config)
         url = (
-            config["base_url"]
+            bailian_endpoint(config)
+            if config["provider"] == "bailian"
+            else config["base_url"]
             if config["provider"] == "openai_compatible"
             else (
                 config["azure_endpoint"]
@@ -177,6 +214,42 @@ class Client:
     def transcribe(self, samples):
         config = self.config
         audio = wav_bytes(samples)
+        if config["provider"] == "bailian":
+            options = {"enable_itn": config["bailian_enable_itn"]}
+            if config["language"] != "auto":
+                options["language"] = config["language"]
+            body = {
+                "model": config["bailian_model"],
+                "messages": [
+                    {
+                        "role": "user",
+                        "content": [
+                            {
+                                "type": "input_audio",
+                                "input_audio": {
+                                    "data": "data:audio/wav;base64,"
+                                    + base64.b64encode(audio).decode("ascii")
+                                },
+                            }
+                        ],
+                    }
+                ],
+                "stream": False,
+                "asr_options": options,
+            }
+            result = self._request(
+                bailian_endpoint(config),
+                json.dumps(body, ensure_ascii=False).encode("utf-8"),
+                {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + config["bailian_api_key"],
+                },
+            )
+            try:
+                text = result["choices"][0]["message"]["content"]
+            except (KeyError, IndexError, TypeError):
+                raise ASRError("asr_api_response_invalid") from None
+            return checked_text(text), config["language"]
         if config["provider"] == "openai_compatible":
             url, _ = endpoint(config["base_url"])
             if not url.endswith("/audio/transcriptions"):

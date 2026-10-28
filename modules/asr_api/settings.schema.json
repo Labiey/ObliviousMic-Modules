@@ -8,11 +8,17 @@
       "apply_policy": "reprepare",
       "enum": [
         "openai_compatible",
-        "azure"
+        "azure",
+        "bailian"
       ],
       "enum_labels": {
         "openai_compatible": "OpenAI compatible",
-        "azure": "Azure Speech"
+        "azure": "Azure Speech",
+        "bailian": {
+          "zh-CN": "阿里云百炼",
+          "en": "Alibaba Cloud Bailian",
+          "ja": "Alibaba Cloud 百錬"
+        }
       }
     },
     "base_url": {
@@ -62,7 +68,8 @@
       ],
       "visible_when": {
         "provider": [
-          "openai_compatible"
+          "openai_compatible",
+          "bailian"
         ]
       }
     },
@@ -114,6 +121,79 @@
       "visible_when": {
         "provider": [
           "azure"
+        ]
+      }
+    },
+    "bailian_api_key": {
+      "type": "string",
+      "default": "",
+      "maxLength": 2048,
+      "private": true,
+      "secret": true,
+      "apply_policy": "reprepare",
+      "visible_when": {
+        "provider": [
+          "bailian"
+        ]
+      }
+    },
+    "bailian_region": {
+      "type": "string",
+      "default": "beijing",
+      "enum": [
+        "beijing",
+        "singapore"
+      ],
+      "enum_labels": {
+        "beijing": {
+          "zh-CN": "北京",
+          "en": "Beijing",
+          "ja": "北京"
+        },
+        "singapore": {
+          "zh-CN": "新加坡",
+          "en": "Singapore",
+          "ja": "シンガポール"
+        }
+      },
+      "apply_policy": "reprepare",
+      "visible_when": {
+        "provider": [
+          "bailian"
+        ]
+      }
+    },
+    "bailian_model": {
+      "type": "string",
+      "default": "qwen3-asr-flash",
+      "maxLength": 200,
+      "apply_policy": "reprepare",
+      "visible_when": {
+        "provider": [
+          "bailian"
+        ]
+      }
+    },
+    "bailian_base_url": {
+      "type": "string",
+      "default": "",
+      "maxLength": 2048,
+      "advanced": true,
+      "apply_policy": "reprepare",
+      "visible_when": {
+        "provider": [
+          "bailian"
+        ]
+      }
+    },
+    "bailian_enable_itn": {
+      "type": "boolean",
+      "default": false,
+      "advanced": true,
+      "apply_policy": "reprepare",
+      "visible_when": {
+        "provider": [
+          "bailian"
         ]
       }
     },
