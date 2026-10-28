@@ -16,7 +16,7 @@ MODULES = {
         "Includes CAM++ speaker weights; separator template rights unresolved, local import only",
     ),
     "asr": (
-        "Local speech recognition with timestamped Chinese, English and Japanese text",
+        "ASR Whisper: local recognition with timestamped Chinese, English and Japanese text",
         "Includes pinned MIT Whisper Small weights, tokenizer and configuration",
     ),
     "tts": (
@@ -38,6 +38,10 @@ MODULES = {
     "denoise": (
         "Local DPDFNet speech denoising with Light and Enhanced 48 kHz modes",
         "Includes both pinned Apache-2.0 DPDFNet ONNX models; no voice registration required",
+    ),
+    "asr_api": (
+        "Remote ASR via OpenAI-compatible transcription or Azure Speech APIs",
+        "Original Apache-2.0 client; no model weights; chosen service receives speech segments",
     ),
 }
 

@@ -1,0 +1,19 @@
+ObliviousMic ASR API module
+Copyright 2026 ObliviousMic contributors. Licensed under Apache-2.0.
+
+This is an original bounded HTTP client and graph adapter. It does not bundle
+SpeechRecognition, LunaTranslator, vendor SDKs or models.
+
+Open-source references reviewed for protocol interoperability:
+SpeechRecognition, Copyright (c) 2014-, Anthony Zhang and contributors,
+BSD-3-Clause, revision 8075e8f76acdac58fcf6ac41a104172f51349e98.
+https://github.com/Uberi/speech_recognition
+Reviewed the OpenAI-compatible WAV upload and Azure recognition interfaces.
+
+LunaTranslator's Windows speech recognition was reviewed as a UI reference;
+no GPL code is incorporated. Exact references are recorded in provenance.json.
+The REST adapters are independently implemented against the documented protocols.
+
+The selected cloud or self-hosted service owns inference, model availability,
+voice-data handling and service terms. No model license is granted by this client.
+NumPy is an external BSD-licensed runtime dependency, not bundled in the ZIP.

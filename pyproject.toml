@@ -17,6 +17,7 @@ include = ["modules*"]
 "modules.campplus" = ["*.json", "LICENSE", "NOTICE", "README.md"]
 "modules.bsrnn" = ["*.json", "LICENSE", "NOTICE", "README.md"]
 "modules.denoise" = ["*.json", "LICENSE", "NOTICE", "README.md", "licenses/dpdfnet/LICENSE"]
+"modules.asr_api" = ["*.json", "LICENSE", "NOTICE", "README.md"]
 "modules.translate" = ["*.json", "LICENSE", "NOTICE", "README.md", "licenses/*.txt"]
 
 [tool.pytest.ini_options]

@@ -1,5 +1,18 @@
 # Licensing and redistribution audit
 
+## ASR API (checked 2026-10-28)
+
+Original Apache-2.0 REST client, PCM/WAV segmentation and process adapter.
+Reviewed SpeechRecognition (BSD-3-Clause), revision
+8075e8f76acdac58fcf6ac41a104172f51349e98, to check public request
+formats and response handling. No source from that project is redistributed;
+this module interoperates with their documented protocols. No GPL LunaTranslator
+code, provider SDK, model, recording or credential is included. Its NOTICE and
+provenance.json identify exact references. Service/model terms remain separate.
+The pre-existing ASR package is displayed as ASR Whisper with unchanged ID and
+package bytes; renaming does not relicense or duplicate its MIT model payloads.
+
+
 ## DPDFNet denoise (checked 2026-10-28)
 
 The official Ceva-IP/DPDFNet Hugging Face model card explicitly declares

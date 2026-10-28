@@ -65,6 +65,7 @@ if __name__ == "__main__":
             "campplus",
             "bsrnn",
             "asr",
+            "asr_api",
             "tts",
             "subtitles",
             "broadcast",

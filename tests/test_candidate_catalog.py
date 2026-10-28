@@ -23,6 +23,7 @@ def test_candidate_is_deterministic_accepted_by_host_and_preserves_published_ent
         "campplus",
         "bsrnn",
         "asr",
+        "asr_api",
         "tts",
         "subtitles",
         "broadcast",
@@ -64,7 +65,7 @@ def test_candidate_installs_four_independent_packages_through_catalog_and_restor
         assert record["bundle_sha256"] == item["sha256"]
     assert set(prepared) == {
         "org.obliviousmic." + name
-        for name in ("asr", "tts", "subtitles", "broadcast", "translate", "denoise")
+        for name in ("asr", "asr_api", "tts", "subtitles", "broadcast", "translate", "denoise")
     }
     restored = PluginManager(tmp_path / "data", ModuleRegistry())
     assert restored.restore() == []

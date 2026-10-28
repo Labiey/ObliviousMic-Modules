@@ -9,7 +9,8 @@ optional adapters, module-local reusable algorithms, initialization and package 
 | [DPDFNet Denoise](modules/denoise/README.md) | Installer includes both pinned ONNX models | Light / Enhanced, 48 kHz CPU; no enrollment or manual paths | Official Ceva-IP model card and source: Apache-2.0 |
 | CAM++ | Release installer includes verified public ONNX | Select/create a profile and provide at least 3 seconds of suitable speech | Upstream ModelScope v1.0.0 declares Apache-2.0; download from sherpa-onnx, SHA-256 pinned |
 | BSRNN | Release installer includes public CAM++ only | Import an authorized compatible template once; provide suitable speech (at least 4 seconds); registration and baking run together | Current REAL-TSE checkpoint permission is unresolved. No weights, automatic download or checkpoint redistribution is supplied |
-| ASR | Release installer includes all four pinned Whisper resources | CPU/int8 defaults; automatic Chinese/English/Japanese detection | Whisper conversion model card: MIT; faster-whisper/CTranslate2: MIT |
+| ASR Whisper | Release installer includes all four pinned Whisper resources | CPU/int8 defaults; automatic Chinese/English/Japanese detection | Whisper conversion model card: MIT; faster-whisper/CTranslate2: MIT |
+| [ASR API](modules/asr_api/README.md) | Client-only installer, no models | OpenAI-compatible key/base/model or Azure Speech key/region | Original Apache-2.0 client; selected service and model terms remain separate |
 | TTS | Release installer | Qwen/Azure key and region, or one local GPT-SoVITS reference initialization | Adapter Apache-2.0; cloud, model and voice terms remain separate |
 | Subtitles | Release installer | Windows floating window, no voice profile or model | Original Apache-2.0 code; Python/Tk runtime supplied separately |
 | Broadcast | Release installer | Compatible local NVIDIA Broadcast app; default buffered noise removal | Original Apache-2.0 adapter; no NVIDIA software or models redistributed |
@@ -33,7 +34,7 @@ Packages are published as GitHub Actions artifacts and per-module GitHub Release
 Catalog entries pin package SHA-256 and size. `resources.json` identifies bundled model payloads, pinned fallback sources and separate weight licenses;
 `setup.json` declares automatic bindings and first-use actions. [Package format](docs/module-format.md).
 
-Prepare all eight modules in an ignored staging directory before publishing:
+Prepare all nine modules in an ignored staging directory before publishing:
 
 ```powershell
 python -m tools.prepare_catalog

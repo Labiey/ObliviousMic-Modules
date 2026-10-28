@@ -1,0 +1,44 @@
+{
+  "setup_version": 1,
+  "profile_required": false,
+  "artifacts": [],
+  "runtime_resources": [],
+  "requirements": [
+    {
+      "when": {
+        "provider": [
+          "openai_compatible"
+        ]
+      },
+      "settings_required": [
+        "base_url",
+        "model"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "openai_compatible"
+        ],
+        "base_url": [
+          "https://api.openai.com/v1"
+        ]
+      },
+      "settings_required": [
+        "api_key"
+      ]
+    },
+    {
+      "when": {
+        "provider": [
+          "azure"
+        ]
+      },
+      "settings_required": [
+        "azure_api_key",
+        "azure_region",
+        "azure_language"
+      ]
+    }
+  ]
+}

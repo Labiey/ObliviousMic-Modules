@@ -1,0 +1,29 @@
+{
+  "implementation": "Original ObliviousMic REST/segmentation/IPC adapter",
+  "license": "Apache-2.0",
+  "copied_lunatranslator_sources": [],
+  "reviewed_reference": {
+    "repository": "https://github.com/HIllya51/LunaTranslator",
+    "revision": "be625f4237e892213f7eae8ddb042739593c2c4d",
+    "documentation": "https://docs.lunatranslator.org/en/sr.html",
+    "note": "Windows speech recognition is not a cloud ASR protocol. No GPL implementation is copied."
+  },
+  "protocol_sources": [
+    "https://developers.openai.com/api/reference/resources/audio/subresources/transcriptions/methods/create",
+    "https://learn.microsoft.com/en-us/azure/ai-services/speech-service/rest-speech-to-text-short"
+  ],
+  "open_source_references": [
+    {
+      "repository": "https://github.com/Uberi/speech_recognition",
+      "revision": "8075e8f76acdac58fcf6ac41a104172f51349e98",
+      "license": "BSD-3-Clause",
+      "files": [
+        "speech_recognition/recognizers/whisper_api/base.py",
+        "speech_recognition/recognizers/whisper_api/openai.py",
+        "speech_recognition/__init__.py"
+      ],
+      "usage": "Reviewed WAV upload, language selection and Azure request/response protocol; no source copied."
+    }
+  ],
+  "models_bundled": false
+}

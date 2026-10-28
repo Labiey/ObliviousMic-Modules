@@ -25,6 +25,7 @@ def validate(path=None, *, metadata_only=False):
             "campplus",
             "bsrnn",
             "asr",
+            "asr_api",
             "tts",
             "subtitles",
             "broadcast",
