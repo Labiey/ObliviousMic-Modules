@@ -8,7 +8,18 @@ from tools.build_module import build
 
 
 @pytest.mark.parametrize(
-    "name", ["campplus", "bsrnn", "asr", "asr_api", "tts", "subtitles", "broadcast", "translate", "denoise"]
+    "name",
+    [
+        "campplus",
+        "bsrnn",
+        "asr",
+        "asr_api",
+        "tts",
+        "subtitles",
+        "broadcast",
+        "translate",
+        "denoise",
+    ],
 )
 def test_independent_bundle_roundtrip_and_licenses(tmp_path, name):
     one = build(name, tmp_path / "a")
@@ -21,6 +32,8 @@ def test_independent_bundle_roundtrip_and_licenses(tmp_path, name):
         if name in {"campplus", "bsrnn"}:
             assert {"licensing.md", "provenance.json"} <= set(names)
         assert not any(x.endswith((".onnx", ".wav", ".npy")) for x in names)
+        if name == "tts":
+            assert "local_service.py" not in names
     manager = PluginManager(tmp_path / "data", ModuleRegistry())
     with pytest.raises(ValueError, match="reserved"):
         manager.install(one["bundle_path"], trusted=True)
@@ -38,7 +51,11 @@ def test_independent_bundle_roundtrip_and_licenses(tmp_path, name):
     if name in {"campplus", "bsrnn"}:
         assert registration.setup["initialize_action"] == "initialize"
     elif name == "tts":
-        assert registration.setup["initialize_action"] == "initialize_reference"
+        assert "initialize_action" not in registration.setup
+        assert not registration.setup["artifacts"] and not registration.actions
+        assert registration.settings_schema["properties"]["provider"]["enum"] == ["qwen", "azure"]
+    elif name == "asr_api":
+        assert "bailian" in registration.settings_schema["properties"]["provider"]["enum"]
     recovered = PluginManager(tmp_path / "data", ModuleRegistry())
     assert recovered.restore() == []
     assert (
