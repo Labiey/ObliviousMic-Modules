@@ -99,7 +99,7 @@
         }
       ],
       "minimum_framework_version": "0.3.0rc1",
-      "description": "Local speech recognition with timestamped Chinese, English and Japanese text",
+      "description": "ASR Whisper: local recognition with timestamped Chinese, English and Japanese text",
       "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr-v1.0.0/asr-1.0.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/asr/LICENSE",
       "weight_status": "Includes pinned MIT Whisper Small weights, tokenizer and configuration"
@@ -213,6 +213,25 @@
       "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/denoise-v1.0.0/denoise-1.0.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/denoise/LICENSE",
       "weight_status": "Includes both pinned Apache-2.0 DPDFNet ONNX models; no voice registration required"
+    },
+    {
+      "module_id": "org.obliviousmic.asr_api",
+      "name": "asr_api",
+      "version": "1.0.0",
+      "api": {
+        "min": "1.0",
+        "max_exclusive": "2.0"
+      },
+      "license": "Apache-2.0",
+      "bytes": 39534,
+      "sha256": "10359b160d108b10a921eb2cc46b8268c4d9bc8d1b3ce02acf18ed9e1c769974",
+      "source_path": "modules/asr_api",
+      "bundled_resources": [],
+      "minimum_framework_version": "0.3.0rc1",
+      "description": "Remote ASR via OpenAI-compatible transcription or Azure Speech APIs",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.0.0/asr_api-1.0.0.obmic.zip",
+      "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/asr_api/LICENSE",
+      "weight_status": "Original Apache-2.0 client; no model weights; chosen service receives speech segments"
     }
   ]
 }
