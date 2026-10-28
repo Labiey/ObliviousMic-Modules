@@ -2,45 +2,7 @@
   "setup_version": 1,
   "profile_required": false,
   "artifacts": [],
-  "initialize_action": "initialize_reference",
-  "file_required": true,
-  "minimum_audio_seconds": 3,
-  "settings_bindings": {
-    "profile_id": {
-      "source": "profile"
-    }
-  },
-  "action_bindings": {
-    "initialize_reference": {
-      "profile_id": {
-        "source": "profile"
-      }
-    }
-  },
-  "initialize_when": {
-    "provider": [
-      "gpt_sovits"
-    ]
-  },
-  "initialization_fields": [
-    "prompt_text",
-    "prompt_language"
-  ],
   "requirements": [
-    {
-      "when": {
-        "provider": [
-          "gpt_sovits"
-        ],
-        "reference_path": [
-          ""
-        ]
-      },
-      "profile_required": true,
-      "artifacts": [
-        "reference_audio"
-      ]
-    },
     {
       "when": {
         "provider": [
@@ -61,5 +23,6 @@
         "azure_api_key"
       ]
     }
-  ]
+  ],
+  "runtime_resources": []
 }

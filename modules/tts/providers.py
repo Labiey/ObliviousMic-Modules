@@ -37,26 +37,6 @@ def language_for(text, requested="auto", observed="auto"):
     return "zh" if any("\u4e00" <= c <= "\u9fff" for c in text) else "en"
 
 
-def local_url(value):
-    parsed = urllib.parse.urlparse(value)
-    if (
-        parsed.scheme not in {"http", "https"}
-        or parsed.hostname not in {"127.0.0.1", "localhost", "::1"}
-        or parsed.username
-        or parsed.password
-        or parsed.query
-        or parsed.fragment
-        or parsed.path not in {"", "/"}
-    ):
-        raise TTSError("tts_local_endpoint_must_be_loopback")
-    try:
-        if parsed.port is not None and not 1 <= parsed.port <= 65535:
-            raise ValueError()
-    except ValueError:
-        raise TTSError("tts_local_endpoint_must_be_loopback") from None
-    return value.rstrip("/")
-
-
 def validate_config(config):
     provider = config["provider"]
     if provider == "qwen" and not config["qwen_api_key"].strip():
@@ -74,9 +54,7 @@ def validate_config(config):
                 or not 0.5 <= value <= maximum
             ):
                 raise TTSError("tts_azure_prosody_invalid")
-    if provider == "gpt_sovits":
-        local_url(config["local_endpoint"])
-    if provider not in {"qwen", "azure", "gpt_sovits"}:
+    if provider not in {"qwen", "azure"}:
         raise TTSError("tts_provider_unknown")
     for key in ("qwen_api_key", "azure_api_key"):
         if any(ord(c) < 32 or ord(c) > 126 for c in config[key]):
@@ -87,23 +65,7 @@ class Client:
     def __init__(self, config, opener=None):
         validate_config(config)
         self.config = dict(config)
-        handlers = [NoRedirects()]
-        if config["provider"] == "gpt_sovits":
-            handlers.append(urllib.request.ProxyHandler({}))
-        self.open = opener or urllib.request.build_opener(*handlers).open
-
-    def warmup(self):
-        """Load local lazy language models before accepting a live text stream."""
-        if self.config["provider"] != "gpt_sovits":
-            return  # Never make a billable cloud request during graph preparation.
-        original = self.config
-        self.config = {**original, "request_timeout_seconds": 90}
-        try:
-            language = original["language"]
-            phrase = {"en": "Hello.", "ja": "こんにちは。"}.get(language, "你好。")
-            self.synthesize(phrase, language if language != "auto" else "zh")
-        finally:
-            self.config = original
+        self.open = opener or urllib.request.build_opener(NoRedirects()).open
 
     def _request(self, url, deadline, *, payload=None, headers=None, limit=MAX_AUDIO_BYTES):
         remaining = min(self.config["request_timeout_seconds"], deadline - time.monotonic())
@@ -233,25 +195,6 @@ class Client:
                     "Content-Type": "application/ssml+xml",
                     "X-Microsoft-OutputFormat": "riff-24khz-16bit-mono-pcm",
                 },
-            )
-        else:
-            payload = {
-                "text": text,
-                "text_lang": language,
-                "ref_audio_path": config["reference_path"],
-                "prompt_text": config["reference_prompt"],
-                "prompt_lang": config["reference_language"]
-                if config["reference_language"] != "auto"
-                else "zh",
-                "media_type": "wav",
-                "streaming_mode": False,
-                "batch_size": 1,
-            }
-            data = self._request(
-                local_url(config["local_endpoint"]) + "/tts",
-                deadline,
-                payload=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
-                headers={"Content-Type": "application/json"},
             )
         return self._decode(data)
 

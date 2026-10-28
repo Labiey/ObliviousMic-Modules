@@ -29,7 +29,6 @@ class Module:
     def prepare(self, context, config):
         self.context = context
         self.client = self.client_factory(config)
-        self.client.warmup()
         self.reset("prepare")
 
     def start(self, stream):

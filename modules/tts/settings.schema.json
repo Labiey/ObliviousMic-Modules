@@ -4,13 +4,20 @@
   "properties": {
     "provider": {
       "type": "string",
-      "default": "gpt_sovits",
+      "default": "qwen",
       "apply_policy": "reprepare",
       "enum": [
-        "gpt_sovits",
         "qwen",
         "azure"
-      ]
+      ],
+      "enum_labels": {
+        "qwen": {
+          "zh-CN": "阿里云百炼",
+          "en": "Alibaba Cloud Bailian",
+          "ja": "Alibaba Cloud 百錬"
+        },
+        "azure": "Azure Speech"
+      }
     },
     "language": {
       "type": "string",
@@ -22,18 +29,6 @@
         "en",
         "ja"
       ]
-    },
-    "profile_id": {
-      "type": "string",
-      "default": "",
-      "apply_policy": "reprepare",
-      "format": "profile_id",
-      "private": true,
-      "visible_when": {
-        "provider": [
-          "gpt_sovits"
-        ]
-      }
     },
     "qwen_api_key": {
       "type": "string",
@@ -147,81 +142,6 @@
       "visible_when": {
         "provider": [
           "azure"
-        ]
-      }
-    },
-    "local_endpoint": {
-      "type": "string",
-      "default": "http://127.0.0.1:9880",
-      "apply_policy": "reprepare",
-      "advanced": true,
-      "visible_when": {
-        "provider": [
-          "gpt_sovits"
-        ]
-      }
-    },
-    "local_install_directory": {
-      "type": "string",
-      "default": "",
-      "apply_policy": "reprepare",
-      "private": true,
-      "advanced": true,
-      "visible_when": {
-        "provider": [
-          "gpt_sovits"
-        ]
-      }
-    },
-    "auto_start_local": {
-      "type": "boolean",
-      "default": true,
-      "apply_policy": "reprepare",
-      "advanced": true,
-      "visible_when": {
-        "provider": [
-          "gpt_sovits"
-        ]
-      }
-    },
-    "reference_path": {
-      "type": "string",
-      "default": "",
-      "apply_policy": "reprepare",
-      "private": true,
-      "advanced": true,
-      "visible_when": {
-        "provider": [
-          "gpt_sovits"
-        ]
-      }
-    },
-    "reference_prompt": {
-      "type": "string",
-      "default": "",
-      "apply_policy": "reprepare",
-      "private": true,
-      "advanced": true,
-      "visible_when": {
-        "provider": [
-          "gpt_sovits"
-        ]
-      }
-    },
-    "reference_language": {
-      "type": "string",
-      "default": "auto",
-      "apply_policy": "reprepare",
-      "enum": [
-        "auto",
-        "zh",
-        "en",
-        "ja"
-      ],
-      "advanced": true,
-      "visible_when": {
-        "provider": [
-          "gpt_sovits"
         ]
       }
     },

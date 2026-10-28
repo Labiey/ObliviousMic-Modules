@@ -112,10 +112,9 @@ The four resources retain upstream URLs, exact sizes, SHA-256 and MIT attributio
 Sources: https://github.com/SYSTRAN/faster-whisper/blob/master/LICENSE and
 https://huggingface.co/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120.
 
-TTS uses original REST adapters for Qwen/Azure and a loopback client for an independently installed
-GPT-SoVITS service. Service terms, selected voices, local runtime and model licenses are separate.
-The adapter does not redistribute cloud SDKs, GPT-SoVITS, its models or the user's voice reference.
-Successful tests with a selected local model or cloud account do not grant redistribution rights.
+TTS 1.2.0 uses original REST adapters for Qwen/Azure only. Service and selected voice terms
+remain separate. The adapter does not redistribute cloud SDKs, models or voice references.
+Successful tests with a selected cloud account do not grant redistribution rights.
 
 Subtitles uses the user's Python/Tk runtime and original Windows window-control glue. It does not
 bundle Python, Tcl/Tk or another project's GUI code. Their installed runtime notices remain applicable.
@@ -142,7 +141,7 @@ Evidence SHA-256:
 CAM++ 1.2.0 and BSRNN 1.2.0 include only the licensed public speaker model (28,281,164 bytes).
 BSRNN's separator template is still NOT redistributed; a local test copy is not a public license grant.
 ASR 1.0.0 includes all four public Whisper resources (486,212,372 bytes total), unchanged.
-TTS, subtitles and Broadcast packages have no model payloads. GPT-SoVITS and NVIDIA software/models
+TTS, subtitles and Broadcast packages have no model payloads. NVIDIA software/models
 remain external prerequisites; their local availability is not permission for public redistribution.
 Private baked cores, recordings, speaker embeddings and API keys remain excluded from every package.
 

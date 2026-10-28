@@ -20,8 +20,8 @@ MODULES = {
         "Includes pinned MIT Whisper Small weights, tokenizer and configuration",
     ),
     "tts": (
-        "Text to speech with Qwen, Azure or local GPT-SoVITS",
-        "Original adapter only; provider and selected local model terms remain separate",
+        "Cloud text to speech with Qwen or Azure",
+        "Original adapter only; cloud provider and selected voice terms remain separate",
     ),
     "subtitles": (
         "Private timestamped text in a Windows floating subtitle window",

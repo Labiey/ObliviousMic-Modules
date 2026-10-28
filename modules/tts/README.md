@@ -1,40 +1,33 @@
-# Text to speech
+# TTS — 云端语音合成
 
-Accepts private TextSegment v1 metadata and emits 24 kHz mono float audio plus the original text stream.
-Only final, nonempty segments are spoken; repeated final IDs are deduplicated within a bounded window.
-Generated audio has its own contiguous clock starting at zero, independent of source utterance duration.
-A device host must schedule generated audio independently; connecting it to a capture-clock-only route is not sufficient.
+模块 ID：`org.obliviousmic.tts`，版本 1.2.0，Apache-2.0。
 
-## First use
+```text
+文本输入／ASR／翻译 → TTS → 音频设备输出
+                       → 字幕（原文 text 输出）
+```
 
-- **Local GPT-SoVITS (default):** select a private profile and initialize one 3–10 second reference WAV/FLAC. Reference transcript and language can be supplied with the initialization action. The framework keeps the reference and prompt metadata in the private profile, outside the module package. The adapter discovers a compatible Windows portable installation in Downloads or D:/BaiduNetdiskDownload; an advanced directory override supports other locations.
-- **Qwen Bailian:** select Qwen, supply a DashScope API key and its Beijing/Singapore region. Cherry and qwen3-tts-flash are defaults. Text is sent to the selected cloud provider; billing and provider terms apply.
-- **Azure Speech:** select Azure, supply the Speech resource key and matching region. Chinese, English and Japanese voices are chosen automatically, with advanced voice/endpoint overrides. Text is sent to Azure; billing and provider terms apply.
+## 配置
 
-Cloud providers require no reference profile. Secret inputs are marked as password fields. The adapter never logs keys, prompts, reference paths or provider error bodies, never retries billable synthesis automatically, and never forwards credentials to Qwen audio storage.
+仅保留两个云端后端，默认选择百炼；填写密钥后保存设置、验证并应用图。
 
-Azure supports `azure_rate` (0.5–2.0) and `azure_pitch` (0.5–2.0), both defaulting to 1.0 for the original voice. Values are multipliers: rate 1.2 means faster speech; pitch 1.2 requests +20% pitch. The WebUI offers numeric inputs only when Azure is selected. Save the parameter table, then validate and apply the graph. Default settings retain the original SSML without a prosody tag. Support can vary by voice; these controls do not add styles or role selection. Slower speech still obeys `maximum_audio_seconds`; use shorter input if the generated response exceeds it.
+| 后端 | 最简配置 |
+| --- | --- |
+| 阿里云百炼（qwen） | API Key、匹配的北京／新加坡地域；默认模型和音色可直接使用 |
+| Azure Speech | Speech Key、区域；可选语言、音色、语速与音调 |
 
-Azure SSML specification: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody
+语言支持自动判断／中文／英文／日文。Azure 语速和音调均为倍率，默认 1，范围 0.5～2。
+输出为 24 kHz 单声道 PCM，框架按后续端口转换格式；text 输出透传原文。
+不需要模型、声音档案或参考音频。1.2.0 已移除本地合成后端和自动启动服务的实现。
+升级时如原参数表使用已移除的后端，请重新选择百炼或 Azure 并配置密钥，
+不会自动把原来的本地语音任务切换为付费云调用。
 
-Local API calls are restricted to loopback. Existing compatible API services are reused and left running. When auto-starting, the adapter copies the installation YAML to a temporary directory and owns only the process it starts. Shared framework service leases keep it alive across graph replacement; the last owner releases it. The local runtime and model licenses remain separate from this adapter.
+只有最终且非空的文本段会请求服务；同一段不重复合成。网络请求运行在独立进程，
+准备和健康检查不发送测试请求。超时／停止可结束工作进程，不自动重试或切换供应商。
+密钥通过有界 IPC 传递，不放在命令行。生成音频在内存中传递，不写入仓库。
 
-## Bounded preparation and processing
+## 来源与许可证
 
-Local preparation performs a short, discarded synthesis to load lazy language models, in an isolated worker with a 93 second deadline (90 seconds for the request). This avoids the first live utterance timing out during cold initialization. No cloud warmup is sent. API process startup has its own 120 second bound. Normal synthesis defaults to 25 seconds, at most 300 characters and 30 seconds of returned audio, with configurable bounds. Request failure stops the node; there is no raw-audio fallback.
-
-Audio is decoded and checked for finite normalized PCM, converted to mono and resampled to 24 kHz. Output uses reusable shared-memory IPC and 480-frame packets. A realtime dispatch consumes one utterance at a time. No generated audio or reference recording is bundled or committed.
-
-## Validation and distribution
-
-Contract tests cover all three providers, SSML escaping, audio validation, private error handling, deduplication, clock continuity and warmup deadlines. A real local GPT-SoVITS run synthesized Chinese, English and Japanese through the installed ZIP and framework DAG, verified text passthrough, process cleanup and unchanged original installation files.
-
-User-authorized live Qwen (Beijing) and Azure Speech (eastasia) checks also passed for Chinese, English and Japanese through the installed ZIP, isolated worker and named offline Web API. Defaults were used for the model and voices, without a reference profile. Local Whisper independently read back each language and checked known phrase content. Job metrics, exported reports and generated QA configuration files were checked for credential leakage. These short calls verify the tested accounts and paths, not provider availability or latency guarantees. Earlier intermittent Japanese Qwen failures could not be diagnosed from the old generic worker error; later explicit checks passed. Requests are not retried automatically.
-
-Provider failures use SDK PublicModuleError identifiers, preserving a controlled error_code across IPC and task records without exposing provider response bodies, keys, prompts or signed audio URLs. A matching current framework build is required for this SDK addition.
-
-This module is currently a local development package; it is not yet in the published official catalog. Local GPT-SoVITS has also passed a real ASR → TTS → device playback/subtitle route with independent physical microphone capture. Cloud playback, broader device combinations and remote distribution have separate acceptance requirements. See the framework development decision record for current status.
-
-## Licensing
-
-This package contains original Apache-2.0 adapter code only; see LICENSE and NOTICE. It does not redistribute GPT-SoVITS, model weights, voice recordings, cloud SDKs or provider credentials. No license to a cloud service, third-party model or selected voice is inferred from the adapter license. API references are recorded in NOTICE.
+原始 Apache-2.0 客户端代码，包含 LICENSE 和 NOTICE，不捆绑模型、供应商 SDK 或密钥。
+所选云服务、音色和生成内容的使用另受供应商条款约束。
+协议测试覆盖两个后端、Azure SSML／语速音调、音频校验、错误脱敏、文本去重和音频时钟。
