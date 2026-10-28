@@ -107,21 +107,21 @@
     {
       "module_id": "org.obliviousmic.tts",
       "name": "tts",
-      "version": "1.1.1",
+      "version": "1.2.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 53669,
-      "sha256": "256ffb0bb109270ce251008d5aa198b6664938390376e39f8b8bd8074bf37bff",
+      "bytes": 34829,
+      "sha256": "123f58d9d5c96c881c293e048fd6c4e979281dd3c26b3d4468313392abb5222c",
       "source_path": "modules/tts",
       "bundled_resources": [],
       "minimum_framework_version": "0.3.0rc1",
-      "description": "Text to speech with Qwen, Azure or local GPT-SoVITS",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.1.1/tts-1.1.1.obmic.zip",
+      "description": "Cloud text to speech with Qwen or Azure",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.2.0/tts-1.2.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/tts/LICENSE",
-      "weight_status": "Original adapter only; provider and selected local model terms remain separate"
+      "weight_status": "Original adapter only; cloud provider and selected voice terms remain separate"
     },
     {
       "module_id": "org.obliviousmic.subtitles",
@@ -217,19 +217,19 @@
     {
       "module_id": "org.obliviousmic.asr_api",
       "name": "asr_api",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 39534,
-      "sha256": "10359b160d108b10a921eb2cc46b8268c4d9bc8d1b3ce02acf18ed9e1c769974",
+      "bytes": 46116,
+      "sha256": "1624f5ea21b61b091d449c86c9a84e986f78975012bf325e12e6837df2fb2b32",
       "source_path": "modules/asr_api",
       "bundled_resources": [],
       "minimum_framework_version": "0.3.0rc1",
-      "description": "Remote ASR via OpenAI-compatible transcription or Azure Speech APIs",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.0.0/asr_api-1.0.0.obmic.zip",
+      "description": "Remote ASR via OpenAI-compatible transcription, Azure Speech or Alibaba Cloud Bailian",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.1.0/asr_api-1.1.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/asr_api/LICENSE",
       "weight_status": "Original Apache-2.0 client; no model weights; chosen service receives speech segments"
     }
