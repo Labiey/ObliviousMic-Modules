@@ -2,7 +2,7 @@ name: Validate and distribute modules
 on:
   push:
     branches: [main]
-    tags: ['campplus-v*', 'bsrnn-v*', 'asr-v*', 'tts-v*', 'subtitles-v*', 'broadcast-v*', 'translate-v*']
+    tags: ['campplus-v*', 'bsrnn-v*', 'asr-v*', 'tts-v*', 'subtitles-v*', 'broadcast-v*', 'translate-v*', 'denoise-v*']
   pull_request:
   workflow_dispatch:
 permissions:

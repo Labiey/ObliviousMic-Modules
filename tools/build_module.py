@@ -60,7 +60,17 @@ def build(name, output=None, *, include_models=False, cache=None, download=True)
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "name", choices=["campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast", "translate"]
+        "name",
+        choices=[
+            "campplus",
+            "bsrnn",
+            "asr",
+            "tts",
+            "subtitles",
+            "broadcast",
+            "translate",
+            "denoise",
+        ],
     )
     parser.add_argument("--output", type=Path)
     parser.add_argument("--cache", type=Path)

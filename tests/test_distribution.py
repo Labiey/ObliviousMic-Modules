@@ -8,7 +8,7 @@ from tools.build_module import build
 
 
 @pytest.mark.parametrize(
-    "name", ["campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast", "translate"]
+    "name", ["campplus", "bsrnn", "asr", "tts", "subtitles", "broadcast", "translate", "denoise"]
 )
 def test_independent_bundle_roundtrip_and_licenses(tmp_path, name):
     one = build(name, tmp_path / "a")

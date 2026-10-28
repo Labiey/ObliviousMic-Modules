@@ -35,6 +35,10 @@ MODULES = {
         "Text translation with LunaTranslator web/API engines and OpenAI-compatible services",
         "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights",
     ),
+    "denoise": (
+        "Local DPDFNet speech denoising with Light and Enhanced 48 kHz modes",
+        "Includes both pinned Apache-2.0 DPDFNet ONNX models; no voice registration required",
+    ),
 }
 
 

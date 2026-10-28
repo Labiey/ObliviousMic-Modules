@@ -1,5 +1,17 @@
 # Provenance and modifications
 
+DPDFNet denoise adapts the CPU session/state loading, Vorbis STFT and causal
+streaming code in ceva-ip/DPDFNet's package/src/dpdfnet/{onnx_backend,stream,audio}.py
+at revision 9bd9844a227bb6aa57e55588d8d0e961fcff1c46 (Apache-2.0).
+Changes and model provenance are recorded in modules/denoise/provenance.json
+and NOTICE. Unlike upstream StreamEnhancer, it compensates four spectral
+delay hops, supplies causal left padding, drains to exact input length and
+aligns the original waveform before dry/wet mixing. It uses no librosa or
+PyTorch and lets the host handle format conversion. The pinned enhanced
+ONNX mistakenly reports profile dpdfnet2_48khz_hr; the module also checks the
+distinct state sizes (56436 / 90228) and managed model digests.
+
+
 The source baseline is ObliviousMic commit fa4620e and the independently reusable leaves of the
 user-supplied Apache-2.0 OwnerMic snapshot identified in licensing.md. Exact copied-source hashes
 are in provenance.json. This is adapter/DSP source redistribution, not checkpoint redistribution.

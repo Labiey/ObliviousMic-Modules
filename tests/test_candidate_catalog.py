@@ -27,6 +27,7 @@ def test_candidate_is_deterministic_accepted_by_host_and_preserves_published_ent
         "subtitles",
         "broadcast",
         "translate",
+        "denoise",
     }
     validate(first)
     catalog = OfficialCatalog(
@@ -62,7 +63,8 @@ def test_candidate_installs_four_independent_packages_through_catalog_and_restor
         record = catalog.install(item["module_id"], job, item["sha256"])
         assert record["bundle_sha256"] == item["sha256"]
     assert set(prepared) == {
-        "org.obliviousmic." + name for name in ("asr", "tts", "subtitles", "broadcast", "translate")
+        "org.obliviousmic." + name
+        for name in ("asr", "tts", "subtitles", "broadcast", "translate", "denoise")
     }
     restored = PluginManager(tmp_path / "data", ModuleRegistry())
     assert restored.restore() == []

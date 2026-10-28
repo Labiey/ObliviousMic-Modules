@@ -1,0 +1,19 @@
+{
+  "setup_version": 1,
+  "profile_required": false,
+  "artifacts": [],
+  "runtime_resources": [
+    "light_weights",
+    "enhanced_weights"
+  ],
+  "settings_bindings": {
+    "light_model_asset": {
+      "source": "resource",
+      "id": "light_weights"
+    },
+    "enhanced_model_asset": {
+      "source": "resource",
+      "id": "enhanced_weights"
+    }
+  }
+}

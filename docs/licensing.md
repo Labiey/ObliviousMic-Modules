@@ -1,5 +1,23 @@
 # Licensing and redistribution audit
 
+## DPDFNet denoise (checked 2026-10-28)
+
+The official Ceva-IP/DPDFNet Hugging Face model card explicitly declares
+`license: apache-2.0` at revision dd6818d00f50c836fed43a6243ebe49116de5964:
+https://huggingface.co/Ceva-IP/DPDFNet/blob/dd6818d00f50c836fed43a6243ebe49116de5964/README.md.
+Both dpdfnet2_48khz_hr.onnx and dpdfnet8_48khz_hr.onnx are from that same
+official model repository, not a third-party conversion. Their sizes and
+SHA-256 digests are pinned in modules/denoise/resources.json.
+
+The corresponding source revision 9bd9844a227bb6aa57e55588d8d0e961fcff1c46
+at https://github.com/ceva-ip/DPDFNet includes the full Apache-2.0 LICENSE;
+no upstream NOTICE was present. The integration retains that license,
+identifies adapted files and changes, and adds attribution in its NOTICE.
+Full installers may redistribute these two weights with that license and
+provenance; Git and code-only archives omit binaries. NumPy and ONNX Runtime
+remain separately installed dependencies. No training dataset is bundled.
+
+
 Checked 2026-10-22 (initial code provenance audit: 2026-10-14). Code, model weights and dependencies are separate licensed works.
 The root LICENSE and per-module LICENSE apply to this repository's original adapters and the
 Apache-2.0 OwnerMic source supplied by Labiey. They do not assert an Apache license for every weight.

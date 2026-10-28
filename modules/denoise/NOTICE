@@ -1,0 +1,23 @@
+ObliviousMic DPDFNet Denoise module
+Copyright 2026 ObliviousMic contributors
+Licensed under the Apache License, Version 2.0.
+
+DPDFNet source and pretrained models: Ceva-IP / ceva-ip/DPDFNet contributors.
+https://github.com/ceva-ip/DPDFNet
+Source revision: 9bd9844a227bb6aa57e55588d8d0e961fcff1c46
+Official Hugging Face weights: Ceva-IP/DPDFNet
+Model revision: dd6818d00f50c836fed43a6243ebe49116de5964
+The pinned official model card declares Apache-2.0.
+License text is included in LICENSE and licenses/dpdfnet/LICENSE.
+No upstream NOTICE file was present at the pinned source revision.
+
+engine.py adapts the upstream package's onnx_backend.py, stream.py and
+audio.py. Changes: minimal NumPy/ONNX Runtime dependencies; managed model
+paths and configurable CPU threads; per-node explicit recurrent state;
+causal left padding, four-hop spectral delay compensation, exact-length
+EOS draining and media-aligned dry/wet mixing. See provenance.json.
+runtime.py and package declarations implement the ObliviousMic Module API.
+This module is an independent integration, not an endorsement by Ceva-IP.
+
+NumPy (BSD-3-Clause) and ONNX Runtime (MIT) are external runtime dependencies;
+their code is not bundled in this module archive.

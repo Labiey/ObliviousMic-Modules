@@ -6,6 +6,7 @@ optional adapters, module-local reusable algorithms, initialization and package 
 
 | Module | Installation | First use | Weight license |
 | --- | --- | --- | --- |
+| [DPDFNet Denoise](modules/denoise/README.md) | Installer includes both pinned ONNX models | Light / Enhanced, 48 kHz CPU; no enrollment or manual paths | Official Ceva-IP model card and source: Apache-2.0 |
 | CAM++ | Release installer includes verified public ONNX | Select/create a profile and provide at least 3 seconds of suitable speech | Upstream ModelScope v1.0.0 declares Apache-2.0; download from sherpa-onnx, SHA-256 pinned |
 | BSRNN | Release installer includes public CAM++ only | Import an authorized compatible template once; provide suitable speech (at least 4 seconds); registration and baking run together | Current REAL-TSE checkpoint permission is unresolved. No weights, automatic download or checkpoint redistribution is supplied |
 | ASR | Release installer includes all four pinned Whisper resources | CPU/int8 defaults; automatic Chinese/English/Japanese detection | Whisper conversion model card: MIT; faster-whisper/CTranslate2: MIT |
@@ -14,7 +15,7 @@ optional adapters, module-local reusable algorithms, initialization and package 
 | Broadcast | Release installer | Compatible local NVIDIA Broadcast app; default buffered noise removal | Original Apache-2.0 adapter; no NVIDIA software or models redistributed |
 | [Text Translation](modules/translate/README.md) | Release installer | Microsoft by default without a key; 13 web engines, 12 traditional API engines, one OpenAI-compatible interface | Combined module GPL-3.0; pinned LunaTranslator engine sources, no model weights |
 
-Git contains no weight binaries. Release installers include only audited public CAM++/Whisper resources.
+Git contains no weight binaries. Release installers include only audited public CAM++/Whisper/DPDFNet resources.
 Recordings, user embeddings, personalized models and unresolved BSRNN templates are excluded.
 `LICENSE` applies to project code and Apache-licensed adapted OwnerMic leaves, except the GPL-3.0
 translation module (see its own LICENSE/NOTICE), and not to all third-party
@@ -32,7 +33,7 @@ Packages are published as GitHub Actions artifacts and per-module GitHub Release
 Catalog entries pin package SHA-256 and size. `resources.json` identifies bundled model payloads, pinned fallback sources and separate weight licenses;
 `setup.json` declares automatic bindings and first-use actions. [Package format](docs/module-format.md).
 
-Prepare all seven modules in an ignored staging directory before publishing:
+Prepare all eight modules in an ignored staging directory before publishing:
 
 ```powershell
 python -m tools.prepare_catalog

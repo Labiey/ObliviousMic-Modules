@@ -1,0 +1,20 @@
+{
+  "upstream_repository": "https://github.com/ceva-ip/DPDFNet",
+  "source_revision": "9bd9844a227bb6aa57e55588d8d0e961fcff1c46",
+  "adapted_files": [
+    "package/src/dpdfnet/onnx_backend.py",
+    "package/src/dpdfnet/stream.py",
+    "package/src/dpdfnet/audio.py"
+  ],
+  "model_repository": "https://huggingface.co/Ceva-IP/DPDFNet",
+  "model_revision": "dd6818d00f50c836fed43a6243ebe49116de5964",
+  "license_evidence": "https://huggingface.co/Ceva-IP/DPDFNet/blob/dd6818d00f50c836fed43a6243ebe49116de5964/README.md",
+  "model_card_license": "apache-2.0",
+  "modifications": [
+    "Dependency-minimal CPU runtime",
+    "Independent recurrent state per graph node",
+    "Half-window left padding, compensation for four delayed spectral hops",
+    "Exact-length bounded EOS drain, aligned dry/wet mixing",
+    "Module API v1 managed asset bindings"
+  ]
+}
