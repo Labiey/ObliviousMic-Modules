@@ -126,19 +126,19 @@
     {
       "module_id": "org.obliviousmic.subtitles",
       "name": "subtitles",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 29326,
-      "sha256": "10dbfe2951bb694b45ed4af6a6ce6beb53bf32079dc59d0e6a43d4367f322bb5",
+      "bytes": 32155,
+      "sha256": "10f9c22a730bb3ac15f668ea76bbee23b1dd3d263191b8d75bef401c01a156c3",
       "source_path": "modules/subtitles",
       "bundled_resources": [],
       "minimum_framework_version": "0.3.0rc1",
       "description": "Private timestamped text in a Windows floating subtitle window",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/subtitles-v1.0.0/subtitles-1.0.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/subtitles-v1.1.0/subtitles-1.1.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/subtitles/LICENSE",
       "weight_status": "No model resources; Python/Tk runtime required"
     },
@@ -164,19 +164,19 @@
     {
       "module_id": "org.obliviousmic.translate",
       "name": "translate",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "GPL-3.0-only",
-      "bytes": 182257,
-      "sha256": "b609c84a53b3e52d8880179ec53769a04efcf0c2da99668137fb104ac508b442",
+      "bytes": 185826,
+      "sha256": "1b9052d89268009d7d9f1b7a18102fe27ec58d1bb67bc684e033117535f066d8",
       "source_path": "modules/translate",
       "bundled_resources": [],
       "minimum_framework_version": "0.3.0rc1",
       "description": "Text translation with LunaTranslator web/API engines and OpenAI-compatible services",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.1.0/translate-1.1.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.0/translate-1.2.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/translate/LICENSE",
       "weight_status": "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights"
     },
