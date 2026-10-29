@@ -1,7 +1,7 @@
 {
   "manifest_version": 1,
   "module_id": "org.obliviousmic.subtitles",
-  "module_version": "1.0.0",
+  "module_version": "1.1.0",
   "api": {
     "min": "1.0",
     "max_exclusive": "2.0"

@@ -6,6 +6,8 @@ import queue
 import sys
 import threading
 
+from obliviousmic.text_hotkey import KeyboardHook
+
 MAX_LINE = 256 * 1024
 
 
@@ -50,12 +52,19 @@ def main():
     )
     body.pack(fill="both", expand=True, padx=16, pady=(4, 12))
     body.configure(state="disabled")
-    state = {"generation": -1, "clear_job": None, "placed": False}
+    state = {"generation": -1, "clear_job": None, "placed": False, "hidden": False, "hotkey": None}
+    hooks = []
+    toggles = threading.Event()
 
     def report(**value):
         print(json.dumps(value, ensure_ascii=True), flush=True)
 
     def close(user=True):
+        if user and state["hotkey"]:
+            state["hidden"] = True
+            root.withdraw()
+            report(state="hidden", mapped=False)
+            return
         report(state="closed", user=user)
         root.destroy()
 
@@ -137,6 +146,16 @@ def main():
         return {"click_through": bool(applied & 0x20), "no_activate": bool(applied & 0x08000000)}
 
     def tick():
+        if toggles.is_set():
+            toggles.clear()
+            state["hidden"] = not state["hidden"]
+            if state["hidden"]:
+                root.withdraw()
+            else:
+                root.deiconify()
+            report(
+                state="hidden" if state["hidden"] else "visible", mapped=bool(root.winfo_ismapped())
+            )
         latest = None
         while True:
             try:
@@ -151,6 +170,21 @@ def main():
                 state["generation"] = value.get("generation", 0)
         if latest is not None:
             config = latest["config"]
+            hotkey = config.get("overlay_hotkey", "")
+            if hotkey != state["hotkey"]:
+                for hook in hooks:
+                    hook.close()
+                hooks.clear()
+                try:
+                    hook = KeyboardHook(hotkey, toggles.set)
+                except Exception as error:
+                    report(
+                        state="error", error=getattr(error, "code", "text_overlay_hotkey_failed")
+                    )
+                    root.destroy()
+                    return
+                hooks.append(hook)
+                state["hotkey"] = hotkey
             font_size = int(config["font_size"])
             width = min(int(config["width"]), root.winfo_screenwidth() - 20)
             height = min(root.winfo_screenheight() - 20, max(130, int(font_size * 5.2 + 38)))
@@ -167,7 +201,8 @@ def main():
             set_text(text)
             root.update_idletasks()
             native_style = click_style(config["click_through"]) or {}
-            root.deiconify()
+            if not state["hidden"]:
+                root.deiconify()
             root.update_idletasks()
             if state["clear_job"]:
                 root.after_cancel(state["clear_job"])
@@ -191,7 +226,11 @@ def main():
     report(state="ready")
     threading.Thread(target=reader, daemon=True, name="subtitle-input").start()
     root.after(30, tick)
-    root.mainloop()
+    try:
+        root.mainloop()
+    finally:
+        for hook in hooks:
+            hook.close()
 
 
 if __name__ == "__main__":

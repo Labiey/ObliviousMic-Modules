@@ -12,6 +12,7 @@ from threading import Event, Thread
 from time import monotonic
 
 from obliviousmic.sdk import FlushResult, Latency, TextSegment
+from obliviousmic.text_hotkey import parse_hotkey
 
 ROOT = Path(__file__).parent
 
@@ -27,8 +28,15 @@ class OverlaySession:
         self.closed = False
         environment = os.environ.copy()
         environment["PYTHONIOENCODING"] = "utf-8"
+        bootstrap = (
+            "import sys,runpy;sys.path[:0]="
+            + repr(sys.path)
+            + ";runpy.run_path("
+            + repr(str(ROOT / "window.py"))
+            + ",run_name='__main__')"
+        )
         self.process = subprocess.Popen(
-            [getattr(sys, "_base_executable", sys.executable), "-B", str(ROOT / "window.py")],
+            [getattr(sys, "_base_executable", sys.executable), "-B", "-c", bootstrap],
             stdin=subprocess.PIPE,
             stdout=subprocess.PIPE,
             stderr=subprocess.DEVNULL,
@@ -67,7 +75,14 @@ class OverlaySession:
                     status = json.loads(line)
                 except ValueError:
                     continue
-                if status.get("state") in {"ready", "displayed", "closed"}:
+                if status.get("state") in {
+                    "ready",
+                    "displayed",
+                    "visible",
+                    "hidden",
+                    "closed",
+                    "error",
+                }:
                     self.status = status
                     self.ready.set()
         finally:
@@ -134,10 +149,19 @@ class Module:
 
     def prepare(self, context, config):
         self.context, self.config = context, dict(config)
+        parse_hotkey(self.config.get("overlay_hotkey", ""))
         self.reset("prepare")
 
     def start(self, stream):
         self.reset("start")
+        if self.session is None and self._active() and self.config.get("overlay_hotkey"):
+            self.session = self.factory()
+            self.session.submit(self._payload())
+
+    def _active(self):
+        return self.config["enabled"] and (
+            self.context.mode == "realtime" or self.config["show_in_offline"]
+        )
 
     def _payload(self, segment=None):
         return {
@@ -157,9 +181,7 @@ class Module:
             self.session.submit(self._payload())
 
     def process(self, bundle):
-        active = self.config["enabled"] and (
-            self.context.mode == "realtime" or self.config["show_in_offline"]
-        )
+        active = self._active()
         for packet in bundle.ports.get("text", ()):
             text = TextSegment.from_packet(packet)
             key = (packet.stream_id, packet.epoch_id, text.segment_id)

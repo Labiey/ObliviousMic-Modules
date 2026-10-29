@@ -57,6 +57,12 @@
       "default": false,
       "apply_policy": "reprepare",
       "advanced": true
+    },
+    "overlay_hotkey": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "maxLength": 64
     }
   }
 }

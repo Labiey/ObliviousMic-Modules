@@ -1,5 +1,6 @@
 from fractions import Fraction
 
+import pytest
 from obliviousmic.sdk import PortBundle, PrepareContext, StreamContext, TextSegment
 
 from modules.subtitles.runtime import Module
@@ -88,6 +89,64 @@ def test_offline_jobs_do_not_open_a_window_unless_explicitly_enabled():
     module.process(original)
     assert len(sessions) == 1
     module.dispose()
+
+
+def test_bound_shortcut_starts_without_text_and_is_released_on_stop():
+    module, sessions = prepare(overlay_hotkey="Ctrl+Alt+C")
+    assert len(sessions) == 1
+    assert sessions[0].updates[-1]["config"]["overlay_hotkey"] == "Ctrl+Alt+C"
+    assert sessions[0].updates[-1]["text"] == ""
+    module.start(StreamContext())
+    assert len(sessions) == 1  # Do not leak a GUI/hook on repeated stream starts.
+    original = text()
+    assert module.process(original) is original
+    module.stop()
+    assert sessions[0].closed
+    module, sessions = prepare("offline", overlay_hotkey="Ctrl+Alt+C")
+    assert not sessions
+    module.dispose()
+
+
+def test_shortcut_is_validated_before_launching_any_window():
+    with pytest.raises(ValueError, match="text_overlay_hotkey_invalid"):
+        prepare(overlay_hotkey="t")
+
+
+def test_subtitle_shortcuts_conflict_with_text_inputs_and_other_subtitle_nodes():
+    from obliviousmic.graph.dag import DAGCompiler
+    from obliviousmic.graph.primitives import register_primitives
+    from obliviousmic.sdk import AudioFormat, Manifest, ModuleRegistration, ModuleRegistry
+
+    registry = ModuleRegistry()
+    register_primitives(registry)
+    registry.register(ModuleRegistration(Manifest(Module.MANIFEST), Module.SCHEMA, Module))
+    document = {
+        "graph_schema": 1,
+        "graph_id": "captions",
+        "revision": 1,
+        "execution": "dag",
+        "nodes": [
+            {
+                "id": "text",
+                "type": "core.text_source",
+                "settings": {"overlay_enabled": True, "overlay_hotkey": "Ctrl+Alt+C"},
+            },
+            {
+                "id": "subtitles",
+                "type": "org.obliviousmic.subtitles",
+                "settings": {"overlay_hotkey": "ctrl+alt+c"},
+            },
+            {"id": "sink", "type": "core.text_sink"},
+        ],
+        "edges": [
+            {"from": "text.text", "to": "subtitles.text"},
+            {"from": "subtitles.text", "to": "sink.text"},
+        ],
+    }
+    with pytest.raises(ValueError, match="hotkey_duplicate"):
+        DAGCompiler(registry).compile(document, AudioFormat(16000))
+    document["nodes"][0]["settings"]["overlay_hotkey"] = "Ctrl+Alt+T"
+    DAGCompiler(registry).compile(document, AudioFormat(16000))
 
 
 def test_window_queue_coalesces_old_updates_and_accepts_maximum_unicode_caption():
