@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "Floating Subtitles",
+  "author": "ObliviousMic contributors",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "windows"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.subtitles",
+  "module_version": "1.1.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ],
+    "outputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 160,
+    "maximum_block_frames": 65536,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 4,
+    "latency_mode": "reported_on_prepare",
+    "async_process": true
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [],
+  "resources": {
+    "model_assets": []
+  },
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "悬浮字幕",
+    "en": "Floating Subtitles",
+    "ja": "フローティング字幕"
+  },
+  "description": "Displays recognized, translated or manually entered text in a floating Windows subtitle window. Adjust font size, opacity, position and display duration; no model or voice enrollment required.",
+  "descriptions": {
+    "zh-CN": "将语音识别、翻译或手动输入的文字显示为 Windows 置顶悬浮字幕。可调整字号、透明度、位置与保留时长，无需模型或声音登记。",
+    "en": "Displays recognized, translated or manually entered text in a floating Windows subtitle window. Adjust font size, opacity, position and display duration; no model or voice enrollment required.",
+    "ja": "音声認識・翻訳・手入力のテキストを Windows の最前面字幕に表示します。文字サイズ・透明度・位置・表示時間を調整でき、モデルや声の登録は不要です。"
+  },
+  "keywords": [
+    "subtitles",
+    "audio",
+    "obliviousmic"
+  ],
+  "distribution": {
+    "repository_id": 1418766723,
+    "release_id": 428295388,
+    "asset_id": 689630082,
+    "release": "subtitles-v1.1.1",
+    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/subtitles-v1.1.1/subtitles-1.1.1.obmic.zip",
+    "bytes": 33622,
+    "sha256": "b9be2055d7a1c9e19c0f0f5af678193a85a36fd2fd28e418865b8d10bee9c25e"
+  }
+}

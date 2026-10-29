@@ -1,0 +1,110 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "General Speech Denoising · DPDFNet",
+  "author": "ObliviousMic contributors",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "any"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.denoise",
+  "module_version": "1.0.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          48000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          48000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 480,
+    "maximum_block_frames": 480,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 2880,
+    "max_flush_calls": 1,
+    "latency_mode": "reported_on_prepare",
+    "allow_partial_eos": true,
+    "async_process": true
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [
+    "asset.read",
+    "resource.acquire"
+  ],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "onnxruntime>=1.20,<2",
+    "numpy>=2,<3"
+  ],
+  "setup": "setup.json",
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "通用语音降噪 · DPDFNet",
+    "en": "General Speech Denoising · DPDFNet",
+    "ja": "汎用音声ノイズ除去 · DPDFNet"
+  },
+  "description": "Suppresses background noise locally while retaining speech, with Light and Enhanced modes. Includes both DPDFNet ONNX models for 48 kHz speech; no voice enrollment or cloud key needed.",
+  "descriptions": {
+    "zh-CN": "在本机抑制环境噪声并保留人声，提供轻量／增强模式。包含两份 DPDFNet ONNX 模型，以 48 kHz 处理语音，无需声音登记或云端密钥。",
+    "en": "Suppresses background noise locally while retaining speech, with Light and Enhanced modes. Includes both DPDFNet ONNX models for 48 kHz speech; no voice enrollment or cloud key needed.",
+    "ja": "人声を保ちながら環境ノイズをローカルで抑えます。軽量・強化の2モードと48 kHz用 DPDFNet ONNX モデルを同梱し、声の登録やクラウドキーは不要です。"
+  },
+  "keywords": [
+    "denoise",
+    "audio",
+    "obliviousmic"
+  ],
+  "distribution": {
+    "repository_id": 1418766723,
+    "release_id": 428295674,
+    "asset_id": 689631051,
+    "release": "denoise-v1.0.1",
+    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/denoise-v1.0.1/denoise-1.0.1.obmic.zip",
+    "bytes": 25399157,
+    "sha256": "3fb959b6043f34ed5485b203884f098cd78228dd22a3ef05262c1b65f2f0111a"
+  }
+}

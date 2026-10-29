@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "Voiceprint Recognition · CAM++",
+  "author": "ObliviousMic contributors",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "any"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.campplus",
+  "module_version": "1.3.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          16000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "decision",
+        "kind": "control",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 160,
+    "preferred_block_frames": 160,
+    "maximum_block_frames": 65536,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 4,
+    "latency_mode": "reported_on_prepare",
+    "exact_block_frames": 160,
+    "allow_partial_eos": true,
+    "async_process": true
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [
+    "asset.read",
+    "profile.read",
+    "resource.acquire"
+  ],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "onnx>=1.16,<2",
+    "onnxruntime>=1.20,<2",
+    "numpy>=2,<3"
+  ],
+  "setup": "setup.json",
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "声纹识别 · CAM++",
+    "en": "Voiceprint Recognition · CAM++",
+    "ja": "声紋認識 · CAM++"
+  },
+  "description": "Recognizes an enrolled speaker and sends open/close decisions to Gate. Includes the public voiceprint model; register your voice once to get started.",
+  "descriptions": {
+    "zh-CN": "判断当前声音是否属于已登记用户，并向 Gate 输出开关指令。包含公共声纹模型，完成一次声音登记即可使用。",
+    "en": "Recognizes an enrolled speaker and sends open/close decisions to Gate. Includes the public voiceprint model; register your voice once to get started.",
+    "ja": "登録した話者の声を判定し、Gate に開閉指示を送ります。公開声紋モデルを同梱しており、一度の声の登録で使えます。"
+  },
+  "keywords": [
+    "campplus",
+    "audio",
+    "obliviousmic"
+  ],
+  "distribution": {
+    "repository_id": 1418766723,
+    "release_id": 428291529,
+    "asset_id": 689618705,
+    "release": "campplus-v1.3.1",
+    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.3.1/campplus-1.3.1.obmic.zip",
+    "bytes": 28420913,
+    "sha256": "dd0028f4c0f14be6092d22293ae044779044d48bf417235c3c02761cb0381c9f"
+  }
+}

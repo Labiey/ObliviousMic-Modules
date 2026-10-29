@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "Audio Noise Removal · NVIDIA Broadcast",
+  "author": "ObliviousMic contributors",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "windows"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.broadcast",
+  "module_version": "1.0.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          48000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          48000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 960,
+    "maximum_block_frames": 48000,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 600000,
+    "max_flush_calls": 4,
+    "latency_mode": "reported_on_prepare",
+    "async_process": true,
+    "maximum_batch_packets": 64,
+    "deadline_seconds": 60,
+    "maximum_output_frames": 600000,
+    "maximum_pending_frames": 800000
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "numpy>=2,<3",
+    "soundfile>=0.13,<1",
+    "soxr>=1.1,<2"
+  ],
+  "setup": "setup.json",
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "音频降噪 · NVIDIA Broadcast",
+    "en": "Audio Noise Removal · NVIDIA Broadcast",
+    "ja": "音声ノイズ除去 · NVIDIA Broadcast"
+  },
+  "description": "Processes upstream audio through NVIDIA Broadcast for noise removal and enhancement. Requires a compatible installed Broadcast app and NVIDIA GPU; no NVIDIA runtime or models are bundled.",
+  "descriptions": {
+    "zh-CN": "通过本机 NVIDIA Broadcast 处理上游音频，提供降噪等音频增强。需安装兼容的 Broadcast 环境及 NVIDIA 显卡，不随包提供模型或运行时。",
+    "en": "Processes upstream audio through NVIDIA Broadcast for noise removal and enhancement. Requires a compatible installed Broadcast app and NVIDIA GPU; no NVIDIA runtime or models are bundled.",
+    "ja": "上流の音声を本機の NVIDIA Broadcast で処理し、ノイズ除去などを行います。対応する Broadcast と NVIDIA GPU が必要です。実行環境やモデルは同梱していません。"
+  },
+  "keywords": [
+    "broadcast",
+    "audio",
+    "obliviousmic"
+  ],
+  "distribution": {
+    "repository_id": 1418766723,
+    "release_id": 428295470,
+    "asset_id": 689630328,
+    "release": "broadcast-v1.0.1",
+    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/broadcast-v1.0.1/broadcast-1.0.1.obmic.zip",
+    "bytes": 49338,
+    "sha256": "674df7e27400993f7815cfae206c11d27d119be1e39765e1bcb4dbdddd9219a9"
+  }
+}

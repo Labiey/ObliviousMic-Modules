@@ -1,0 +1,106 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "Speech Recognition · Whisper",
+  "author": "ObliviousMic contributors",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "any"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.asr",
+  "module_version": "1.0.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          16000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 160,
+    "maximum_block_frames": 160,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 1,
+    "latency_mode": "reported_on_prepare",
+    "allow_partial_eos": true,
+    "async_process": true
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [
+    "asset.read",
+    "resource.acquire"
+  ],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "faster-whisper>=1.2.1,<2",
+    "ctranslate2>=4.8.3,<5",
+    "numpy>=2,<3"
+  ],
+  "setup": "setup.json",
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "语音识别 · Whisper",
+    "en": "Speech Recognition · Whisper",
+    "ja": "音声認識 · Whisper"
+  },
+  "description": "Transcribes speech locally with timestamps in Chinese, English, Japanese and other languages. Includes MIT-licensed pretrained Whisper Small weights; no cloud key required.",
+  "descriptions": {
+    "zh-CN": "在本机将语音转成带时间戳的文字，支持中文、英文、日文等语言。包含 MIT 许可的 Whisper Small 预训练模型，无需云端密钥。",
+    "en": "Transcribes speech locally with timestamps in Chinese, English, Japanese and other languages. Includes MIT-licensed pretrained Whisper Small weights; no cloud key required.",
+    "ja": "中国語・英語・日本語などの音声をローカルでタイムスタンプ付きテキストに変換します。MITライセンスの学習済み Whisper Small モデルを同梱し、クラウドキーは不要です。"
+  },
+  "keywords": [
+    "asr",
+    "audio",
+    "obliviousmic"
+  ],
+  "distribution": {
+    "repository_id": 1418766723,
+    "release_id": 428292220,
+    "asset_id": 689620633,
+    "release": "asr-v1.0.1",
+    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr-v1.0.1/asr-1.0.1.obmic.zip",
+    "bytes": 486247477,
+    "sha256": "ed957c31d08acd2573415f3edabd912c79d86b57b668aca4eda35ff6e384330c"
+  }
+}

@@ -1,18 +1,19 @@
 {
   "catalog_version": 1,
   "repository": "Labiey/ObliviousMic-Modules",
+  "repository_id": 1418766723,
   "modules": [
     {
       "module_id": "org.obliviousmic.campplus",
       "name": "campplus",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 28419556,
-      "sha256": "e811cf05ebf3ab4d639140e72a3c0647d761cdba21469d395a000f5d960966f1",
+      "bytes": 28420913,
+      "sha256": "dd0028f4c0f14be6092d22293ae044779044d48bf417235c3c02761cb0381c9f",
       "source_path": "modules/campplus",
       "bundled_resources": [
         {
@@ -23,23 +24,149 @@
           "source_url": "https://modelscope.cn/models/iic/speech_campplus_sv_zh_en_16k-common_advanced"
         }
       ],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "Voiceprint Recognition · CAM++",
+        "author": "ObliviousMic contributors",
+        "license": "Apache-2.0",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "any"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.campplus",
+        "module_version": "1.3.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "audio",
+              "kind": "audio",
+              "sample_rates": [
+                16000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "decision",
+              "kind": "control",
+              "schema_version": 1,
+              "optional": false
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 160,
+          "preferred_block_frames": 160,
+          "maximum_block_frames": 65536,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 0,
+          "max_flush_calls": 4,
+          "latency_mode": "reported_on_prepare",
+          "exact_block_frames": 160,
+          "allow_partial_eos": true,
+          "async_process": true
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [
+          "asset.read",
+          "profile.read",
+          "resource.acquire"
+        ],
+        "resources": {
+          "model_assets": []
+        },
+        "dependencies": [
+          "onnx>=1.16,<2",
+          "onnxruntime>=1.20,<2",
+          "numpy>=2,<3"
+        ],
+        "setup": "setup.json",
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "声纹识别 · CAM++",
+          "en": "Voiceprint Recognition · CAM++",
+          "ja": "声紋認識 · CAM++"
+        },
+        "description": "Recognizes an enrolled speaker and sends open/close decisions to Gate. Includes the public voiceprint model; register your voice once to get started.",
+        "descriptions": {
+          "zh-CN": "判断当前声音是否属于已登记用户，并向 Gate 输出开关指令。包含公共声纹模型，完成一次声音登记即可使用。",
+          "en": "Recognizes an enrolled speaker and sends open/close decisions to Gate. Includes the public voiceprint model; register your voice once to get started.",
+          "ja": "登録した話者の声を判定し、Gate に開閉指示を送ります。公開声紋モデルを同梱しており、一度の声の登録で使えます。"
+        },
+        "keywords": [
+          "campplus",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428291529,
+          "asset_id": 689618705,
+          "release": "campplus-v1.3.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.3.1/campplus-1.3.1.obmic.zip",
+          "bytes": 28420913,
+          "sha256": "dd0028f4c0f14be6092d22293ae044779044d48bf417235c3c02761cb0381c9f"
+        }
+      },
+      "display_names": {
+        "zh-CN": "声纹识别 · CAM++",
+        "en": "Voiceprint Recognition · CAM++",
+        "ja": "声紋認識 · CAM++"
+      },
+      "descriptions": {
+        "zh-CN": "判断当前声音是否属于已登记用户，并向 Gate 输出开关指令。包含公共声纹模型，完成一次声音登记即可使用。",
+        "en": "Recognizes an enrolled speaker and sends open/close decisions to Gate. Includes the public voiceprint model; register your voice once to get started.",
+        "ja": "登録した話者の声を判定し、Gate に開閉指示を送ります。公開声紋モデルを同梱しており、一度の声の登録で使えます。"
+      },
+      "keywords": [
+        "campplus",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Speaker identity with one-time registration",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.3.0/campplus-1.3.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/campplus-v1.3.1/campplus-1.3.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/campplus/LICENSE",
-      "weight_status": "Includes the Apache-2.0 public CAM++ model; private enrollment stays local"
+      "weight_status": "Includes the Apache-2.0 public CAM++ model; private enrollment stays local",
+      "declaration_path": "catalog/declarations/campplus/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     },
     {
       "module_id": "org.obliviousmic.bsrnn",
       "name": "bsrnn",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 28430244,
-      "sha256": "26c0a53d5f947fbabf1bc3235459226a0b06d35e15f69a2064253951a8de68b0",
+      "bytes": 28431809,
+      "sha256": "8445a2a6a159beea9d1cddcce05caf329a652e90229ed84bb92ca31594df84c0",
       "source_path": "modules/bsrnn",
       "bundled_resources": [
         {
@@ -50,23 +177,151 @@
           "source_url": "https://modelscope.cn/models/iic/speech_campplus_sv_zh_en_16k-common_advanced"
         }
       ],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "Target Speaker Separation · BSRNN",
+        "author": "ObliviousMic contributors",
+        "license": "Apache-2.0",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "any"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.bsrnn",
+        "module_version": "1.2.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "mixture",
+              "kind": "audio",
+              "sample_rates": [
+                16000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "separated",
+              "kind": "audio",
+              "sample_rates": [
+                16000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 1,
+          "preferred_block_frames": 640,
+          "maximum_block_frames": 65536,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 4096,
+          "max_flush_calls": 4,
+          "latency_mode": "reported_on_prepare"
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [
+          "asset.read",
+          "profile.read",
+          "resource.acquire"
+        ],
+        "resources": {
+          "model_assets": []
+        },
+        "dependencies": [
+          "onnx>=1.16,<2",
+          "onnxruntime>=1.20,<2",
+          "numpy>=2,<3"
+        ],
+        "setup": "setup.json",
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "目标说话人分离 · BSRNN",
+          "en": "Target Speaker Separation · BSRNN",
+          "ja": "目標話者分離 · BSRNN"
+        },
+        "description": "Extracts an enrolled target speaker from mixed voices. Import an authorized separator template and initialize your voice; template redistribution rights are unconfirmed, so it is not bundled.",
+        "descriptions": {
+          "zh-CN": "从混合语音中提取已登记的目标说话人。需导入有权使用的分离模板并初始化声音；模板的公开再分发许可尚未确认，不随包提供。",
+          "en": "Extracts an enrolled target speaker from mixed voices. Import an authorized separator template and initialize your voice; template redistribution rights are unconfirmed, so it is not bundled.",
+          "ja": "混合音声から登録した目標話者の声を抽出します。利用権のある分離テンプレートの導入と声の初期化が必要です。テンプレートは再配布許諾が未確認のため同梱していません。"
+        },
+        "keywords": [
+          "bsrnn",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428291818,
+          "asset_id": 689619514,
+          "release": "bsrnn-v1.2.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/bsrnn-v1.2.1/bsrnn-1.2.1.obmic.zip",
+          "bytes": 28431809,
+          "sha256": "8445a2a6a159beea9d1cddcce05caf329a652e90229ed84bb92ca31594df84c0"
+        }
+      },
+      "display_names": {
+        "zh-CN": "目标说话人分离 · BSRNN",
+        "en": "Target Speaker Separation · BSRNN",
+        "ja": "目標話者分離 · BSRNN"
+      },
+      "descriptions": {
+        "zh-CN": "从混合语音中提取已登记的目标说话人。需导入有权使用的分离模板并初始化声音；模板的公开再分发许可尚未确认，不随包提供。",
+        "en": "Extracts an enrolled target speaker from mixed voices. Import an authorized separator template and initialize your voice; template redistribution rights are unconfirmed, so it is not bundled.",
+        "ja": "混合音声から登録した目標話者の声を抽出します。利用権のある分離テンプレートの導入と声の初期化が必要です。テンプレートは再配布許諾が未確認のため同梱していません。"
+      },
+      "keywords": [
+        "bsrnn",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Target-speaker extraction; authorized local template required",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/bsrnn-v1.2.0/bsrnn-1.2.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/bsrnn-v1.2.1/bsrnn-1.2.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/bsrnn/LICENSE",
-      "weight_status": "Includes CAM++ speaker weights; separator template rights unresolved, local import only"
+      "weight_status": "Includes CAM++ speaker weights; separator template rights unresolved, local import only",
+      "declaration_path": "catalog/declarations/bsrnn/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     },
     {
       "module_id": "org.obliviousmic.asr",
       "name": "asr",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 486245992,
-      "sha256": "6fb561e96203d0ae5cf1eb28b613710bf1b8987c9abbe88639cf8435465c7404",
+      "bytes": 486247477,
+      "sha256": "ed957c31d08acd2573415f3edabd912c79d86b57b668aca4eda35ff6e384330c",
       "source_path": "modules/asr",
       "bundled_resources": [
         {
@@ -98,99 +353,706 @@
           "source_url": "https://huggingface.co/Systran/faster-whisper-small/tree/536b0662742c02347bc0e980a01041f333bce120"
         }
       ],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "Speech Recognition · Whisper",
+        "author": "ObliviousMic contributors",
+        "license": "Apache-2.0",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "any"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.asr",
+        "module_version": "1.0.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "audio",
+              "kind": "audio",
+              "sample_rates": [
+                16000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "text",
+              "kind": "metadata",
+              "schema_version": 1,
+              "optional": false
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 1,
+          "preferred_block_frames": 160,
+          "maximum_block_frames": 160,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 0,
+          "max_flush_calls": 1,
+          "latency_mode": "reported_on_prepare",
+          "allow_partial_eos": true,
+          "async_process": true
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [
+          "asset.read",
+          "resource.acquire"
+        ],
+        "resources": {
+          "model_assets": []
+        },
+        "dependencies": [
+          "faster-whisper>=1.2.1,<2",
+          "ctranslate2>=4.8.3,<5",
+          "numpy>=2,<3"
+        ],
+        "setup": "setup.json",
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "语音识别 · Whisper",
+          "en": "Speech Recognition · Whisper",
+          "ja": "音声認識 · Whisper"
+        },
+        "description": "Transcribes speech locally with timestamps in Chinese, English, Japanese and other languages. Includes MIT-licensed pretrained Whisper Small weights; no cloud key required.",
+        "descriptions": {
+          "zh-CN": "在本机将语音转成带时间戳的文字，支持中文、英文、日文等语言。包含 MIT 许可的 Whisper Small 预训练模型，无需云端密钥。",
+          "en": "Transcribes speech locally with timestamps in Chinese, English, Japanese and other languages. Includes MIT-licensed pretrained Whisper Small weights; no cloud key required.",
+          "ja": "中国語・英語・日本語などの音声をローカルでタイムスタンプ付きテキストに変換します。MITライセンスの学習済み Whisper Small モデルを同梱し、クラウドキーは不要です。"
+        },
+        "keywords": [
+          "asr",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428292220,
+          "asset_id": 689620633,
+          "release": "asr-v1.0.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr-v1.0.1/asr-1.0.1.obmic.zip",
+          "bytes": 486247477,
+          "sha256": "ed957c31d08acd2573415f3edabd912c79d86b57b668aca4eda35ff6e384330c"
+        }
+      },
+      "display_names": {
+        "zh-CN": "语音识别 · Whisper",
+        "en": "Speech Recognition · Whisper",
+        "ja": "音声認識 · Whisper"
+      },
+      "descriptions": {
+        "zh-CN": "在本机将语音转成带时间戳的文字，支持中文、英文、日文等语言。包含 MIT 许可的 Whisper Small 预训练模型，无需云端密钥。",
+        "en": "Transcribes speech locally with timestamps in Chinese, English, Japanese and other languages. Includes MIT-licensed pretrained Whisper Small weights; no cloud key required.",
+        "ja": "中国語・英語・日本語などの音声をローカルでタイムスタンプ付きテキストに変換します。MITライセンスの学習済み Whisper Small モデルを同梱し、クラウドキーは不要です。"
+      },
+      "keywords": [
+        "asr",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "ASR Whisper: local recognition with timestamped Chinese, English and Japanese text",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr-v1.0.0/asr-1.0.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr-v1.0.1/asr-1.0.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/asr/LICENSE",
-      "weight_status": "Includes pinned MIT Whisper Small weights, tokenizer and configuration"
+      "weight_status": "Includes pinned MIT Whisper Small weights, tokenizer and configuration",
+      "declaration_path": "catalog/declarations/asr/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     },
     {
       "module_id": "org.obliviousmic.tts",
       "name": "tts",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 34829,
-      "sha256": "123f58d9d5c96c881c293e048fd6c4e979281dd3c26b3d4468313392abb5222c",
+      "bytes": 36237,
+      "sha256": "e7779fbf6b6ae5f15edc2d3b1145719c83233370352813ef3d968d6ce90f56bd",
       "source_path": "modules/tts",
       "bundled_resources": [],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "Cloud Text-to-Speech",
+        "author": "ObliviousMic contributors",
+        "license": "Apache-2.0",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "any"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.tts",
+        "module_version": "1.2.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "text",
+              "kind": "metadata",
+              "schema_version": 1,
+              "optional": false
+            }
+          ],
+          "outputs": [
+            {
+              "id": "audio",
+              "kind": "audio",
+              "sample_rates": [
+                24000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            },
+            {
+              "id": "text",
+              "kind": "metadata",
+              "schema_version": 1,
+              "optional": false
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 1,
+          "preferred_block_frames": 160,
+          "maximum_block_frames": 65536,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 0,
+          "max_flush_calls": 4,
+          "latency_mode": "reported_on_prepare",
+          "async_process": true,
+          "maximum_batch_packets": 1,
+          "deadline_seconds": 35,
+          "maximum_output_frames": 960000
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [],
+        "resources": {
+          "model_assets": []
+        },
+        "dependencies": [
+          "numpy>=2,<3",
+          "soundfile>=0.13,<1",
+          "soxr>=1.1,<2"
+        ],
+        "setup": "setup.json",
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "在线语音合成",
+          "en": "Cloud Text-to-Speech",
+          "ja": "音声合成"
+        },
+        "description": "Converts text to speech using Alibaba Cloud Bailian or Azure Speech. Configure a service key, language and voice; Azure also supports adjustable speaking rate and pitch.",
+        "descriptions": {
+          "zh-CN": "将文本合成为语音，支持阿里云百炼和 Azure Speech。需配置服务密钥，可选择语言与音色；Azure 还支持语速和音调调节。",
+          "en": "Converts text to speech using Alibaba Cloud Bailian or Azure Speech. Configure a service key, language and voice; Azure also supports adjustable speaking rate and pitch.",
+          "ja": "Alibaba Cloud 百錬または Azure Speech でテキストを音声に変換します。サービスキー・言語・声を設定でき、Azure では速度と音程も調整できます。"
+        },
+        "keywords": [
+          "tts",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428295279,
+          "asset_id": 689629688,
+          "release": "tts-v1.2.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.2.1/tts-1.2.1.obmic.zip",
+          "bytes": 36237,
+          "sha256": "e7779fbf6b6ae5f15edc2d3b1145719c83233370352813ef3d968d6ce90f56bd"
+        }
+      },
+      "display_names": {
+        "zh-CN": "在线语音合成",
+        "en": "Cloud Text-to-Speech",
+        "ja": "音声合成"
+      },
+      "descriptions": {
+        "zh-CN": "将文本合成为语音，支持阿里云百炼和 Azure Speech。需配置服务密钥，可选择语言与音色；Azure 还支持语速和音调调节。",
+        "en": "Converts text to speech using Alibaba Cloud Bailian or Azure Speech. Configure a service key, language and voice; Azure also supports adjustable speaking rate and pitch.",
+        "ja": "Alibaba Cloud 百錬または Azure Speech でテキストを音声に変換します。サービスキー・言語・声を設定でき、Azure では速度と音程も調整できます。"
+      },
+      "keywords": [
+        "tts",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Cloud text to speech with Qwen or Azure",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.2.0/tts-1.2.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.2.1/tts-1.2.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/tts/LICENSE",
-      "weight_status": "Original adapter only; cloud provider and selected voice terms remain separate"
+      "weight_status": "Original adapter only; cloud provider and selected voice terms remain separate",
+      "declaration_path": "catalog/declarations/tts/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     },
     {
       "module_id": "org.obliviousmic.subtitles",
       "name": "subtitles",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 32155,
-      "sha256": "10f9c22a730bb3ac15f668ea76bbee23b1dd3d263191b8d75bef401c01a156c3",
+      "bytes": 33622,
+      "sha256": "b9be2055d7a1c9e19c0f0f5af678193a85a36fd2fd28e418865b8d10bee9c25e",
       "source_path": "modules/subtitles",
       "bundled_resources": [],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "Floating Subtitles",
+        "author": "ObliviousMic contributors",
+        "license": "Apache-2.0",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "windows"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.subtitles",
+        "module_version": "1.1.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "text",
+              "kind": "metadata",
+              "schema_version": 1,
+              "optional": false
+            }
+          ],
+          "outputs": [
+            {
+              "id": "text",
+              "kind": "metadata",
+              "schema_version": 1,
+              "optional": false
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 1,
+          "preferred_block_frames": 160,
+          "maximum_block_frames": 65536,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 0,
+          "max_flush_calls": 4,
+          "latency_mode": "reported_on_prepare",
+          "async_process": true
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [],
+        "resources": {
+          "model_assets": []
+        },
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "悬浮字幕",
+          "en": "Floating Subtitles",
+          "ja": "フローティング字幕"
+        },
+        "description": "Displays recognized, translated or manually entered text in a floating Windows subtitle window. Adjust font size, opacity, position and display duration; no model or voice enrollment required.",
+        "descriptions": {
+          "zh-CN": "将语音识别、翻译或手动输入的文字显示为 Windows 置顶悬浮字幕。可调整字号、透明度、位置与保留时长，无需模型或声音登记。",
+          "en": "Displays recognized, translated or manually entered text in a floating Windows subtitle window. Adjust font size, opacity, position and display duration; no model or voice enrollment required.",
+          "ja": "音声認識・翻訳・手入力のテキストを Windows の最前面字幕に表示します。文字サイズ・透明度・位置・表示時間を調整でき、モデルや声の登録は不要です。"
+        },
+        "keywords": [
+          "subtitles",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428295388,
+          "asset_id": 689630082,
+          "release": "subtitles-v1.1.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/subtitles-v1.1.1/subtitles-1.1.1.obmic.zip",
+          "bytes": 33622,
+          "sha256": "b9be2055d7a1c9e19c0f0f5af678193a85a36fd2fd28e418865b8d10bee9c25e"
+        }
+      },
+      "display_names": {
+        "zh-CN": "悬浮字幕",
+        "en": "Floating Subtitles",
+        "ja": "フローティング字幕"
+      },
+      "descriptions": {
+        "zh-CN": "将语音识别、翻译或手动输入的文字显示为 Windows 置顶悬浮字幕。可调整字号、透明度、位置与保留时长，无需模型或声音登记。",
+        "en": "Displays recognized, translated or manually entered text in a floating Windows subtitle window. Adjust font size, opacity, position and display duration; no model or voice enrollment required.",
+        "ja": "音声認識・翻訳・手入力のテキストを Windows の最前面字幕に表示します。文字サイズ・透明度・位置・表示時間を調整でき、モデルや声の登録は不要です。"
+      },
+      "keywords": [
+        "subtitles",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Private timestamped text in a Windows floating subtitle window",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/subtitles-v1.1.0/subtitles-1.1.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/subtitles-v1.1.1/subtitles-1.1.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/subtitles/LICENSE",
-      "weight_status": "No model resources; Python/Tk runtime required"
+      "weight_status": "No model resources; Python/Tk runtime required",
+      "declaration_path": "catalog/declarations/subtitles/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     },
     {
       "module_id": "org.obliviousmic.broadcast",
       "name": "broadcast",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 47769,
-      "sha256": "ce49e0b0a154449bcf12ae59bd6a7a9c450ed964a458c1b3f0080198dcb42985",
+      "bytes": 49338,
+      "sha256": "674df7e27400993f7815cfae206c11d27d119be1e39765e1bcb4dbdddd9219a9",
       "source_path": "modules/broadcast",
       "bundled_resources": [],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "Audio Noise Removal · NVIDIA Broadcast",
+        "author": "ObliviousMic contributors",
+        "license": "Apache-2.0",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "windows"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.broadcast",
+        "module_version": "1.0.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "audio",
+              "kind": "audio",
+              "sample_rates": [
+                48000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "audio",
+              "kind": "audio",
+              "sample_rates": [
+                48000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 1,
+          "preferred_block_frames": 960,
+          "maximum_block_frames": 48000,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 600000,
+          "max_flush_calls": 4,
+          "latency_mode": "reported_on_prepare",
+          "async_process": true,
+          "maximum_batch_packets": 64,
+          "deadline_seconds": 60,
+          "maximum_output_frames": 600000,
+          "maximum_pending_frames": 800000
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [],
+        "resources": {
+          "model_assets": []
+        },
+        "dependencies": [
+          "numpy>=2,<3",
+          "soundfile>=0.13,<1",
+          "soxr>=1.1,<2"
+        ],
+        "setup": "setup.json",
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "音频降噪 · NVIDIA Broadcast",
+          "en": "Audio Noise Removal · NVIDIA Broadcast",
+          "ja": "音声ノイズ除去 · NVIDIA Broadcast"
+        },
+        "description": "Processes upstream audio through NVIDIA Broadcast for noise removal and enhancement. Requires a compatible installed Broadcast app and NVIDIA GPU; no NVIDIA runtime or models are bundled.",
+        "descriptions": {
+          "zh-CN": "通过本机 NVIDIA Broadcast 处理上游音频，提供降噪等音频增强。需安装兼容的 Broadcast 环境及 NVIDIA 显卡，不随包提供模型或运行时。",
+          "en": "Processes upstream audio through NVIDIA Broadcast for noise removal and enhancement. Requires a compatible installed Broadcast app and NVIDIA GPU; no NVIDIA runtime or models are bundled.",
+          "ja": "上流の音声を本機の NVIDIA Broadcast で処理し、ノイズ除去などを行います。対応する Broadcast と NVIDIA GPU が必要です。実行環境やモデルは同梱していません。"
+        },
+        "keywords": [
+          "broadcast",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428295470,
+          "asset_id": 689630328,
+          "release": "broadcast-v1.0.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/broadcast-v1.0.1/broadcast-1.0.1.obmic.zip",
+          "bytes": 49338,
+          "sha256": "674df7e27400993f7815cfae206c11d27d119be1e39765e1bcb4dbdddd9219a9"
+        }
+      },
+      "display_names": {
+        "zh-CN": "音频降噪 · NVIDIA Broadcast",
+        "en": "Audio Noise Removal · NVIDIA Broadcast",
+        "ja": "音声ノイズ除去 · NVIDIA Broadcast"
+      },
+      "descriptions": {
+        "zh-CN": "通过本机 NVIDIA Broadcast 处理上游音频，提供降噪等音频增强。需安装兼容的 Broadcast 环境及 NVIDIA 显卡，不随包提供模型或运行时。",
+        "en": "Processes upstream audio through NVIDIA Broadcast for noise removal and enhancement. Requires a compatible installed Broadcast app and NVIDIA GPU; no NVIDIA runtime or models are bundled.",
+        "ja": "上流の音声を本機の NVIDIA Broadcast で処理し、ノイズ除去などを行います。対応する Broadcast と NVIDIA GPU が必要です。実行環境やモデルは同梱していません。"
+      },
+      "keywords": [
+        "broadcast",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Buffered NVIDIA Broadcast enhancement of the graph's upstream audio",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/broadcast-v1.0.0/broadcast-1.0.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/broadcast-v1.0.1/broadcast-1.0.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/broadcast/LICENSE",
-      "weight_status": "No NVIDIA binaries or models; compatible installed Broadcast app required"
+      "weight_status": "No NVIDIA binaries or models; compatible installed Broadcast app required",
+      "declaration_path": "catalog/declarations/broadcast/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     },
     {
       "module_id": "org.obliviousmic.translate",
       "name": "translate",
-      "version": "1.2.0",
+      "version": "1.2.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "GPL-3.0-only",
-      "bytes": 185826,
-      "sha256": "1b9052d89268009d7d9f1b7a18102fe27ec58d1bb67bc684e033117535f066d8",
+      "bytes": 187346,
+      "sha256": "381ec7bde850f350fcea14183f03b939b42992eb53db2c414e751c9d46794642",
       "source_path": "modules/translate",
       "bundled_resources": [],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "Text Translation",
+        "author": "ObliviousMic contributors",
+        "license": "GPL-3.0-only",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "any"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.translate",
+        "module_version": "1.2.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "text",
+              "kind": "metadata",
+              "schema_version": 1,
+              "optional": false
+            }
+          ],
+          "outputs": [
+            {
+              "id": "text",
+              "kind": "metadata",
+              "schema_version": 1,
+              "optional": false
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 1,
+          "preferred_block_frames": 160,
+          "maximum_block_frames": 65536,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 0,
+          "max_flush_calls": 4,
+          "latency_mode": "reported_on_prepare",
+          "async_process": true,
+          "maximum_batch_packets": 1,
+          "deadline_seconds": 35
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [],
+        "resources": {
+          "model_assets": []
+        },
+        "dependencies": [
+          "langid>=1.1.6,<2",
+          "hanzidentifier>=1.3,<2"
+        ],
+        "setup": "setup.json",
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "文本翻译",
+          "en": "Text Translation",
+          "ja": "テキスト翻訳"
+        },
+        "description": "Translates recognized or entered text between Chinese, English, Japanese and more. Supports key-free web engines, translation APIs and OpenAI-compatible endpoints; connect subtitles or TTS next.",
+        "descriptions": {
+          "zh-CN": "连接语音识别或文本输入，在中文、英文、日文等语言间翻译。支持免密钥网页引擎、传统翻译 API 和 OpenAI 兼容接口，可继续接字幕或语音合成。",
+          "en": "Translates recognized or entered text between Chinese, English, Japanese and more. Supports key-free web engines, translation APIs and OpenAI-compatible endpoints; connect subtitles or TTS next.",
+          "ja": "音声認識やテキスト入力を中国語・英語・日本語などへ翻訳します。キー不要のWeb翻訳、翻訳API、OpenAI互換サービスに対応し、字幕や音声合成へ接続できます。"
+        },
+        "keywords": [
+          "translate",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428295561,
+          "asset_id": 689630669,
+          "release": "translate-v1.2.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.1/translate-1.2.1.obmic.zip",
+          "bytes": 187346,
+          "sha256": "381ec7bde850f350fcea14183f03b939b42992eb53db2c414e751c9d46794642"
+        }
+      },
+      "display_names": {
+        "zh-CN": "文本翻译",
+        "en": "Text Translation",
+        "ja": "テキスト翻訳"
+      },
+      "descriptions": {
+        "zh-CN": "连接语音识别或文本输入，在中文、英文、日文等语言间翻译。支持免密钥网页引擎、传统翻译 API 和 OpenAI 兼容接口，可继续接字幕或语音合成。",
+        "en": "Translates recognized or entered text between Chinese, English, Japanese and more. Supports key-free web engines, translation APIs and OpenAI-compatible endpoints; connect subtitles or TTS next.",
+        "ja": "音声認識やテキスト入力を中国語・英語・日本語などへ翻訳します。キー不要のWeb翻訳、翻訳API、OpenAI互換サービスに対応し、字幕や音声合成へ接続できます。"
+      },
+      "keywords": [
+        "translate",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Text translation with LunaTranslator web/API engines and OpenAI-compatible services",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.0/translate-1.2.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.1/translate-1.2.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/translate/LICENSE",
-      "weight_status": "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights"
+      "weight_status": "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights",
+      "declaration_path": "catalog/declarations/translate/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     },
     {
       "module_id": "org.obliviousmic.denoise",
       "name": "denoise",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 25397633,
-      "sha256": "bd5d988c502649984c75cab5b90a565ba1f5732d6d6515f4e5dbdb521ccb3235",
+      "bytes": 25399157,
+      "sha256": "3fb959b6043f34ed5485b203884f098cd78228dd22a3ef05262c1b65f2f0111a",
       "source_path": "modules/denoise",
       "bundled_resources": [
         {
@@ -208,30 +1070,280 @@
           "source_url": "https://huggingface.co/Ceva-IP/DPDFNet/blob/dd6818d00f50c836fed43a6243ebe49116de5964/README.md"
         }
       ],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "General Speech Denoising · DPDFNet",
+        "author": "ObliviousMic contributors",
+        "license": "Apache-2.0",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "any"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.denoise",
+        "module_version": "1.0.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "audio",
+              "kind": "audio",
+              "sample_rates": [
+                48000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "audio",
+              "kind": "audio",
+              "sample_rates": [
+                48000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 1,
+          "preferred_block_frames": 480,
+          "maximum_block_frames": 480,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 2880,
+          "max_flush_calls": 1,
+          "latency_mode": "reported_on_prepare",
+          "allow_partial_eos": true,
+          "async_process": true
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [
+          "asset.read",
+          "resource.acquire"
+        ],
+        "resources": {
+          "model_assets": []
+        },
+        "dependencies": [
+          "onnxruntime>=1.20,<2",
+          "numpy>=2,<3"
+        ],
+        "setup": "setup.json",
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "通用语音降噪 · DPDFNet",
+          "en": "General Speech Denoising · DPDFNet",
+          "ja": "汎用音声ノイズ除去 · DPDFNet"
+        },
+        "description": "Suppresses background noise locally while retaining speech, with Light and Enhanced modes. Includes both DPDFNet ONNX models for 48 kHz speech; no voice enrollment or cloud key needed.",
+        "descriptions": {
+          "zh-CN": "在本机抑制环境噪声并保留人声，提供轻量／增强模式。包含两份 DPDFNet ONNX 模型，以 48 kHz 处理语音，无需声音登记或云端密钥。",
+          "en": "Suppresses background noise locally while retaining speech, with Light and Enhanced modes. Includes both DPDFNet ONNX models for 48 kHz speech; no voice enrollment or cloud key needed.",
+          "ja": "人声を保ちながら環境ノイズをローカルで抑えます。軽量・強化の2モードと48 kHz用 DPDFNet ONNX モデルを同梱し、声の登録やクラウドキーは不要です。"
+        },
+        "keywords": [
+          "denoise",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428295674,
+          "asset_id": 689631051,
+          "release": "denoise-v1.0.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/denoise-v1.0.1/denoise-1.0.1.obmic.zip",
+          "bytes": 25399157,
+          "sha256": "3fb959b6043f34ed5485b203884f098cd78228dd22a3ef05262c1b65f2f0111a"
+        }
+      },
+      "display_names": {
+        "zh-CN": "通用语音降噪 · DPDFNet",
+        "en": "General Speech Denoising · DPDFNet",
+        "ja": "汎用音声ノイズ除去 · DPDFNet"
+      },
+      "descriptions": {
+        "zh-CN": "在本机抑制环境噪声并保留人声，提供轻量／增强模式。包含两份 DPDFNet ONNX 模型，以 48 kHz 处理语音，无需声音登记或云端密钥。",
+        "en": "Suppresses background noise locally while retaining speech, with Light and Enhanced modes. Includes both DPDFNet ONNX models for 48 kHz speech; no voice enrollment or cloud key needed.",
+        "ja": "人声を保ちながら環境ノイズをローカルで抑えます。軽量・強化の2モードと48 kHz用 DPDFNet ONNX モデルを同梱し、声の登録やクラウドキーは不要です。"
+      },
+      "keywords": [
+        "denoise",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Local DPDFNet speech denoising with Light and Enhanced 48 kHz modes",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/denoise-v1.0.0/denoise-1.0.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/denoise-v1.0.1/denoise-1.0.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/denoise/LICENSE",
-      "weight_status": "Includes both pinned Apache-2.0 DPDFNet ONNX models; no voice registration required"
+      "weight_status": "Includes both pinned Apache-2.0 DPDFNet ONNX models; no voice registration required",
+      "declaration_path": "catalog/declarations/denoise/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     },
     {
       "module_id": "org.obliviousmic.asr_api",
       "name": "asr_api",
-      "version": "1.1.0",
+      "version": "1.1.1",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 46116,
-      "sha256": "1624f5ea21b61b091d449c86c9a84e986f78975012bf325e12e6837df2fb2b32",
+      "bytes": 47684,
+      "sha256": "ad049b0f2e5e7c7e7c7c055227d51a8f9aabbdcdcbd3022913598c5e39384d25",
       "source_path": "modules/asr_api",
       "bundled_resources": [],
+      "declaration": {
+        "schema_version": 1,
+        "package_type": "module",
+        "name": "Cloud Speech Recognition",
+        "author": "ObliviousMic contributors",
+        "license": "Apache-2.0",
+        "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+        "framework": {
+          "min": "0.3.0rc1",
+          "max_exclusive": "1.0.0"
+        },
+        "platforms": [
+          "any"
+        ],
+        "architectures": [
+          "any"
+        ],
+        "module_id": "org.obliviousmic.asr_api",
+        "module_version": "1.1.1",
+        "api": {
+          "min": "1.0",
+          "max_exclusive": "2.0"
+        },
+        "runtime": {
+          "kind": "python",
+          "entrypoint": "runtime:Module"
+        },
+        "ports": {
+          "inputs": [
+            {
+              "id": "audio",
+              "kind": "audio",
+              "sample_rates": [
+                16000
+              ],
+              "channels": [
+                1
+              ],
+              "sample_format": "f32_interleaved"
+            }
+          ],
+          "outputs": [
+            {
+              "id": "text",
+              "kind": "metadata",
+              "schema_version": 1,
+              "optional": false
+            }
+          ]
+        },
+        "processing": {
+          "minimum_block_frames": 1,
+          "preferred_block_frames": 320,
+          "maximum_block_frames": 320,
+          "realtime_capable": true,
+          "offline_capable": true,
+          "stateful": true,
+          "concurrent_process_calls": false,
+          "max_tail_frames": 0,
+          "max_flush_calls": 1,
+          "latency_mode": "reported_on_prepare",
+          "allow_partial_eos": true,
+          "async_process": true,
+          "maximum_batch_packets": 1,
+          "deadline_seconds": 35,
+          "maximum_pending_frames": 576000
+        },
+        "settings_schema": "settings.schema.json",
+        "actions_schema": "actions.schema.json",
+        "permissions": [],
+        "resources": {
+          "model_assets": []
+        },
+        "dependencies": [
+          "numpy>=2,<3"
+        ],
+        "setup": "setup.json",
+        "resource_declaration": "resources.json",
+        "display_names": {
+          "zh-CN": "在线语音识别",
+          "en": "Cloud Speech Recognition",
+          "ja": "クラウド音声認識"
+        },
+        "description": "Recognizes speech through OpenAI-compatible services, Azure Speech or Alibaba Cloud Bailian and returns final text per segment. No local model needed; configure the provider key and region or endpoint.",
+        "descriptions": {
+          "zh-CN": "通过 OpenAI 兼容接口、Azure Speech 或阿里云百炼识别语音，按段输出最终文字。无需下载本地模型，需配置对应服务的密钥与地域或地址。",
+          "en": "Recognizes speech through OpenAI-compatible services, Azure Speech or Alibaba Cloud Bailian and returns final text per segment. No local model needed; configure the provider key and region or endpoint.",
+          "ja": "OpenAI互換サービス、Azure Speech、Alibaba Cloud 百錬で音声を認識し、区間ごとに確定テキストを出力します。モデルのダウンロードは不要で、キーと地域または接続先を設定します。"
+        },
+        "keywords": [
+          "asr_api",
+          "audio",
+          "obliviousmic"
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 428295899,
+          "asset_id": 689631785,
+          "release": "asr_api-v1.1.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.1.1/asr_api-1.1.1.obmic.zip",
+          "bytes": 47684,
+          "sha256": "ad049b0f2e5e7c7e7c7c055227d51a8f9aabbdcdcbd3022913598c5e39384d25"
+        }
+      },
+      "display_names": {
+        "zh-CN": "在线语音识别",
+        "en": "Cloud Speech Recognition",
+        "ja": "クラウド音声認識"
+      },
+      "descriptions": {
+        "zh-CN": "通过 OpenAI 兼容接口、Azure Speech 或阿里云百炼识别语音，按段输出最终文字。无需下载本地模型，需配置对应服务的密钥与地域或地址。",
+        "en": "Recognizes speech through OpenAI-compatible services, Azure Speech or Alibaba Cloud Bailian and returns final text per segment. No local model needed; configure the provider key and region or endpoint.",
+        "ja": "OpenAI互換サービス、Azure Speech、Alibaba Cloud 百錬で音声を認識し、区間ごとに確定テキストを出力します。モデルのダウンロードは不要で、キーと地域または接続先を設定します。"
+      },
+      "keywords": [
+        "asr_api",
+        "audio",
+        "obliviousmic"
+      ],
+      "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Remote ASR via OpenAI-compatible transcription, Azure Speech or Alibaba Cloud Bailian",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.1.0/asr_api-1.1.0.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.1.1/asr_api-1.1.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/asr_api/LICENSE",
-      "weight_status": "Original Apache-2.0 client; no model weights; chosen service receives speech segments"
+      "weight_status": "Original Apache-2.0 client; no model weights; chosen service receives speech segments",
+      "declaration_path": "catalog/declarations/asr_api/obliviousmic.module.json",
+      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
     }
   ]
 }

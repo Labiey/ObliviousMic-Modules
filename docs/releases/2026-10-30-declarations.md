@@ -22,3 +22,10 @@ contain final ZIP digests; internal declarations do not.
 The existing CI retains metadata validation, without automatic official package
 building/publication. No new PR checker or automatic merge workflow is introduced.
 The separate daily community catalog workflow is independent of official releases.
+
+The nine patch releases have been manually published and their installer assets
+verified against the audited size and SHA-256. `catalog/declarations/*/` contains
+their complete external declarations, bound to repository ID `1418766723` and
+the actual GitHub Release/asset IDs. The promoted official index and the host's
+bundled snapshot carry these same declarations. Private voice assets and the
+unresolved BSRNN separator template are not distributed.
