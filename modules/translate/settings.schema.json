@@ -200,6 +200,11 @@
         "it"
       ]
     },
+    "skip_same_language": {
+      "type": "boolean",
+      "default": true,
+      "apply_policy": "reprepare"
+    },
     "api_key": {
       "type": "string",
       "default": "",

@@ -106,6 +106,106 @@ def test_local_key_optional_cloud_key_required_and_same_language_bypasses_networ
     assert client.translate("Already English.", "en-US") == "Already English."
 
 
+@pytest.mark.parametrize("tag", ["en", "en-US", "en_GB"])
+def test_same_language_option_preserves_exact_original_and_never_detects_or_requests(tag):
+    client = Client(config(), lambda *_a, **_k: pytest.fail("unexpected network"))
+    client.detector.detect = lambda _text: pytest.fail("known language must not be detected")
+    original = "  Already English.\nSecond line.  "
+    assert client.translate(original, tag) == original
+    client = Client(config(source_language="en"), lambda *_a, **_k: pytest.fail("network"))
+    assert client.translate(original, "ja") == original  # Explicit source wins.
+
+
+def test_disabled_skip_option_calls_provider_even_when_source_matches_target():
+    calls = []
+
+    def open(*_a, **_k):
+        calls.append(1)
+        return response("Provider result")
+
+    client = Client(config(skip_same_language=False), open)
+    client.detector.detect = lambda _text: pytest.fail("disabled detection")
+    assert client.translate("Already English.", "en") == "Provider result"
+    assert len(calls) == 1
+
+
+@pytest.mark.parametrize(
+    "text,target",
+    [
+        ("This is a test of local language detection.", "en"),
+        ("这是一段中文测试文字，今天的天气很好。", "zh"),
+        ("這是一段中文測試文字，今天的天氣很好。", "zh-Hant"),
+        ("これは日本語の文章です。今日はとても良い天気です。", "ja"),
+        ("Bonjour, je suis heureux de vous rencontrer aujourd’hui.", "fr"),
+    ],
+)
+def test_unlabeled_input_is_detected_locally_without_a_network_request(text, target):
+    client = Client(config(target_language=target), lambda *_a, **_k: pytest.fail("network"))
+    assert client.detector.identifier is None  # No model load or request during prepare.
+    assert client.translate(text, "auto") == text
+
+
+@pytest.mark.parametrize(
+    "text,target,source",
+    [
+        ("Hello", "en", "auto"),
+        ("123456789", "en", "auto"),
+        ("This is English 这是中文 日本語です", "ja", "auto"),
+        ("這是一段中文測試文字，今天的天氣很好。", "zh", "auto"),
+        ("这是一段中文测试文字，今天的天气很好。", "zh-Hant", "auto"),
+        ("中文", "zh", "zh-Hant-TW"),
+    ],
+)
+def test_uncertain_mixed_and_different_script_input_still_translates(text, target, source):
+    calls = []
+
+    def open(*_a, **_k):
+        calls.append(1)
+        return response("Translated fixture")
+
+    client = Client(config(target_language=target), open)
+    assert client.translate(text, source) == "Translated fixture"
+    assert len(calls) == 1
+
+
+def test_bypassed_packets_preserve_timing_revisions_and_reach_downstream():
+    class LocalClient(Client):
+        def __init__(self, settings):
+            super().__init__(settings, lambda *_a, **_k: pytest.fail("unexpected network"))
+
+    module = NetworkModule(LocalClient)
+    module.prepare(PrepareContext("translator", {}, {}, "realtime"), config(final_only=False))
+    module.start(StreamContext("typed", 4))
+    segment = TextSegment("one", "  Original English.  ", Fraction(3), Fraction(5), "en", False, 1)
+    packet = segment.to_packet("keyboard", StreamContext("typed", 4))
+    result = module.process(PortBundle({"text": (packet,)})).ports["text"][0]
+    assert TextSegment.from_packet(result) == segment
+    assert result.private and result.stream_id == "typed" and result.epoch_id == 4
+    assert result.source_instance == "translator"
+    assert not module.process(PortBundle({"text": (packet,)})).ports["text"]
+
+
+def test_real_ipc_worker_bypasses_unlabeled_matching_text_with_no_translation_server():
+    module = Module()
+    try:
+        module.prepare(
+            PrepareContext("translator", {}, {}, "realtime"),
+            config(api_key="", base_url="http://127.0.0.1:1/v1"),
+        )
+        module.start(StreamContext("typed", 7))
+        original = TextSegment(
+            "local", "This is a test of local language detection.", Fraction(2), Fraction(4), "auto"
+        )
+        result = module.process(
+            PortBundle({"text": (original.to_packet("keyboard", StreamContext("typed", 7)),)})
+        ).ports["text"][0]
+        assert TextSegment.from_packet(result).text == original.text
+        assert TextSegment.from_packet(result).language == "en"
+        assert result.epoch_id == 7 and result.private
+    finally:
+        module.dispose()
+
+
 @pytest.mark.parametrize("status", [401, 403, 429, 503])
 def test_public_errors_never_contain_provider_body_text_or_keys(status):
     def open(request, **kwargs):

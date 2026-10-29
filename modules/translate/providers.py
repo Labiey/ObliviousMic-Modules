@@ -11,8 +11,10 @@ import urllib.request
 from obliviousmic.sdk import PublicModuleError
 
 try:
+    from .language import LanguageDetector
     from .luna_bridge import ENGINES, Engine, validate_engine_config
 except ImportError:
+    from language import LanguageDetector
     from luna_bridge import ENGINES, Engine, validate_engine_config
 
 MAX_RESPONSE_BYTES = 256 * 1024
@@ -99,8 +101,8 @@ def validate_config(config):
 
 
 def normalized_language(value):
-    value = value.replace("_", "-").lower()
-    if value in {"zh-hant", "zh-tw", "zh-hk"}:
+    value = (value or "auto").replace("_", "-").lower()
+    if value.startswith(("zh-hant", "zh-tw", "zh-hk", "zh-mo")):
         return "zh-Hant"
     if value.startswith("zh"):
         return "zh"
@@ -117,6 +119,7 @@ class Client:
             handlers.append(urllib.request.ProxyHandler({}))
         self.open = opener or urllib.request.build_opener(*handlers).open
         self.engine = Engine(config, opener=opener) if config["provider"] in ENGINES else None
+        self.detector = LanguageDetector()
 
     def _request(self, url, payload, headers):
         deadline = time.monotonic() + self.config["request_timeout_seconds"]
@@ -156,8 +159,17 @@ class Client:
         if source == "auto":
             source = normalized_language(observed_language)
         target = config["target_language"]
-        if source == target:
-            return text
+        if config.get("skip_same_language", True):
+            detected = source
+            if detected == "auto":
+                language = self.detector.detect(text)
+                detected = (
+                    target
+                    if language == "zh-both" and target in {"zh", "zh-Hant"}
+                    else normalized_language(language)
+                )
+            if detected == target:
+                return text
         if self.engine is not None:
             output = self.engine.translate(text, source, target)
         elif config["provider"] == "azure":

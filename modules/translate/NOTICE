@@ -1,4 +1,4 @@
-ObliviousMic Text Translation Module 1.1.0
+ObliviousMic Text Translation Module 1.2.0
 Copyright 2026 ObliviousMic contributors.
 
 This combined module is distributed under GPL-3.0-only. The full GPL text is in
@@ -29,3 +29,10 @@ OpenAI-compatible and Azure protocol references:
 https://help.aliyun.com/zh/model-studio/compatibility-of-openai-with-dashscope
 https://learn.microsoft.com/en-us/azure/ai-services/translator/text-translation/reference/v3/translate
 Service access, billing and terms remain those of the selected provider.
+
+Optional same-language bypass uses separately installed Python dependencies:
+langid.py (Marco Lui and Tim Baldwin, BSD-2-Clause): https://github.com/saffsd/langid.py
+hanzidentifier (Thomas Roten, MIT): https://github.com/tsroten/hanzidentifier
+Its zhon dependency supplies Chinese character data; dependency licenses and data
+attribution remain in their own distributions. These packages, their language model
+and character data are not copied into this module ZIP. Detection runs locally.
