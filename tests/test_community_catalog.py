@@ -5,6 +5,7 @@ import urllib.error
 from datetime import UTC, datetime, timedelta
 
 import pytest
+from tools.catalog_refresh import previous_snapshot
 
 from tools.catalog_network import REPOSITORY_ID, SCHEMAS, CatalogUnavailable, GitHub
 from tools.catalog_refresh import collect, discover
@@ -221,3 +222,10 @@ def test_publisher_writes_only_generated_catalog_branch_with_no_force_and_checks
     with pytest.raises(ValueError):
         publish(writer, invalid)
     assert writer.writes == []
+def test_first_collection_checks_a_missing_branch_ref_without_a_commits_422():
+    class Missing:
+        def request(self, path):
+            assert path.endswith("/git/ref/heads/catalog-data")
+            raise CatalogUnavailable("github_not_found", status=404)
+    assert previous_snapshot(Missing()) is None
+

@@ -42,14 +42,14 @@ def discover(client, kind, start, end, *, depth=0):
 
 def previous_snapshot(client):
     try:
-        branch = client.request(f"/repos/{REPOSITORY}/commits/catalog-data")
+        branch = client.request(f"/repos/{REPOSITORY}/git/ref/heads/catalog-data")
     except CatalogUnavailable as exc:
         if exc.status == 404:
             return None
         raise
     repo = {"full_name": REPOSITORY}
     docs = {
-        name: client.document(repo, name, branch["sha"], max_size=20 * 1024 * 1024)
+        name: client.document(repo, name, branch["object"]["sha"], max_size=20 * 1024 * 1024)
         for name in DATA_FILES
     }
     return validate_snapshot(docs)
