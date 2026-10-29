@@ -1,0 +1,57 @@
+name: Refresh community catalogs and popularity
+on:
+  schedule:
+    - cron: '17 19 * * *'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: catalog-refresh
+  cancel-in-progress: false
+jobs:
+  collect:
+    if: github.repository == 'Labiey/ObliviousMic-Modules' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'jsonschema>=4.23,<5' 'packaging>=24'
+      - name: Collect metadata without executing third-party content
+        run: python -m tools.catalog_refresh --output snapshot
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: catalog-snapshot
+          path: snapshot/
+          retention-days: 3
+          if-no-files-found: error
+  publish:
+    needs: collect
+    if: github.repository == 'Labiey/ObliviousMic-Modules' && github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: python -m pip install 'jsonschema>=4.23,<5' 'packaging>=24'
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
+        with:
+          name: catalog-snapshot
+          path: snapshot/
+      - name: Revalidate and publish generated data only
+        run: python -m tools.publish_catalog --input snapshot
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
