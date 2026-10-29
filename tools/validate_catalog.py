@@ -7,6 +7,8 @@ import tempfile
 from pathlib import Path
 
 from tools.build_module import build
+from tools.catalog_network import REPOSITORY_ID, ENTRY_NAMES
+from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -21,6 +23,18 @@ def validate(path=None, *, metadata_only=False):
     for item in catalog["modules"]:
         name = item["name"]
         folder = ROOT / "modules" / name
+        if item.get("declaration", {}).get("distribution"):
+            declared = item["declaration"]
+            schema = json.loads((ROOT / "schemas/obliviousmic-module-v1.json").read_text("utf-8"))
+            Draft202012Validator(schema).validate(declared)
+            internal = json.loads((folder / ENTRY_NAMES["module"]).read_text("utf-8"))
+            assert {k: v for k, v in declared.items() if k != "distribution"} == internal
+            distribution = declared["distribution"]
+            assert catalog["repository_id"] == distribution["repository_id"] == REPOSITORY_ID
+            assert (distribution["bytes"], distribution["sha256"], distribution["url"]) == (item["bytes"], item["sha256"], item["download_url"])
+            declaration_path = ROOT / item["declaration_path"]
+            if Path(path or ROOT / "catalog/index.json").resolve() == (ROOT / "catalog/index.json").resolve():
+                assert json.loads(declaration_path.read_text("utf-8")) == declared
         assert name in {
             "campplus",
             "bsrnn",

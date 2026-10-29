@@ -4,14 +4,19 @@ import json
 import os
 import urllib.error
 import urllib.request
+from urllib.parse import urlparse
 from contextlib import nullcontext
 from pathlib import Path
 
 from tools.build_module import build
 from tools.prepare_catalog import MODULES, ROOT, prepare
+from tools.catalog_network import NoRedirect
 
 
 def request(url, data=None, content_type="application/json", *, method=None):
+    parsed = urlparse(url)
+    if parsed.scheme != "https" or parsed.netloc not in {"api.github.com", "uploads.github.com"}:
+        raise ValueError("release publication must use GitHub API hosts")
     headers = {
         "Authorization": "Bearer " + os.environ["GITHUB_TOKEN"],
         "Accept": "application/vnd.github+json",
@@ -21,7 +26,7 @@ def request(url, data=None, content_type="application/json", *, method=None):
     if isinstance(data, Path):
         headers["Content-Length"] = str(data.stat().st_size)
     with data.open("rb") if isinstance(data, Path) else nullcontext(data) as body:
-        with urllib.request.urlopen(
+        with urllib.request.build_opener(NoRedirect()).open(
             urllib.request.Request(
                 url,
                 data=body,
@@ -30,7 +35,7 @@ def request(url, data=None, content_type="application/json", *, method=None):
             ),
             timeout=120,
         ) as response:
-            return json.loads(response.read())
+            return json.loads(response.read(2 * 1024 * 1024))
 
 
 def audited_package(tag):

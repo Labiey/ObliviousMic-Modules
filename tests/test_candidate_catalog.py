@@ -10,6 +10,15 @@ from obliviousmic.sdk import ModuleRegistry
 from tools import publish_release
 from tools.prepare_catalog import ROOT, prepare
 from tools.validate_catalog import validate
+from tools.release_declarations import bind
+
+
+def released(candidate):
+    releases = {}
+    for index, item in enumerate(candidate["modules"]):
+        tag = f"{item['name']}-v{item['version']}"
+        releases[tag] = {"id": index + 1, "draft": False, "tag_name": tag, "assets": [{"id": index + 100, "browser_download_url": item["download_url"], "size": item["bytes"], "digest": "sha256:" + item["sha256"]}]}
+    return bind(candidate, releases, "a" * 40)
 
 
 def test_candidate_is_deterministic_accepted_by_host_and_preserves_published_entries(tmp_path):
@@ -31,6 +40,7 @@ def test_candidate_is_deterministic_accepted_by_host_and_preserves_published_ent
         "denoise",
     }
     validate(first)
+    first.write_text(json.dumps(released(candidate)), encoding="utf-8")
     catalog = OfficialCatalog(
         tmp_path, None, None, opener=lambda *_a, **_k: io.BytesIO(first.read_bytes())
     )
@@ -44,6 +54,8 @@ def test_candidate_is_deterministic_accepted_by_host_and_preserves_published_ent
 def test_candidate_installs_four_independent_packages_through_catalog_and_restores(tmp_path):
     path = prepare(tmp_path / "packages" / "catalog.next.json", include_models=False)
     candidate = json.loads(path.read_text("utf-8"))
+    candidate = released(candidate)
+    path.write_text(json.dumps(candidate), encoding="utf-8")
     prepared = []
     registry = ModuleRegistry()
     manager = PluginManager(tmp_path / "data", registry)
@@ -93,3 +105,13 @@ def test_release_preflight_checks_supported_tag_and_catalog_digest_before_networ
     candidate.write_text(json.dumps(data), encoding="utf-8")
     with pytest.raises(ValueError, match="differs"):
         publish_release.audited_package("tts-v" + current)
+
+
+def test_manual_promotion_rejects_bad_assets_and_publication_hosts(tmp_path):
+    candidate = json.loads(prepare(tmp_path / "catalog.next.json", include_models=False).read_text("utf-8"))
+    published = released(candidate)
+    assert published["modules"][0]["declaration"]["distribution"]["asset_id"] == 100
+    assert "distribution" not in candidate["modules"][0]["declaration"]
+    for url in ["https://example.org/upload", "http://api.github.com/repos/x"]:
+        with pytest.raises(ValueError, match="hosts"):
+            publish_release.request(url)
