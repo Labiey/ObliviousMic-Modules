@@ -1,0 +1,95 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "Cloud Speech Recognition",
+  "author": "ObliviousMic contributors",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "any"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.asr_api",
+  "module_version": "1.1.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          16000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 320,
+    "maximum_block_frames": 320,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 1,
+    "latency_mode": "reported_on_prepare",
+    "allow_partial_eos": true,
+    "async_process": true,
+    "maximum_batch_packets": 1,
+    "deadline_seconds": 35,
+    "maximum_pending_frames": 576000
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "numpy>=2,<3"
+  ],
+  "setup": "setup.json",
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "在线语音识别",
+    "en": "Cloud Speech Recognition",
+    "ja": "クラウド音声認識"
+  },
+  "description": "Recognizes speech through OpenAI-compatible services, Azure Speech or Alibaba Cloud Bailian and returns final text per segment. No local model needed; configure the provider key and region or endpoint.",
+  "descriptions": {
+    "zh-CN": "通过 OpenAI 兼容接口、Azure Speech 或阿里云百炼识别语音，按段输出最终文字。无需下载本地模型，需配置对应服务的密钥与地域或地址。",
+    "en": "Recognizes speech through OpenAI-compatible services, Azure Speech or Alibaba Cloud Bailian and returns final text per segment. No local model needed; configure the provider key and region or endpoint.",
+    "ja": "OpenAI互換サービス、Azure Speech、Alibaba Cloud 百錬で音声を認識し、区間ごとに確定テキストを出力します。モデルのダウンロードは不要で、キーと地域または接続先を設定します。"
+  },
+  "keywords": [
+    "asr_api",
+    "audio",
+    "obliviousmic"
+  ]
+}

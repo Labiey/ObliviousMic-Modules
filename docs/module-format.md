@@ -3,7 +3,7 @@
 Official Release installers use <module>-<version>.obmic.zip. GitHub Source ZIPs and development
 code-only packages are not the full user installer. Large weight binaries never enter Git.
 
-Each package contains manifest.json, settings.schema.json, actions.schema.json, setup.json,
+Each package contains obliviousmic.module.json, settings.schema.json, actions.schema.json, setup.json,
 resources.json, runtime code, LICENSE, NOTICE and README.md. A package containing permitted public
 weights additionally includes models/, complete model licenses and upstream model cards under licenses/,
 and licensing.md. Code and weight licenses remain independent.

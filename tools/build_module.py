@@ -6,7 +6,10 @@ import json
 import zipfile
 from pathlib import Path
 
+from jsonschema import Draft202012Validator
+
 ROOT = Path(__file__).resolve().parents[1]
+SCHEMAS = Path(__file__).resolve().parents[1] / "schemas"
 
 
 def build(name, output=None, *, include_models=False, cache=None, download=True):
@@ -15,7 +18,15 @@ def build(name, output=None, *, include_models=False, cache=None, download=True)
 
         return build_release(name, output, cache=cache, download=download)
     folder = ROOT / "modules" / name
-    manifest = json.loads((folder / "manifest.json").read_text("utf-8"))
+    manifest = json.loads((folder / "obliviousmic.module.json").read_text("utf-8"))
+    schema = json.loads((SCHEMAS / "obliviousmic-module-v1.json").read_text("utf-8"))
+    Draft202012Validator(schema).validate(manifest)
+    if (
+        "distribution" in manifest
+        or (folder / "manifest.json").exists()
+        or (folder / "obliviousmic.theme.json").exists()
+    ):
+        raise ValueError("module source must contain one new internal declaration")
     output = Path(output or ROOT / "dist")
     output.mkdir(parents=True, exist_ok=True)
     path = output / f"{name}-{manifest['module_version']}.obmic.zip"
@@ -54,6 +65,11 @@ def build(name, output=None, *, include_models=False, cache=None, download=True)
         "source_path": "modules/" + name,
         "bundle_path": str(path),
         "bundled_resources": [],
+        "declaration": manifest,
+        "display_names": manifest.get("display_names", {}),
+        "descriptions": manifest.get("descriptions", {}),
+        "keywords": manifest.get("keywords", []),
+        "author": manifest.get("author"),
     }
 
 

@@ -49,7 +49,12 @@ MODULES = {
 def prepare(output=None, *, include_models=True, cache=None, download=True, names=None):
     output = Path(output or ROOT / "dist" / "catalog.next.json")
     output.parent.mkdir(parents=True, exist_ok=True)
-    catalog = {"catalog_version": 1, "repository": "Labiey/ObliviousMic-Modules", "modules": []}
+    catalog = {
+        "catalog_version": 1,
+        "repository": "Labiey/ObliviousMic-Modules",
+        "repository_id": 1418766723,
+        "modules": [],
+    }
     for name, (description, weight_status) in MODULES.items():
         if names is not None and name not in names:
             continue
@@ -67,6 +72,7 @@ def prepare(output=None, *, include_models=True, cache=None, download=True, name
             ),
             license_url=f"{repository}/blob/main/modules/{name}/LICENSE",
             weight_status=weight_status,
+            declaration_path=f"catalog/declarations/{name}/obliviousmic.module.json",
         )
         catalog["modules"].append(package)
     output.write_text(json.dumps(catalog, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")

@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "Cloud Text-to-Speech",
+  "author": "ObliviousMic contributors",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "any"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.tts",
+  "module_version": "1.2.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ],
+    "outputs": [
+      {
+        "id": "audio",
+        "kind": "audio",
+        "sample_rates": [
+          24000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      },
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 160,
+    "maximum_block_frames": 65536,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 4,
+    "latency_mode": "reported_on_prepare",
+    "async_process": true,
+    "maximum_batch_packets": 1,
+    "deadline_seconds": 35,
+    "maximum_output_frames": 960000
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "numpy>=2,<3",
+    "soundfile>=0.13,<1",
+    "soxr>=1.1,<2"
+  ],
+  "setup": "setup.json",
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "在线语音合成",
+    "en": "Cloud Text-to-Speech",
+    "ja": "音声合成"
+  },
+  "description": "Converts text to speech using Alibaba Cloud Bailian or Azure Speech. Configure a service key, language and voice; Azure also supports adjustable speaking rate and pitch.",
+  "descriptions": {
+    "zh-CN": "将文本合成为语音，支持阿里云百炼和 Azure Speech。需配置服务密钥，可选择语言与音色；Azure 还支持语速和音调调节。",
+    "en": "Converts text to speech using Alibaba Cloud Bailian or Azure Speech. Configure a service key, language and voice; Azure also supports adjustable speaking rate and pitch.",
+    "ja": "Alibaba Cloud 百錬または Azure Speech でテキストを音声に変換します。サービスキー・言語・声を設定でき、Azure では速度と音程も調整できます。"
+  },
+  "keywords": [
+    "tts",
+    "audio",
+    "obliviousmic"
+  ]
+}

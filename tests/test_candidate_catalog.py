@@ -80,7 +80,9 @@ def test_release_preflight_checks_supported_tag_and_catalog_digest_before_networ
     monkeypatch.setattr(
         publish_release, "request", lambda *_a, **_k: pytest.fail("unexpected publish")
     )
-    current = json.loads((ROOT / "modules/tts/manifest.json").read_text("utf-8"))["module_version"]
+    current = json.loads((ROOT / "modules/tts/obliviousmic.module.json").read_text("utf-8"))[
+        "module_version"
+    ]
     name, version, package = publish_release.audited_package("tts-v" + current)
     assert (name, version, package["module_id"]) == ("tts", current, "org.obliviousmic.tts")
     for tag in ("tts-v99.0.0", "unlisted-v1.0.0", "../tts-v1.0.0"):

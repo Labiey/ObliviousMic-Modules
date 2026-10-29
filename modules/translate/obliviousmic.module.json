@@ -1,0 +1,89 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "Text Translation",
+  "author": "ObliviousMic contributors",
+  "license": "GPL-3.0-only",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "any"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.translate",
+  "module_version": "1.2.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ],
+    "outputs": [
+      {
+        "id": "text",
+        "kind": "metadata",
+        "schema_version": 1,
+        "optional": false
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 160,
+    "maximum_block_frames": 65536,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 0,
+    "max_flush_calls": 4,
+    "latency_mode": "reported_on_prepare",
+    "async_process": true,
+    "maximum_batch_packets": 1,
+    "deadline_seconds": 35
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "langid>=1.1.6,<2",
+    "hanzidentifier>=1.3,<2"
+  ],
+  "setup": "setup.json",
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "文本翻译",
+    "en": "Text Translation",
+    "ja": "テキスト翻訳"
+  },
+  "description": "Translates recognized or entered text between Chinese, English, Japanese and more. Supports key-free web engines, translation APIs and OpenAI-compatible endpoints; connect subtitles or TTS next.",
+  "descriptions": {
+    "zh-CN": "连接语音识别或文本输入，在中文、英文、日文等语言间翻译。支持免密钥网页引擎、传统翻译 API 和 OpenAI 兼容接口，可继续接字幕或语音合成。",
+    "en": "Translates recognized or entered text between Chinese, English, Japanese and more. Supports key-free web engines, translation APIs and OpenAI-compatible endpoints; connect subtitles or TTS next.",
+    "ja": "音声認識やテキスト入力を中国語・英語・日本語などへ翻訳します。キー不要のWeb翻訳、翻訳API、OpenAI互換サービスに対応し、字幕や音声合成へ接続できます。"
+  },
+  "keywords": [
+    "translate",
+    "audio",
+    "obliviousmic"
+  ]
+}

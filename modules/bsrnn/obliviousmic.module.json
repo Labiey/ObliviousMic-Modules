@@ -1,0 +1,101 @@
+{
+  "schema_version": 1,
+  "package_type": "module",
+  "name": "Target Speaker Separation · BSRNN",
+  "author": "ObliviousMic contributors",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/Labiey/ObliviousMic-Modules",
+  "framework": {
+    "min": "0.3.0rc1",
+    "max_exclusive": "1.0.0"
+  },
+  "platforms": [
+    "any"
+  ],
+  "architectures": [
+    "any"
+  ],
+  "module_id": "org.obliviousmic.bsrnn",
+  "module_version": "1.2.1",
+  "api": {
+    "min": "1.0",
+    "max_exclusive": "2.0"
+  },
+  "runtime": {
+    "kind": "python",
+    "entrypoint": "runtime:Module"
+  },
+  "ports": {
+    "inputs": [
+      {
+        "id": "mixture",
+        "kind": "audio",
+        "sample_rates": [
+          16000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ],
+    "outputs": [
+      {
+        "id": "separated",
+        "kind": "audio",
+        "sample_rates": [
+          16000
+        ],
+        "channels": [
+          1
+        ],
+        "sample_format": "f32_interleaved"
+      }
+    ]
+  },
+  "processing": {
+    "minimum_block_frames": 1,
+    "preferred_block_frames": 640,
+    "maximum_block_frames": 65536,
+    "realtime_capable": true,
+    "offline_capable": true,
+    "stateful": true,
+    "concurrent_process_calls": false,
+    "max_tail_frames": 4096,
+    "max_flush_calls": 4,
+    "latency_mode": "reported_on_prepare"
+  },
+  "settings_schema": "settings.schema.json",
+  "actions_schema": "actions.schema.json",
+  "permissions": [
+    "asset.read",
+    "profile.read",
+    "resource.acquire"
+  ],
+  "resources": {
+    "model_assets": []
+  },
+  "dependencies": [
+    "onnx>=1.16,<2",
+    "onnxruntime>=1.20,<2",
+    "numpy>=2,<3"
+  ],
+  "setup": "setup.json",
+  "resource_declaration": "resources.json",
+  "display_names": {
+    "zh-CN": "目标说话人分离 · BSRNN",
+    "en": "Target Speaker Separation · BSRNN",
+    "ja": "目標話者分離 · BSRNN"
+  },
+  "description": "Extracts an enrolled target speaker from mixed voices. Import an authorized separator template and initialize your voice; template redistribution rights are unconfirmed, so it is not bundled.",
+  "descriptions": {
+    "zh-CN": "从混合语音中提取已登记的目标说话人。需导入有权使用的分离模板并初始化声音；模板的公开再分发许可尚未确认，不随包提供。",
+    "en": "Extracts an enrolled target speaker from mixed voices. Import an authorized separator template and initialize your voice; template redistribution rights are unconfirmed, so it is not bundled.",
+    "ja": "混合音声から登録した目標話者の声を抽出します。利用権のある分離テンプレートの導入と声の初期化が必要です。テンプレートは再配布許諾が未確認のため同梱していません。"
+  },
+  "keywords": [
+    "bsrnn",
+    "audio",
+    "obliviousmic"
+  ]
+}

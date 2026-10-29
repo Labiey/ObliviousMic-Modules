@@ -91,5 +91,5 @@ class Module(ModelModule):
 
 
 # Package declarations are the source of truth for both bundled and source use.
-Module.MANIFEST = json.loads(Path(__file__).with_name("manifest.json").read_text("utf-8"))
+Module.MANIFEST = json.loads(Path(__file__).with_name("obliviousmic.module.json").read_text("utf-8"))
 Module.SCHEMA = json.loads(Path(__file__).with_name("settings.schema.json").read_text("utf-8"))

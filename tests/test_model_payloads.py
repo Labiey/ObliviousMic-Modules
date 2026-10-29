@@ -3,6 +3,7 @@ import json
 import zipfile
 
 import pytest
+from obliviousmic.sdk.declaration import audio, manifest
 
 from tools import build_module
 from tools.model_payloads import acquire
@@ -26,14 +27,8 @@ def environment(tmp_path, monkeypatch, **change):
         "download_url": "https://example.com/model.bin",
         **change,
     }
-    (folder / "manifest.json").write_text(
-        json.dumps(
-            {
-                "module_id": "example.fixture",
-                "module_version": "1.0.0",
-                "api": {"min": "1.0"},
-            }
-        )
+    (folder / "obliviousmic.module.json").write_text(
+        json.dumps(manifest("example.fixture", [audio()], [audio()]))
     )
     (folder / "resources.json").write_text(
         json.dumps({"resources_version": 1, "assets": [resource]})

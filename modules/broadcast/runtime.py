@@ -67,7 +67,7 @@ def cleanup_jobs(directory, gateway_factory=Gateway):
 
 
 class Module:
-    MANIFEST = json.loads((ROOT / "manifest.json").read_text("utf-8"))
+    MANIFEST = json.loads((ROOT / "obliviousmic.module.json").read_text("utf-8"))
     SCHEMA = json.loads((ROOT / "settings.schema.json").read_text("utf-8"))
 
     def __init__(self):

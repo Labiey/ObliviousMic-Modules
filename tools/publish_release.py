@@ -38,7 +38,7 @@ def audited_package(tag):
     name, version = tag.rsplit("-v", 1)
     if (
         name not in MODULES
-        or json.loads((ROOT / "modules" / name / "manifest.json").read_text("utf-8"))[
+        or json.loads((ROOT / "modules" / name / "obliviousmic.module.json").read_text("utf-8"))[
             "module_version"
         ]
         != version

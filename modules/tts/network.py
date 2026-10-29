@@ -24,7 +24,7 @@ class Module:
         self.frames = self.sequence = 0
 
     def describe(self):
-        return json.loads((ROOT / "manifest.json").read_text("utf-8"))
+        return json.loads((ROOT / "obliviousmic.module.json").read_text("utf-8"))
 
     def prepare(self, context, config):
         self.context = context
