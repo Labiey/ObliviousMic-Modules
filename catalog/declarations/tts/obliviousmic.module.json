@@ -99,5 +99,14 @@
     "tts",
     "audio",
     "obliviousmic"
-  ]
+  ],
+  "distribution": {
+    "repository_id": 1418766723,
+    "release_id": 429258795,
+    "asset_id": 692715389,
+    "release": "tts-v1.3.0",
+    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.3.0/tts-1.3.0.obmic.zip",
+    "bytes": 44638,
+    "sha256": "e43860b432305b855782912f8c2c46d3cf0bece137974c41915a12a7d17f55f5"
+  }
 }
