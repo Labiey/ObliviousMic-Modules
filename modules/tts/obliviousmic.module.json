@@ -16,7 +16,7 @@
     "any"
   ],
   "module_id": "org.obliviousmic.tts",
-  "module_version": "1.3.0",
+  "module_version": "1.3.1",
   "api": {
     "min": "1.0",
     "max_exclusive": "2.0"

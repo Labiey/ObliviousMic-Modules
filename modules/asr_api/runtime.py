@@ -73,6 +73,9 @@ class Module:
     def report_latency(self):
         return self.worker.report_latency()
 
+    def report_monitor(self):
+        return self.worker._call("report_monitor")
+
     def update_parameters(self, change):
         raise ValueError("ASR API settings require reprepare")
 

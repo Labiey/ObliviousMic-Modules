@@ -7,7 +7,14 @@ from fractions import Fraction
 from pathlib import Path
 
 import numpy as np
-from obliviousmic.sdk import FlushResult, Latency, PortBundle, StreamContext, TextSegment
+from obliviousmic.sdk import (
+    FlushResult,
+    Latency,
+    PortBundle,
+    RequestStatus,
+    StreamContext,
+    TextSegment,
+)
 
 try:
     from .providers import RATE, ASRError, Client
@@ -22,6 +29,7 @@ class Module:
         self.client_factory = client_factory or Client
         self.client = None
         self.buffers = deque()
+        self.requests = RequestStatus(ASRError)
 
     def describe(self):
         return json.loads((ROOT / "obliviousmic.module.json").read_text("utf-8"))
@@ -44,12 +52,21 @@ class Module:
         self.expected_end = self.identity = None
         self.serial = 0
         self.finished = False
+        self.requests.reset()
+
+    def report_monitor(self):
+        return self.requests.report()
 
     def _recognize(self):
         result = []
         try:
             if self.voice_frames >= self.config["minimum_speech_ms"] * RATE // 1000:
-                text, language = self.client.transcribe(np.concatenate(tuple(self.buffers)))
+                recognized = self.requests.call(
+                    self.client.transcribe, np.concatenate(tuple(self.buffers))
+                )
+                if recognized is None:
+                    return []
+                text, language = recognized
                 if text:
                     self.serial += 1
                     result.append(

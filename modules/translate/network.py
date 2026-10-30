@@ -5,7 +5,15 @@ import json
 from collections import OrderedDict
 from pathlib import Path
 
-from obliviousmic.sdk import FlushResult, Latency, PortBundle, StreamContext, TextSegment
+from obliviousmic.sdk import (
+    FlushResult,
+    Latency,
+    PortBundle,
+    PublicModuleError,
+    RequestStatus,
+    StreamContext,
+    TextSegment,
+)
 
 try:
     from .providers import Client
@@ -20,6 +28,7 @@ class Module:
         self.client_factory = client_factory or Client
         self.client = None
         self.seen = OrderedDict()
+        self.requests = RequestStatus(PublicModuleError)
 
     def describe(self):
         return json.loads((ROOT / "obliviousmic.module.json").read_text("utf-8"))
@@ -46,7 +55,13 @@ class Module:
                 or (previous[1] and not segment.final)
             ):
                 continue
-            translated = self.client.translate(segment.text, segment.language)
+            self.seen[key] = (segment.revision, segment.final)
+            self.seen.move_to_end(key)
+            while len(self.seen) > 256:
+                self.seen.popitem(last=False)
+            translated = self.requests.call(self.client.translate, segment.text, segment.language)
+            if translated is None:
+                continue
             output.append(
                 TextSegment(
                     segment.segment_id,
@@ -62,14 +77,14 @@ class Module:
                     private=True,
                 )
             )
-            self.seen[key] = (segment.revision, segment.final)
-            self.seen.move_to_end(key)
-            while len(self.seen) > 256:
-                self.seen.popitem(last=False)
         return PortBundle({"text": tuple(output)})
 
     def reset(self, reason):
         self.seen.clear()
+        self.requests.reset()
+
+    def report_monitor(self):
+        return self.requests.report()
 
     def report_latency(self):
         return Latency(mode="variable")
