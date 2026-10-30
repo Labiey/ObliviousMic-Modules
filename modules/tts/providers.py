@@ -41,6 +41,14 @@ def validate_config(config):
     provider = config["provider"]
     if provider == "qwen" and not config["qwen_api_key"].strip():
         raise TTSError("tts_qwen_api_key_required")
+    if provider == "qwen":
+        if config["qwen_region"] not in {"beijing", "singapore"}:
+            raise TTSError("tts_qwen_region_invalid")
+        if not config["qwen_model"].strip():
+            raise TTSError("tts_qwen_model_required")
+        workspace = config.get("qwen_workspace_id", "")
+        if workspace and not re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", workspace):
+            raise TTSError("tts_qwen_workspace_invalid")
     if provider == "azure":
         if not config["azure_api_key"].strip():
             raise TTSError("tts_azure_api_key_required")
@@ -62,10 +70,11 @@ def validate_config(config):
 
 
 class Client:
-    def __init__(self, config, opener=None):
+    def __init__(self, config, opener=None, websocket_connect=None):
         validate_config(config)
         self.config = dict(config)
         self.open = opener or urllib.request.build_opener(NoRedirects()).open
+        self.websocket_connect = websocket_connect
 
     def _request(self, url, deadline, *, payload=None, headers=None, limit=MAX_AUDIO_BYTES):
         remaining = min(self.config["request_timeout_seconds"], deadline - time.monotonic())
@@ -95,6 +104,13 @@ class Client:
         language = language_for(text, config["language"], observed_language)
         deadline = time.monotonic() + config["request_timeout_seconds"]
         if config["provider"] == "qwen":
+            if config["qwen_model"].startswith("qwen-audio-") and "-tts-" in config["qwen_model"]:
+                try:
+                    from .qwen_websocket import synthesize
+                except ImportError:
+                    from qwen_websocket import synthesize
+
+                return synthesize(config, text, language, deadline, self.websocket_connect)
             host = (
                 "dashscope.aliyuncs.com"
                 if config["qwen_region"] == "beijing"
@@ -104,7 +120,7 @@ class Client:
                 "model": config["qwen_model"],
                 "input": {
                     "text": text,
-                    "voice": config["qwen_voice"],
+                    "voice": config["qwen_voice"] or "Cherry",
                     "language_type": {"zh": "Chinese", "en": "English", "ja": "Japanese"}[language],
                 },
             }

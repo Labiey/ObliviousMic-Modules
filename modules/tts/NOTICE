@@ -3,6 +3,11 @@ Copyright 2026 ObliviousMic contributors. Apache-2.0.
 This package contains original adapter code only. It contains no voices, model weights,
 cloud SDK or third-party runtime.
 Qwen API: https://www.alibabacloud.com/help/en/model-studio/qwen-tts-api
+Qwen-Audio-TTS protocol (independently implemented, no example code copied):
+https://help.aliyun.com/zh/model-studio/qwen-audio-tts-websocket-api
+https://help.aliyun.com/zh/model-studio/qwen-audio-tts-client-events
+https://help.aliyun.com/zh/model-studio/qwen-audio-tts-server-events
+websockets is a separately installed BSD-3-Clause dependency; its code is not bundled.
 Azure API: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/rest-text-to-speech
 Azure prosody: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/speech-synthesis-markup-voice#adjust-prosody
 Cloud provider terms, service billing and selected voice terms apply separately.

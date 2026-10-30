@@ -57,7 +57,7 @@
     },
     "qwen_voice": {
       "type": "string",
-      "default": "Cherry",
+      "default": "",
       "apply_policy": "reprepare",
       "visible_when": {
         "provider": [
@@ -69,12 +69,19 @@
       "type": "string",
       "default": "qwen3-tts-flash",
       "apply_policy": "reprepare",
-      "advanced": true,
+      "advanced": false,
       "visible_when": {
         "provider": [
           "qwen"
         ]
       }
+    },
+    "qwen_workspace_id": {
+      "type": "string",
+      "default": "",
+      "apply_policy": "reprepare",
+      "advanced": true,
+      "visible_when": {"provider": ["qwen"]}
     },
     "azure_api_key": {
       "type": "string",

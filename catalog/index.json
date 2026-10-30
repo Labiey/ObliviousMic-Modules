@@ -486,14 +486,14 @@
     {
       "module_id": "org.obliviousmic.tts",
       "name": "tts",
-      "version": "1.2.1",
+      "version": "1.3.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 36237,
-      "sha256": "e7779fbf6b6ae5f15edc2d3b1145719c83233370352813ef3d968d6ce90f56bd",
+      "bytes": 44638,
+      "sha256": "e43860b432305b855782912f8c2c46d3cf0bece137974c41915a12a7d17f55f5",
       "source_path": "modules/tts",
       "bundled_resources": [],
       "declaration": {
@@ -514,7 +514,7 @@
           "any"
         ],
         "module_id": "org.obliviousmic.tts",
-        "module_version": "1.2.1",
+        "module_version": "1.3.0",
         "api": {
           "min": "1.0",
           "max_exclusive": "2.0"
@@ -577,7 +577,8 @@
         "dependencies": [
           "numpy>=2,<3",
           "soundfile>=0.13,<1",
-          "soxr>=1.1,<2"
+          "soxr>=1.1,<2",
+          "websockets>=15,<17"
         ],
         "setup": "setup.json",
         "resource_declaration": "resources.json",
@@ -596,16 +597,7 @@
           "tts",
           "audio",
           "obliviousmic"
-        ],
-        "distribution": {
-          "repository_id": 1418766723,
-          "release_id": 428295279,
-          "asset_id": 689629688,
-          "release": "tts-v1.2.1",
-          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.2.1/tts-1.2.1.obmic.zip",
-          "bytes": 36237,
-          "sha256": "e7779fbf6b6ae5f15edc2d3b1145719c83233370352813ef3d968d6ce90f56bd"
-        }
+        ]
       },
       "display_names": {
         "zh-CN": "在线语音合成",
@@ -625,11 +617,10 @@
       "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Cloud text to speech with Qwen or Azure",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.2.1/tts-1.2.1.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.3.0/tts-1.3.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/tts/LICENSE",
       "weight_status": "Original adapter only; cloud provider and selected voice terms remain separate",
-      "declaration_path": "catalog/declarations/tts/obliviousmic.module.json",
-      "source_commit": "cf4eff9c0576fc216eb31b81c755bbe5417423b0"
+      "declaration_path": "catalog/declarations/tts/obliviousmic.module.json"
     },
     {
       "module_id": "org.obliviousmic.subtitles",
