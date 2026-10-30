@@ -91,5 +91,14 @@
     "asr_api",
     "audio",
     "obliviousmic"
-  ]
+  ],
+  "distribution": {
+    "repository_id": 1418766723,
+    "release_id": 429423939,
+    "asset_id": 693215964,
+    "release": "asr_api-v1.1.2",
+    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.1.2/asr_api-1.1.2.obmic.zip",
+    "bytes": 48676,
+    "sha256": "ad2e4a7da533f0827e37a58e24d2d255d95e53b572952a3f44efdd89f8277871"
+  }
 }

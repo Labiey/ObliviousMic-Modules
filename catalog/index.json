@@ -597,7 +597,16 @@
           "tts",
           "audio",
           "obliviousmic"
-        ]
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 429423710,
+          "asset_id": 693215229,
+          "release": "tts-v1.3.1",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.3.1/tts-1.3.1.obmic.zip",
+          "bytes": 45946,
+          "sha256": "68b2f2a88ccbad4c3ddf2b3162901b3ac1b072688e31af4eb55411d10f408c87"
+        }
       },
       "display_names": {
         "zh-CN": "在线语音合成",
@@ -620,7 +629,8 @@
       "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.3.1/tts-1.3.1.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/tts/LICENSE",
       "weight_status": "Original adapter only; cloud provider and selected voice terms remain separate",
-      "declaration_path": "catalog/declarations/tts/obliviousmic.module.json"
+      "declaration_path": "catalog/declarations/tts/obliviousmic.module.json",
+      "source_commit": "793e305030bbdf588537ede9f1cc02da733915ca"
     },
     {
       "module_id": "org.obliviousmic.subtitles",
@@ -998,7 +1008,16 @@
           "translate",
           "audio",
           "obliviousmic"
-        ]
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 429423824,
+          "asset_id": 693215513,
+          "release": "translate-v1.2.2",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.2/translate-1.2.2.obmic.zip",
+          "bytes": 188283,
+          "sha256": "1b051f058e226057c839e9f9751968a5002adc89c34fe1afc48c6c7b6cfb80ed"
+        }
       },
       "display_names": {
         "zh-CN": "文本翻译",
@@ -1021,7 +1040,8 @@
       "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.2/translate-1.2.2.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/translate/LICENSE",
       "weight_status": "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights",
-      "declaration_path": "catalog/declarations/translate/obliviousmic.module.json"
+      "declaration_path": "catalog/declarations/translate/obliviousmic.module.json",
+      "source_commit": "793e305030bbdf588537ede9f1cc02da733915ca"
     },
     {
       "module_id": "org.obliviousmic.denoise",
@@ -1291,7 +1311,16 @@
           "asr_api",
           "audio",
           "obliviousmic"
-        ]
+        ],
+        "distribution": {
+          "repository_id": 1418766723,
+          "release_id": 429423939,
+          "asset_id": 693215964,
+          "release": "asr_api-v1.1.2",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.1.2/asr_api-1.1.2.obmic.zip",
+          "bytes": 48676,
+          "sha256": "ad2e4a7da533f0827e37a58e24d2d255d95e53b572952a3f44efdd89f8277871"
+        }
       },
       "display_names": {
         "zh-CN": "在线语音识别",
@@ -1314,7 +1343,8 @@
       "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/asr_api-v1.1.2/asr_api-1.1.2.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/asr_api/LICENSE",
       "weight_status": "Original Apache-2.0 client; no model weights; chosen service receives speech segments",
-      "declaration_path": "catalog/declarations/asr_api/obliviousmic.module.json"
+      "declaration_path": "catalog/declarations/asr_api/obliviousmic.module.json",
+      "source_commit": "793e305030bbdf588537ede9f1cc02da733915ca"
     }
   ]
 }
