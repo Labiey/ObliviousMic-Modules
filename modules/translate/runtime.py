@@ -47,9 +47,11 @@ class Module:
     def prepare(self, context, config):
         self.dispose()
         validate_config(config)
+        self.config = dict(config)
         try:
             self.worker = ProcessModule(
-                worker_command(), timeout=config["request_timeout_seconds"] + 3
+                worker_command(),
+                timeout=self.SCHEMA["properties"]["request_timeout_seconds"]["maximum"] + 3,
             )
             isolated = PrepareContext(
                 context.node_instance_id, context.inputs, context.outputs, context.mode
@@ -66,7 +68,13 @@ class Module:
         return self.worker.process(bundle)
 
     def update_parameters(self, change):
-        raise ValueError("Translation settings require reprepare")
+        config = {**self.config, **change}
+        self.validate_parameters(config)
+        self.worker.update_parameters(change)
+        self.config = config
+
+    def validate_parameters(self, config):
+        validate_config(config)
 
     def report_latency(self):
         return self.worker.report_latency()

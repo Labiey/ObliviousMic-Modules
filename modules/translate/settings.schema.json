@@ -5,7 +5,7 @@
     "provider": {
       "type": "string",
       "default": "microsoft",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "openai_compatible",
         "microsoft",
@@ -166,7 +166,7 @@
     "source_language": {
       "type": "string",
       "default": "auto",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "auto",
         "zh",
@@ -185,7 +185,7 @@
     "target_language": {
       "type": "string",
       "default": "en",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "zh",
         "zh-Hant",
@@ -203,12 +203,12 @@
     "skip_same_language": {
       "type": "boolean",
       "default": true,
-      "apply_policy": "reprepare"
+      "apply_policy": "hot"
     },
     "api_key": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "secret": true,
       "visible_when": {
         "provider": [
@@ -219,7 +219,7 @@
     "base_url": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "visible_when": {
         "provider": [
           "openai_compatible"
@@ -229,7 +229,7 @@
     "model": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "visible_when": {
         "provider": [
           "openai_compatible"
@@ -239,7 +239,7 @@
     "azure_api_key": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "secret": true,
       "visible_when": {
         "provider": [
@@ -250,7 +250,7 @@
     "azure_region": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "visible_when": {
         "provider": [
           "azure"
@@ -260,13 +260,13 @@
     "final_only": {
       "type": "boolean",
       "default": true,
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "advanced": true
     },
     "request_timeout_seconds": {
       "type": "number",
       "default": 25,
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "minimum": 1,
       "maximum": 30,
       "advanced": true
@@ -274,7 +274,7 @@
     "maximum_text_characters": {
       "type": "integer",
       "default": 2000,
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "minimum": 1,
       "maximum": 8000,
       "advanced": true
@@ -282,7 +282,7 @@
     "engine_key": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "secret": true,
       "visible_when": {
         "provider": [
@@ -302,7 +302,7 @@
     "engine_secret": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "secret": true,
       "visible_when": {
         "provider": [
@@ -318,7 +318,7 @@
     "engine_app_id": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "secret": true,
       "visible_when": {
         "provider": [
@@ -333,7 +333,7 @@
     "baidu_interface": {
       "type": "string",
       "default": "standard",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "standard",
         "bce",
@@ -361,7 +361,7 @@
     "deepl_plan": {
       "type": "string",
       "default": "free",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "free",
         "pro"
@@ -375,7 +375,7 @@
     "tencent_region": {
       "type": "string",
       "default": "0",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "0",
         "1",
@@ -424,7 +424,7 @@
       "type": "string",
       "default": "",
       "secret": true,
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "title": "Baidu API Key",
       "visible_when": {
         "provider": [

@@ -36,6 +36,7 @@ class Module:
 
     def prepare(self, context, config):
         self.context = context
+        self.config = dict(config)
         self.client = self.client_factory(config)
         self.reset("prepare")
 
@@ -97,7 +98,10 @@ class Module:
         return FlushResult()
 
     def update_parameters(self, change):
-        raise ValueError("TTS provider changes require reprepare")
+        config = {**self.config, **change}
+        client = self.client_factory(config)  # Validation only; no synthesis request.
+        self.client, self.config = client, config
+        # Keep generated-audio PTS, deduplication and request telemetry intact.
 
     def stop(self):
         self.reset("stop")

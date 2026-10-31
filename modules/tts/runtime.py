@@ -48,16 +48,17 @@ class Module:
         self.dispose()
         config = dict(config)
         validate_config(config)
+        self.config = config
         try:
             self.worker = ProcessModule(
-                worker_command(), timeout=config["request_timeout_seconds"] + 3
+                worker_command(),
+                timeout=self.SCHEMA["properties"]["request_timeout_seconds"]["maximum"] + 3,
             )
             isolated = PrepareContext(
                 context.node_instance_id, context.inputs, context.outputs, context.mode
             )
             # Credentials travel only over bounded IPC, never command arguments.
             self.worker.prepare(isolated, config)
-            self.worker.timeout = config["request_timeout_seconds"] + 3
         except BaseException:
             self.dispose()
             raise
@@ -69,7 +70,13 @@ class Module:
         return self.worker.process(bundle)
 
     def update_parameters(self, change):
-        raise ValueError("TTS provider changes require reprepare")
+        config = {**self.config, **change}
+        self.validate_parameters(config)
+        self.worker.update_parameters(change)
+        self.config = config
+
+    def validate_parameters(self, config):
+        validate_config(config)
 
     def report_latency(self):
         return self.worker.report_latency()

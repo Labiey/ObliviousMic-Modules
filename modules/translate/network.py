@@ -93,7 +93,12 @@ class Module:
         return FlushResult()
 
     def update_parameters(self, change):
-        raise ValueError("Translation settings require reprepare")
+        config = {**self.config, **change}
+        client = self.client_factory(config)  # Engine/network initialization remains lazy.
+        if hasattr(client, "detector") and hasattr(self.client, "detector"):
+            client.detector = self.client.detector
+        self.client, self.config = client, config
+        # A settings change must not replay already translated segments.
 
     def stop(self):
         self.reset("stop")

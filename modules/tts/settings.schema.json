@@ -5,7 +5,7 @@
     "provider": {
       "type": "string",
       "default": "qwen",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "qwen",
         "azure"
@@ -22,7 +22,7 @@
     "language": {
       "type": "string",
       "default": "auto",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "auto",
         "zh",
@@ -33,7 +33,7 @@
     "qwen_api_key": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "secret": true,
       "visible_when": {
         "provider": [
@@ -44,7 +44,7 @@
     "qwen_region": {
       "type": "string",
       "default": "beijing",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "enum": [
         "beijing",
         "singapore"
@@ -58,7 +58,7 @@
     "qwen_voice": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "visible_when": {
         "provider": [
           "qwen"
@@ -68,7 +68,7 @@
     "qwen_model": {
       "type": "string",
       "default": "qwen3-tts-flash",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "advanced": false,
       "visible_when": {
         "provider": [
@@ -79,14 +79,18 @@
     "qwen_workspace_id": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "advanced": true,
-      "visible_when": {"provider": ["qwen"]}
+      "visible_when": {
+        "provider": [
+          "qwen"
+        ]
+      }
     },
     "azure_api_key": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "secret": true,
       "visible_when": {
         "provider": [
@@ -97,7 +101,7 @@
     "azure_region": {
       "type": "string",
       "default": "eastasia",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "visible_when": {
         "provider": [
           "azure"
@@ -107,7 +111,7 @@
     "azure_voice": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "advanced": true,
       "visible_when": {
         "provider": [
@@ -121,7 +125,7 @@
       "minimum": 0.5,
       "maximum": 2.0,
       "ui_step": 0.01,
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "visible_when": {
         "provider": [
           "azure"
@@ -134,7 +138,7 @@
       "minimum": 0.5,
       "maximum": 2.0,
       "ui_step": 0.01,
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "visible_when": {
         "provider": [
           "azure"
@@ -144,7 +148,7 @@
     "azure_endpoint": {
       "type": "string",
       "default": "",
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "advanced": true,
       "visible_when": {
         "provider": [
@@ -155,7 +159,7 @@
     "request_timeout_seconds": {
       "type": "integer",
       "default": 25,
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "minimum": 2,
       "maximum": 30,
       "advanced": true
@@ -171,7 +175,7 @@
     "maximum_text_characters": {
       "type": "integer",
       "default": 300,
-      "apply_policy": "reprepare",
+      "apply_policy": "hot",
       "minimum": 1,
       "maximum": 1000,
       "advanced": true
