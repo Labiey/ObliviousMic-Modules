@@ -486,14 +486,14 @@
     {
       "module_id": "org.obliviousmic.tts",
       "name": "tts",
-      "version": "1.3.1",
+      "version": "1.4.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "Apache-2.0",
-      "bytes": 45946,
-      "sha256": "68b2f2a88ccbad4c3ddf2b3162901b3ac1b072688e31af4eb55411d10f408c87",
+      "bytes": 47070,
+      "sha256": "3a2467bc021746bba10097d3b142a7b389f55640c68792200b02805da9cd928c",
       "source_path": "modules/tts",
       "bundled_resources": [],
       "declaration": {
@@ -514,7 +514,7 @@
           "any"
         ],
         "module_id": "org.obliviousmic.tts",
-        "module_version": "1.3.1",
+        "module_version": "1.4.0",
         "api": {
           "min": "1.0",
           "max_exclusive": "2.0"
@@ -600,12 +600,12 @@
         ],
         "distribution": {
           "repository_id": 1418766723,
-          "release_id": 429423710,
-          "asset_id": 693215229,
-          "release": "tts-v1.3.1",
-          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.3.1/tts-1.3.1.obmic.zip",
-          "bytes": 45946,
-          "sha256": "68b2f2a88ccbad4c3ddf2b3162901b3ac1b072688e31af4eb55411d10f408c87"
+          "release_id": 429937871,
+          "asset_id": 695387735,
+          "release": "tts-v1.4.0",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.4.0/tts-1.4.0.obmic.zip",
+          "bytes": 47070,
+          "sha256": "3a2467bc021746bba10097d3b142a7b389f55640c68792200b02805da9cd928c"
         }
       },
       "display_names": {
@@ -626,11 +626,11 @@
       "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Cloud text to speech with Qwen or Azure",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.3.1/tts-1.3.1.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/tts-v1.4.0/tts-1.4.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/tts/LICENSE",
       "weight_status": "Original adapter only; cloud provider and selected voice terms remain separate",
       "declaration_path": "catalog/declarations/tts/obliviousmic.module.json",
-      "source_commit": "793e305030bbdf588537ede9f1cc02da733915ca"
+      "source_commit": "a49fbbb25900748e90bf2b8b6771ba75fb5f6f95"
     },
     {
       "module_id": "org.obliviousmic.subtitles",
@@ -911,14 +911,14 @@
     {
       "module_id": "org.obliviousmic.translate",
       "name": "translate",
-      "version": "1.2.2",
+      "version": "1.3.0",
       "api": {
         "min": "1.0",
         "max_exclusive": "2.0"
       },
       "license": "GPL-3.0-only",
-      "bytes": 188283,
-      "sha256": "1b051f058e226057c839e9f9751968a5002adc89c34fe1afc48c6c7b6cfb80ed",
+      "bytes": 189271,
+      "sha256": "0b96d62133df9cfb054f26726253cf05d9474234faf34266419ab868ece07047",
       "source_path": "modules/translate",
       "bundled_resources": [],
       "declaration": {
@@ -939,7 +939,7 @@
           "any"
         ],
         "module_id": "org.obliviousmic.translate",
-        "module_version": "1.2.2",
+        "module_version": "1.3.0",
         "api": {
           "min": "1.0",
           "max_exclusive": "2.0"
@@ -1011,12 +1011,12 @@
         ],
         "distribution": {
           "repository_id": 1418766723,
-          "release_id": 429423824,
-          "asset_id": 693215513,
-          "release": "translate-v1.2.2",
-          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.2/translate-1.2.2.obmic.zip",
-          "bytes": 188283,
-          "sha256": "1b051f058e226057c839e9f9751968a5002adc89c34fe1afc48c6c7b6cfb80ed"
+          "release_id": 429937923,
+          "asset_id": 695387935,
+          "release": "translate-v1.3.0",
+          "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.3.0/translate-1.3.0.obmic.zip",
+          "bytes": 189271,
+          "sha256": "0b96d62133df9cfb054f26726253cf05d9474234faf34266419ab868ece07047"
         }
       },
       "display_names": {
@@ -1037,11 +1037,11 @@
       "author": "ObliviousMic contributors",
       "minimum_framework_version": "0.3.0rc1",
       "description": "Text translation with LunaTranslator web/API engines and OpenAI-compatible services",
-      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.2/translate-1.2.2.obmic.zip",
+      "download_url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.3.0/translate-1.3.0.obmic.zip",
       "license_url": "https://github.com/Labiey/ObliviousMic-Modules/blob/main/modules/translate/LICENSE",
       "weight_status": "GPL-3.0 module with pinned LunaTranslator sources and notices; no model weights",
       "declaration_path": "catalog/declarations/translate/obliviousmic.module.json",
-      "source_commit": "793e305030bbdf588537ede9f1cc02da733915ca"
+      "source_commit": "a49fbbb25900748e90bf2b8b6771ba75fb5f6f95"
     },
     {
       "module_id": "org.obliviousmic.denoise",

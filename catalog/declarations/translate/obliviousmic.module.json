@@ -16,7 +16,7 @@
     "any"
   ],
   "module_id": "org.obliviousmic.translate",
-  "module_version": "1.2.2",
+  "module_version": "1.3.0",
   "api": {
     "min": "1.0",
     "max_exclusive": "2.0"
@@ -88,11 +88,11 @@
   ],
   "distribution": {
     "repository_id": 1418766723,
-    "release_id": 429423824,
-    "asset_id": 693215513,
-    "release": "translate-v1.2.2",
-    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.2.2/translate-1.2.2.obmic.zip",
-    "bytes": 188283,
-    "sha256": "1b051f058e226057c839e9f9751968a5002adc89c34fe1afc48c6c7b6cfb80ed"
+    "release_id": 429937923,
+    "asset_id": 695387935,
+    "release": "translate-v1.3.0",
+    "url": "https://github.com/Labiey/ObliviousMic-Modules/releases/download/translate-v1.3.0/translate-1.3.0.obmic.zip",
+    "bytes": 189271,
+    "sha256": "0b96d62133df9cfb054f26726253cf05d9474234faf34266419ab868ece07047"
   }
 }
